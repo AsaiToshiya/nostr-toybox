@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>nevent to naddr</title>
+  </head>
+  <body>
+    <h1>nevent to naddr</h1>
+    <input id="nevent" type="text" size="50" placeholder="nevent" />
+    <button onclick="handleClick()">convert</button><br />
+    <span id="naddr"></span>
+
+    <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
+    <script>
+      const relays = [
+        "wss://nos.lol",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+      ];
+
+      const handleClick = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const event = await pool.get(relays, {
+          ids: [window.NostrTools.nip19.decode(nevent.value).data.id],
+        });
+        pool.close(relays);
+
+        naddr.innerText = window.NostrTools.nip19.naddrEncode({
+          pubkey: event.pubkey,
+          kind: event.kind,
+          identifier: event.tags.find((tag) => tag[0] == "d")[1],
+        });
+      };
+    </script>
+  </body>
+</html>
