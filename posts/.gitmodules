@@ -1,0 +1,3 @@
+[submodule "nostr-fetch"]
+	path = nostr-fetch
+	url = https://github.com/AsaiToshiya/nostr-fetch.git
