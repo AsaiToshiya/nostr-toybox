@@ -2,4 +2,4 @@
 
 ## nevent to naddr
 
-https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr.html
+https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/
