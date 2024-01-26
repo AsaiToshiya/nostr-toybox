@@ -1,0 +1,109 @@
+<body id=B onload=nostr.getPublicKey().then(m)>
+  <script>
+    // イベントの created_at の値を返す関数
+    g = e => e.created_at;
+
+    // REQ を投げる関数
+    s = l =>
+      // REQ を投げる
+      w.send(
+        JSON.stringify([
+          "REQ",
+          "a",                // 適当な subscription_id
+          {
+            authors: a,
+            kinds: [l],
+            limit: [, 200][l] // kind 1 の場合にのみ limit を設定する
+          }
+        ]),
+
+        // フェッチしたイベントを保持する配列 (グローバル変数)
+        e = [],
+
+        // kind (グローバル変数)
+        k = l
+      );
+
+    // WebSocket
+    w = new WebSocket("wss://nos.lol");
+    w.onmessage = h => {
+      // 受け取った JSON をパースする
+      [m, , n] = P(h.data);
+
+      // 受け取ったメッセージが何かをメッセージ タイプの 4 文字目で判断する
+      ({
+        // EVENT
+        N: _ => e.push(n), // イベントを保持する
+
+        // EOSE
+        E:
+          // イベントを created_at の降順にソートする
+          e.sort((a, b) => g(b) - g(a)) &&
+
+          // kind に応じた後処理を実行して、次の REQ を投げる
+          [
+            // kind 0 (プロフィール)
+            _ =>
+              // 次の REQ
+              s(
+                1,
+
+                // 投稿者のプロフィール (グローバル変数)
+                p = e
+              ),
+
+            // kind 1 (投稿)
+            _ =>
+              e.map(q => {
+                // 投稿者のプロフィール (content) をパースする
+                a = P(p.find(p => p.pubkey == q.pubkey)?.content ?? "{}");
+
+                // タグを追加する
+                B.innerHTML += `<p>${
+                  // 投稿者
+                  a.display_name ?? a.displayName
+                }@${a.name ?? a.username}</p><p>${
+                  // 投稿内容
+                  // 特殊文字をエスケープする
+                  "&amp;1&lt;1&gt;1&nbsp;1<br>" // 置換後の文字列 ("1" 区切り)
+                    .split(1)
+                    .reduce(
+                      (a, o, i) => a.replaceAll("&<> \n"[i], o),
+                      q.content
+                    )
+                }</p><p>${
+                  // 投稿日時
+                  new Date(g(q) * 1e3).toLocaleString()
+                }</p>`
+              }),
+            ,
+
+            // kind 3 (フォロー)
+            _ =>
+              // 次の REQ
+              s(
+                0,
+
+                // authors
+                a = e[0].tags.map(t => t[1])
+              )
+          ][k]
+      }[m[3]]())
+    };
+
+    // JSON オブジェクトのエイリアス
+    P = JSON.parse;
+
+    // メイン関数
+    m = p => {
+      // REQ の filters に渡す authors (グローバル変数)
+      a = p && [p];
+
+      // リレー サーバーに接続されるまで待機する
+      try {
+        s(3)               // REQ を投げる
+      } catch {
+        setTimeout(m, 500) // 再帰する
+      }
+    }
+  </script>
