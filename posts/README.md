@@ -1,12 +1,15 @@
-# vercel-nostr-posts
+# posts
 
 ## セットアップ
 
 ### リポジトリ
 
 ```bash
-git clone --recursive https://github.com/AsaiToshiya/vercel-nostr-posts.git
-cd vercel-nostr-posts
+git clone --filter=blob:none --no-checkout --sparse https://github.com/AsaiToshiya/nostr-toybox.git
+cd nostr-toybox
+git sparse-checkout set fetch posts
+git checkout main
+cd posts
 npm install
 ```
 
@@ -45,7 +48,7 @@ Vercel CLI 28.15.4
 ### crontab
 
 ```bash
-0 * * * * export PATH=/usr/local/bin/:$PATH; cd /home/pi/bin/vercel-nostr-posts && npm run deploy > /dev/null 2>&1
+0 * * * * export PATH=/usr/local/bin/:$PATH; cd /home/pi/bin/nostr-toybox/posts && npm run deploy > /dev/null 2>&1
 ```
 
 ## npm スクリプト
