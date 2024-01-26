@@ -38,11 +38,12 @@ Vercel CLI 28.15.4
 
 ```bash
 $ node ./node_modules/vercel/dist/index.js link
-Vercel CLI 28.15.4
-? Set up “~/bin/vercel-nostr-posts”? [Y/n] y
+Vercel CLI 28.20.0
+? Set up “~\nostr-toybox\posts”? [Y/n] y
 ? Which scope should contain your project? asaitoshiya
-? Found project “asaitoshiya/vercel-nostr-posts”. Link to it? [Y/n] y
-✅  Linked to asaitoshiya/vercel-nostr-posts (created .vercel and added it to .gitignore)
+? Link to existing project? [y/N] y
+? What’s the name of your existing project? vercel-nostr-posts
+✅  Linked to asaitoshiya/vercel-nostr-posts (created .vercel)
 ```
 
 ### crontab
