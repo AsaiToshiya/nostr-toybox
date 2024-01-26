@@ -5,7 +5,7 @@ dotenv.config();
 import { marked } from "marked";
 import { SimplePool, nip19, nip04, parseReferences } from "nostr-tools";
 import "websocket-polyfill";
-import { fetch } from "./nostr-fetch/index.js";
+import { fetch } from "../fetch/index.js";
 
 // ReferenceError: crypto is not defined (not in browser) · Issue #192 · nbd-wtf/nostr-tools
 // https://github.com/nbd-wtf/nostr-tools/issues/192#issuecomment-1557401767
