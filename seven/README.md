@@ -4,7 +4,7 @@
 
 ![carbon.png](carbon.png)
 
-https://asaitoshiya.github.io/nostr-toybox/nostr-seven/
+https://asaitoshiya.github.io/nostr-toybox/seven/
 
 動作には [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md) の拡張機能が必要です。
 
