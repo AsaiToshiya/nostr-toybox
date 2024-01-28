@@ -10,6 +10,7 @@
     <span id="naddr"></span>
 
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
+    <script src="fluent.js"></script>
     <script>
       const relays = [
         "wss://nos.lol",
@@ -19,19 +20,10 @@
         "wss://relay.nostr.bg",
       ];
 
-      const handleClick = async () => {
-        const pool = new window.NostrTools.SimplePool();
-        const event = await pool.get(relays, {
-          ids: [window.NostrTools.nip19.decode(nevent.value).data.id],
-        });
-        pool.close(relays);
-
-        naddr.innerText = window.NostrTools.nip19.naddrEncode({
-          pubkey: event.pubkey,
-          kind: event.kind,
-          identifier: event.tags.find((tag) => tag[0] == "d")[1],
-        });
-      };
+      const handleClick = async () =>
+        (naddr.innerText = (
+          await fluent(relays).ids([nevent.value]).get()
+        ).naddr());
     </script>
   </body>
 </html>
