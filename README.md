@@ -1,12 +1,14 @@
-# Nostr Toybox
-
 ![](featured.jpg)
+
+Nostr Toybox is a collection of micro-apps for Nostr.
 
 ## fetch
 
+A library for JavaScript to fetch events
+
 https://github.com/AsaiToshiya/nostr-toybox/tree/main/fetch
 
-## frequent-words-in-nips
+## Frequent words in NIPs
 
 https://github.com/AsaiToshiya/nostr-toybox/tree/main/frequent-words-in-nips
 
