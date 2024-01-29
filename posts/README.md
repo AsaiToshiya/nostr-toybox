@@ -9,6 +9,7 @@ git clone --filter=blob:none --no-checkout --sparse https://github.com/AsaiToshi
 cd nostr-toybox
 git sparse-checkout set fetch posts
 git checkout main
+cp -r fetch posts
 cd posts
 npm install
 ```
