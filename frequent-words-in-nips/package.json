@@ -1,0 +1,31 @@
+{
+  "name": "node-boilerplate",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "exports": "./index.js",
+  "bin": {
+    "node-boilerplate": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AsaiToshiya/node-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "Asai Toshiya <to.asai.60@gmail.com> (https://asaitoshiya.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AsaiToshiya/node-boilerplate/issues"
+  },
+  "homepage": "https://github.com/AsaiToshiya/node-boilerplate#readme",
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "marked": "^5.0.5",
+    "natural": "^6.5.0"
+  }
+}
