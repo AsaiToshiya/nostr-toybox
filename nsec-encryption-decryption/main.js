@@ -2,23 +2,37 @@ import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
+import { bytesToHex, hexToBytes } from "@noble/hashes/utils";
+import * as nip19 from "nostr-tools/nip19";
+import * as nip49 from "./nip49.js";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+document.querySelector("#app").innerHTML = `
+  <h1>nsec encryption/decryption</h1>
+  <input id="passphrase" type="text" placeholder="passphrase" /><br />
+  <input id="nsec" type="text" size="80" placeholder="nsec" />
+  <button id="encrypt">encrypt</button><br />
+  <input id="ncryptsec" type="text" size="80" placeholder="ncryptsec" />
+  <button id="decrypt">decrypt</button>
+`;
 
-setupCounter(document.querySelector('#counter'))
+document
+  .querySelector("#encrypt")
+  .addEventListener(
+    "click",
+    async () =>
+      (ncryptsec.value = await nip49.encrypt(
+        bytesToHex(nip19.decode(nsec.value).data),
+        passphrase.value,
+        16
+      ))
+  );
+
+document
+  .querySelector("#decrypt")
+  .addEventListener(
+    "click",
+    async () =>
+      (nsec.value = nip19.nsecEncode(
+        hexToBytes(await nip49.decrypt(ncryptsec.value, passphrase.value))
+      ))
+  );
