@@ -1,7 +1,3 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 import { bytesToHex, hexToBytes } from "@noble/hashes/utils";
 import * as nip19 from "nostr-tools/nip19";
 import * as nip49 from "./nip49.js";
