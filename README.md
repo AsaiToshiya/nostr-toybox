@@ -12,6 +12,12 @@ A library for JavaScript to fetch events
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/frequent-words-in-nips](https://github.com/AsaiToshiya/nostr-toybox/tree/main/frequent-words-in-nips)
 
+## joined-nostr
+
+The day you joined Nostr
+
+[https://joined-nostr.vercel.app/](https://joined-nostr.vercel.app/)
+
 ## nevent to naddr
 
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
