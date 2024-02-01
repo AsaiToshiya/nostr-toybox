@@ -22,6 +22,10 @@ The day you joined Nostr
 
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
 
+## nsec encryption/decryption
+
+[https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/](https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/)
+
 ## posts
 
 A command line tool to save posts as HTML
