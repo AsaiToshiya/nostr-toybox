@@ -35,3 +35,9 @@ A command line tool to save posts as HTML
 ## Seven-line Nostr client (timeline viewer)
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/seven](https://github.com/AsaiToshiya/nostr-toybox/tree/main/seven)
+
+## timeline
+
+A command line tool to save Nostr timelines as HTML
+
+[https://github.com/AsaiToshiya/nostr-toybox/tree/main/timeline](https://github.com/AsaiToshiya/nostr-toybox/tree/main/timeline)
