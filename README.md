@@ -32,6 +32,12 @@ A command line tool to save posts as HTML
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/posts](https://github.com/AsaiToshiya/nostr-toybox/tree/main/posts)
 
+## req
+
+A simple web-based tool to request Nostr events
+
+[https://asaitoshiya.github.io/nostr-toybox/req/](https://asaitoshiya.github.io/nostr-toybox/req/)
+
 ## Seven-line Nostr client (timeline viewer)
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/seven](https://github.com/AsaiToshiya/nostr-toybox/tree/main/seven)

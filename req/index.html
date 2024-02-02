@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>req</title>
+  </head>
+  <body>
+    <h1>req</h1>
+    ids:
+    <input
+      id="ids"
+      type="text"
+      size="50"
+      placeholder="nevent1... or nostr:nevent1..."
+    /><br />
+    author:
+    <input id="author" type="text" size="50" placeholder="npub1..." /><br />
+    kind:
+    <input id="kind" type="text" /><br />
+    #e:
+    <input id="e" type="text" size="50" placeholder="nevent1..." /><br />
+    #p:
+    <input id="p" type="text" size="50" placeholder="npub1..." /><br />
+    limit:
+    <input id="limit" type="text" /><br />
+    <button onclick="handleClick()">get</button>
+    <button onclick="handleListClick()">list</button><br />
+    event:
+    <pre id="event"></pre>
+
+    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
+    <script>
+      const $ = document.getElementById.bind(document);
+
+      const relays = [
+        "wss://nos.lol",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+        "wss://r.hostr.cc",
+      ];
+
+      const makeFilter = () => {
+        const ids = $("ids")
+          .value.split(",")
+          .filter((value) => value)
+          .map(
+            (value) =>
+              window.NostrTools.nip19.decode(value.replace(/^nostr:/, "")).data
+                .id
+          );
+        const authors = $("author")
+          .value.split(",")
+          .filter((value) => value)
+          .map((value) => window.NostrTools.nip19.decode(value).data);
+        const kinds = $("kind")
+          .value.split(",")
+          .filter((value) => value)
+          .map((value) => parseInt(value));
+        const eTagValues = e.value
+          .split(",")
+          .filter((value) => value)
+          .map((value) => window.NostrTools.nip19.decode(value).data.id);
+        const pTagValues = p.value
+          .split(",")
+          .filter((value) => value)
+          .map((value) => window.NostrTools.nip19.decode(value).data);
+
+        return {
+          ids: ids.length > 0 ? ids : undefined,
+          authors: authors.length > 0 ? authors : undefined,
+          kinds: kinds.length > 0 ? kinds : undefined,
+          "#e": eTagValues.length > 0 ? eTagValues : undefined,
+          "#p": pTagValues.length > 0 ? pTagValues : undefined,
+          limit: limit.value ? parseInt(limit.value) : undefined,
+        };
+      };
+
+      const handleClick = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const event = await pool.get(relays, makeFilter());
+        $("event").innerText = JSON.stringify(event, null, 2);
+      };
+
+      const handleListClick = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const events = await pool.list(relays, [makeFilter()]);
+        $("event").innerText = events
+          .map((event) => JSON.stringify(event, null, 2))
+          .join("\n");
+      };
+
+      const params = new URLSearchParams(location.search);
+      params.forEach((value, key) => value && ($(key).value = value));
+      params.size && handleListClick();
+    </script>
+  </body>
+</html>
