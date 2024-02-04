@@ -8,6 +8,14 @@ A library for JavaScript to fetch events
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/fetch](https://github.com/AsaiToshiya/nostr-toybox/tree/main/fetch)
 
+## Fortune NIPs
+
+A bot on Nostr that tells your lucky NIP of the day
+
+[https://iris.to/npub137u9fh8kaag47zwzd0pt3hfqk3z9petytnele7yu3u2t9jyk4fdsvddmk0](https://iris.to/npub137u9fh8kaag47zwzd0pt3hfqk3z9petytnele7yu3u2t9jyk4fdsvddmk0)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Frequent words in NIPs
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/frequent-words-in-nips](https://github.com/AsaiToshiya/nostr-toybox/tree/main/frequent-words-in-nips)
