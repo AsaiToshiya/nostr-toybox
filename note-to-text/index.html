@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>note-to-text</title>
+  </head>
+  <body>
+    <h1>note-to-text</h1>
+    nevent:
+    <input id="nevent" type="text" size="50" /><br />
+    <button onclick="handleNoteToTextClick()">note to text</button><br />
+    text:<br />
+    <textarea id="text" rows="4" cols="50"></textarea><br />
+    <button onclick="handleCopyClick()">copy</button>
+
+    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
+    <script>
+      const relays = [
+        "wss://nos.lol",
+        "wss://nostr-pub.wellorder.net",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://nostr.oxtr.dev",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+      ];
+
+      const handleNoteToTextClick = async () => {
+        const nip19 = nevent.value.replace(/^nostr:/, "");
+        const id = window.NostrTools.nip19.decode(nip19).data.id;
+        const pool = new window.NostrTools.SimplePool();
+        const event = await pool.get(relays, {
+          ids: [id],
+        });
+        pool.close(relays);
+
+        text.value = `${event.content}
+
+https://njump.me/${nip19}`;
+      };
+
+      const handleCopyClick = () => navigator.clipboard.writeText(text.value);
+    </script>
+  </body>
+</html>

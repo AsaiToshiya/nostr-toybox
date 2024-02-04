@@ -34,6 +34,12 @@ The day you joined Nostr
 
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
 
+## note-to-text
+
+A web-based tool to turn the `content` of an event (kind 1) into shareable text
+
+[https://asaitoshiya.github.io/nostr-toybox/note-to-text/](https://asaitoshiya.github.io/nostr-toybox/note-to-text/)
+
 ## nsec encryption/decryption
 
 [https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/](https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/)
