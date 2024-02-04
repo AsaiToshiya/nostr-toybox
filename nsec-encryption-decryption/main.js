@@ -2,6 +2,16 @@ import { bytesToHex, hexToBytes } from "@noble/hashes/utils";
 import * as nip19 from "nostr-tools/nip19";
 import * as nip49 from "./nip49.js";
 
+const enableButtons = () => {
+  encryptButton.disabled = false;
+  decryptButton.disabled = false;
+};
+
+const disableButtons = () => {
+  encryptButton.disabled = true;
+  decryptButton.disabled = true;
+};
+
 document.querySelector("#app").innerHTML = `
   <h1>nsec encryption/decryption</h1>
   <input id="passphrase" type="text" placeholder="passphrase" /><br />
@@ -11,24 +21,23 @@ document.querySelector("#app").innerHTML = `
   <button id="decrypt">decrypt</button>
 `;
 
-document
-  .querySelector("#encrypt")
-  .addEventListener(
-    "click",
-    async () =>
-      (ncryptsec.value = await nip49.encrypt(
-        bytesToHex(nip19.decode(nsec.value).data),
-        passphrase.value,
-        16
-      ))
-  );
+const encryptButton = document.querySelector("#encrypt");
+const decryptButton = document.querySelector("#decrypt");
 
-document
-  .querySelector("#decrypt")
-  .addEventListener(
-    "click",
-    async () =>
-      (nsec.value = nip19.nsecEncode(
-        hexToBytes(await nip49.decrypt(ncryptsec.value, passphrase.value))
-      ))
+encryptButton.addEventListener("click", async () => {
+  disableButtons();
+  ncryptsec.value = await nip49.encrypt(
+    bytesToHex(nip19.decode(nsec.value).data),
+    passphrase.value,
+    16
   );
+  enableButtons();
+});
+
+decryptButton.addEventListener("click", async () => {
+  disableButtons();
+  nsec.value = nip19.nsecEncode(
+    hexToBytes(await nip49.decrypt(ncryptsec.value, passphrase.value))
+  );
+  enableButtons();
+});
