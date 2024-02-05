@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>event</title>
+  </head>
+  <body>
+    <h1>event</h1>
+    <div style="display: flex; align-items: start">
+      content:
+      <textarea id="content" rows="4" cols="50"></textarea>
+    </div>
+    kind:
+    <input id="kind" type="text" value="1" /><br />
+    tags:<br />
+    d:
+    <input id="d" type="text" /><br />
+    k:
+    <input id="k" type="text" /><br />
+    name:
+    <input id="name" type="text" /><br />
+    proxy:
+    <input id="proxyID" type="text" size="50" placeholder="id" />
+    <input id="proxyProtocol" type="text" placeholder="protocol" /><br />
+    title:
+    <input id="title" type="text" /><br />
+    start:
+    <input id="start" type="text" placeholder="YYYY-MM-DD" /><br />
+    description:
+    <input id="description" type="text" /><br />
+    clone:
+    <input id="clone" type="text" /><br />
+    web:
+    <input id="web" type="text" /><br />
+    patches:
+    <input id="patches" type="text" /><br />
+    nsec:
+    <input id="nsec" type="text" size="50" /><br />
+    <button onclick="handleClick()">publish</button>
+    <button onclick="handleStringifyClick()">stringify (not publish)</button
+    ><br />
+    JSON:
+    <pre id="json"></pre>
+
+    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
+    <script>
+      const relays = [
+        "wss://nos.lol",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+      ];
+
+      const createEvent = () => {
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const pk = window.NostrTools.getPublicKey(sk);
+
+        return window.NostrTools.finishEvent(
+          {
+            kind: parseInt(kind.value, 10),
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ...(d.value ? [["d", d.value]] : []),
+              ...(k.value ? [["k", k.value]] : []),
+              ...(name.value ? [["name", name.value]] : []),
+              ...(proxyID.value && proxyProtocol.value
+                ? [["proxy", proxyID.value, proxyProtocol.value]]
+                : []),
+              ...(title.value ? [["title", title.value]] : []),
+              ...(start.value ? [["start", start.value]] : []),
+              ...(description.value
+                ? [["description", description.value]]
+                : []),
+              ...(clone.value ? [["clone", clone.value]] : []),
+              ...(web.value ? [["web", web.value]] : []),
+              ...(patches.value ? [["patches", patches.value]] : []),
+            ],
+            content: content.value,
+          },
+          sk
+        );
+      };
+
+      const handleClick = async () => {
+        const event = createEvent();
+
+        const pool = new window.NostrTools.SimplePool();
+        pool.publish(relays, event);
+        pool.close(relays);
+
+        json.innerText = JSON.stringify(event, null, 2);
+      };
+
+      const handleStringifyClick = async () => {
+        const event = createEvent();
+
+        json.innerText = JSON.stringify(event);
+      };
+    </script>
+  </body>
+</html>

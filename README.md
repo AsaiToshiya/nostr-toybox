@@ -8,6 +8,12 @@ A client for bookmarking events
 
 [https://asaitoshiya.github.io/nostr-toybox/bookmark/](https://asaitoshiya.github.io/nostr-toybox/bookmark/)
 
+## event
+
+A web-based tool to publish events
+
+[https://asaitoshiya.github.io/nostr-toybox/event/](https://asaitoshiya.github.io/nostr-toybox/event/)
+
 ## fetch
 
 A library for JavaScript to fetch events
