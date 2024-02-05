@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>menu</title>
+  </head>
+  <body>
+    <h1>menu</h1>
+    <p>
+      usage:
+      <code
+        >https://asaitoshiya.github.io/nostr-menu/?nevent=&lt;nip-19-nevent&gt;</code
+      >
+    </p>
+    <p><a id="njump">njump.me</a></p>
+    <p><a id="replies">Replies</a></p>
+    <p><a id="reply">reply with nostr-poster</a></p>
+    <p><a id="bookmark">bookmark with nostr-bookmark</a></p>
+    <p>
+      <button id="copyContent" disabled onclick="handleCopyContentClick()">
+        copy content
+      </button>
+      <span id="copiedContent" style="display: none">copied!</span>
+    </p>
+    <p>
+      <button onclick="handleCopyNip19Click()">copy NIP-19</button>
+      <span id="copiedNip19" style="display: none">copied!</span>
+    </p>
+    <p>
+      <button onclick="handleCopyNip21Click()">copy NIP-21</button>
+      <span id="copiedNip21" style="display: none">copied!</span>
+    </p>
+    <p>event:</p>
+    <pre id="event"></pre>
+
+    <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
+    <script>
+      const relays = [
+        "wss://nos.lol",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+      ];
+
+      const copy = (text, copiedElementId) =>
+        navigator.clipboard.writeText(text).then(() => {
+          const style = document.getElementById(copiedElementId).style;
+          style.display = "inline";
+          setTimeout(() => (style.display = "none"), 3000);
+        });
+
+      const handleCopyContentClick = () => copy(event.content, "copiedContent");
+
+      const handleCopyNip19Click = () => copy(nevent, "copiedNip19");
+
+      const handleCopyNip21Click = () => copy(`nostr:${nevent}`, "copiedNip21");
+
+      const nevent = new URLSearchParams(location.search).get("nevent");
+
+      (async () => {
+        const id = window.NostrTools.nip19.decode(nevent).data.id;
+        const pool = new window.NostrTools.SimplePool();
+        event = await pool.get(relays, {
+          ids: [id],
+        });
+        pool.close(relays);
+
+        copyContent.disabled = false;
+        document.querySelector("#event").innerText = JSON.stringify(
+          event,
+          null,
+          2
+        );
+      })();
+
+      njump.href = `https://njump.me/${nevent}`;
+      replies.href = `https://replies.nostrapps.org/?id=${nevent}`;
+      reply.href = `https://asaitoshiya.github.io/nostr-poster/?nip19=${nevent}`;
+      bookmark.href = `https://asaitoshiya.github.io/nostr-bookmark/?nevent=${nevent}`;
+    </script>
+  </body>
+</html>

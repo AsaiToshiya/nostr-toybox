@@ -30,6 +30,10 @@ The day you joined Nostr
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## menu
+
+[https://asaitoshiya.github.io/nostr-toybox/menu/](https://asaitoshiya.github.io/nostr-toybox/menu/)
+
 ## nevent to naddr
 
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
