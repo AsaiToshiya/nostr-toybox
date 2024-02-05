@@ -2,6 +2,12 @@
 
 Nostr Toybox is a collection of micro-apps for Nostr.
 
+## bookmark
+
+A client for bookmarking events
+
+[https://asaitoshiya.github.io/nostr-toybox/bookmark/](https://asaitoshiya.github.io/nostr-toybox/bookmark/)
+
 ## fetch
 
 A library for JavaScript to fetch events
