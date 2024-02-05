@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>poster</title>
+  </head>
+  <body>
+    <h1>poster</h1>
+    <div style="display: flex; align-items: start">
+      content:
+      <textarea id="content" rows="4" cols="50"></textarea>
+    </div>
+    reply to:
+    <input
+      id="nip19"
+      type="text"
+      size="50"
+      placeholder="nevent1... or nostr:nevent1..."
+    /><br />
+    encryption nsec:
+    <input id="encryptionNsec" type="text" size="50" /><br />
+    nsec:
+    <input id="nsec" type="text" size="50" /><br />
+    <button onclick="handleClick()">投稿</button>
+    <button onclick="handleStringifyClick()">stringify (not post)</button><br />
+    event:
+    <pre id="event"></pre>
+
+    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
+    <script>
+      const relays = [
+        "wss://nos.lol",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+      ];
+
+      const createEvent = async () => {
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const pk = window.NostrTools.getPublicKey(sk);
+
+        return window.NostrTools.finishEvent(
+          {
+            kind: 1,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ...createEventTags(content.value),
+              ...createPubkeyTags(content.value),
+              ...extractReferenceTags(content.value),
+              ...extractHashtagTags(content.value),
+              ...(await createReplyTags(nip19.value)),
+              ...(encryptionNsec.value ? [["encrypted"]] : []),
+            ].filter((tag) => tag.length > 0),
+            content: encryptionNsec.value
+              ? await window.NostrTools.nip04.encrypt(
+                  window.NostrTools.nip19.decode(encryptionNsec.value).data,
+                  pk,
+                  content.value
+                )
+              : content.value,
+          },
+          sk
+        );
+      };
+
+      const createEventTags = (content) =>
+        [...window.NostrTools.nip27.matchAll(content)]
+          .filter(({ decoded: { type } }) => type == "nevent" || type == "note")
+          .map(({ decoded: { type, data } }) => [
+            "e",
+            data.id ? data.id : data,
+            "",
+            "mention",
+          ]);
+
+      const createPubkeyTags = (content) =>
+        [...window.NostrTools.nip27.matchAll(content)]
+          .filter(
+            ({ decoded: { type } }) => type == "npub" || type == "nprofile"
+          )
+          .map(({ decoded: { type, data } }) => [
+            "p",
+            data.pubkey ? data.pubkey : data,
+            "",
+            "mention",
+          ]);
+
+      const createReplyTags = async (nip19) => {
+        return nip19
+          ? await (async (nip19) => {
+              const {
+                data: { id },
+              } = window.NostrTools.nip19.decode(nip19.replace(/^nostr:/, ""));
+              const pool = new window.NostrTools.SimplePool();
+              const event = await pool.get(relays, {
+                ids: [id],
+              });
+              const pTags = event.tags.filter(
+                (tag) => tag[0] == "p" && tag[1] != event.pubkey
+              );
+              const hasETag = event.tags.some((tag) => tag[0] == "e");
+              return [
+                ...pTags,
+                ["e", event.id, "", hasETag ? "reply" : "root"],
+                ["p", event.pubkey],
+              ];
+            })(nip19)
+          : [];
+      };
+
+      const extractHashtagTags = (content) => {
+        return (
+          content.match(
+            /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
+          ) ?? []
+        ).map((tag) => ["t", tag.substring(tag.indexOf("#") + 1)]);
+      };
+
+      const extractReferenceTags = (content) => {
+        return (
+          content.match(
+            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi
+          ) ?? []
+        ).map((url) => ["r", url]);
+      };
+
+      const handleClick = async () => {
+        const event = await createEvent();
+
+        const pool = new window.NostrTools.SimplePool();
+        pool.publish(relays, event);
+
+        document.querySelector("#event").innerText = JSON.stringify(
+          event,
+          null,
+          2
+        );
+      };
+
+      const handleStringifyClick = async () => {
+        const event = await createEvent();
+
+        document.querySelector("#event").innerText = JSON.stringify(
+          event,
+          null,
+          2
+        );
+      };
+
+      nip19.value = new URLSearchParams(location.search).get("nip19");
+    </script>
+  </body>
+</html>

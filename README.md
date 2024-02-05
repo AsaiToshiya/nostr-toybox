@@ -44,6 +44,12 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 [https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/](https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/)
 
+## poster
+
+A simple web-based tool to post events (kind 1)
+
+[https://asaitoshiya.github.io/nostr-toybox/poster/](https://asaitoshiya.github.io/nostr-toybox/poster/)
+
 ## posts
 
 A command line tool to save posts as HTML
