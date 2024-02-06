@@ -18,26 +18,32 @@ document.querySelector("#app").innerHTML = `
   <input id="nsec" type="text" size="80" placeholder="nsec" />
   <button id="encrypt">encrypt</button><br />
   <input id="ncryptsec" type="text" size="80" placeholder="ncryptsec" />
-  <button id="decrypt">decrypt</button>
+  <button id="decrypt">decrypt</button><br />
+  <img id="nostrich" src="nostrich.gif" style="display: none; height: 1.3em; max-height: 1.3em;">
 `;
 
 const encryptButton = document.querySelector("#encrypt");
 const decryptButton = document.querySelector("#decrypt");
+const nostrich = document.querySelector("#nostrich");
 
 encryptButton.addEventListener("click", async () => {
   disableButtons();
+  nostrich.style.display = "inline";
   ncryptsec.value = await nip49.encrypt(
     bytesToHex(nip19.decode(nsec.value).data),
     passphrase.value,
     16
   );
+  nostrich.style.display = "none";
   enableButtons();
 });
 
 decryptButton.addEventListener("click", async () => {
   disableButtons();
+  nostrich.style.display = "inline";
   nsec.value = nip19.nsecEncode(
     hexToBytes(await nip49.decrypt(ncryptsec.value, passphrase.value))
   );
+  nostrich.style.display = "none";
   enableButtons();
 });
