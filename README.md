@@ -60,6 +60,8 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 [https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/](https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/)
 
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+
 ## poster
 
 A simple web-based tool to post events (kind 1)
