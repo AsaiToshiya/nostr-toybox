@@ -58,7 +58,7 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 ## nsec encryption/decryption
 
-nsec encryption/decryption by NIP-49
+Encrypt/Decrypt the nsec with NIP-49
 
 [https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/](https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/)
 
