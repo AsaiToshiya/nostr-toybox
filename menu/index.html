@@ -13,8 +13,8 @@
     </p>
     <p><a id="njump">njump.me</a></p>
     <p><a id="replies">Replies</a></p>
-    <p><a id="reply">reply with nostr-poster</a></p>
-    <p><a id="bookmark">bookmark with nostr-bookmark</a></p>
+    <p><a id="reply">reply with poster</a></p>
+    <p><a id="bookmark">bookmark with bookmark</a></p>
     <p>
       <button id="copyContent" disabled onclick="handleCopyContentClick()">
         copy content
@@ -75,8 +75,8 @@
 
       njump.href = `https://njump.me/${nevent}`;
       replies.href = `https://replies.nostrapps.org/?id=${nevent}`;
-      reply.href = `https://asaitoshiya.github.io/nostr-poster/?nip19=${nevent}`;
-      bookmark.href = `https://asaitoshiya.github.io/nostr-bookmark/?nevent=${nevent}`;
+      reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
+      bookmark.href = `https://asaitoshiya.github.io/nostr-toybox/bookmark/?nevent=${nevent}`;
     </script>
   </body>
 </html>
