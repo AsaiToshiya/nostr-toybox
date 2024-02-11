@@ -9,7 +9,7 @@ git sparse-checkout set nsec-encryption-decryption
 git checkout main
 cd nsec-encryption-decryption
 pnpm install
-curl -O https://raw.githubusercontent.com/AsaiToshiya/learn-nostr/main/nip-49/nip49.js
+curl -O https://raw.githubusercontent.com/AsaiToshiya/learn-nostr/main/nip-49-private-key-encryption/nip49.js
 ```
 
 ## ビルド
