@@ -72,7 +72,7 @@ const generateHashtagHtml = async (posts) => {
                       id: post.id,
                     });
                     const url = hasNostrMenu
-                      ? `https://asaitoshiya.github.io/nostr-menu/?nevent=${nevent}`
+                      ? `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`
                       : `https://njump.me/${nevent}`;
                     const date = new Date(post.created_at * 1000);
                     const dateTime = date.toLocaleString();
@@ -155,7 +155,7 @@ const generateIndexHtml = async (posts) => {
                     id: post.id,
                   });
                   const url = hasNostrMenu
-                    ? `https://asaitoshiya.github.io/nostr-menu/?nevent=${nevent}`
+                    ? `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`
                     : `https://njump.me/${nevent}`;
                   const date = new Date(post.created_at * 1000);
                   const time = date.toLocaleTimeString();
