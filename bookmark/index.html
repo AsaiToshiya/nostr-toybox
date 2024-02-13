@@ -69,7 +69,7 @@
 
         const pk = window.NostrTools.getPublicKey(sk);
         npub.value = window.NostrTools.nip19.npubEncode(pk);
-        await handleClick();
+        event = await fetchBookmarksEvent();
 
         const newEvent = window.NostrTools.finishEvent(
           {
