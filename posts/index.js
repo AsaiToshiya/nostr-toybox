@@ -35,6 +35,27 @@ const _renderContent = async (post) =>
       .replace(/^#+ /g, "\\$&")
   );
 
+const _renderPosts = async (posts, isTimeOnly) =>
+  (
+    await Promise.all(
+      posts.map(async (post) => {
+        const nevent = nip19.neventEncode({
+          id: post.id,
+        });
+        const url = hasNostrMenu
+          ? `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`
+          : `https://njump.me/${nevent}`;
+        const date = new Date(post.created_at * 1000);
+        const dateTime = isTimeOnly
+          ? date.toLocaleTimeString()
+          : date.toLocaleString();
+        const content = await _renderContent(post);
+        return `      <h3><a href="${url}">${dateTime}</a></h3>
+      ${content}`;
+      })
+    )
+  ).join("\n");
+
 const generateHashtagHtml = async (posts) => {
   // 日時の降順にソートして、タグごとにグループ化する
   const sortedPosts = [...posts].sort((a, b) => b.created_at - a.created_at);
@@ -64,24 +85,7 @@ const generateHashtagHtml = async (posts) => {
           .map(
             async (tag) =>
               `      <h2 id="${tag.substring(1)}">${tag}</h2>
-` +
-              (
-                await Promise.all(
-                  groupedPosts[tag].map(async (post) => {
-                    const nevent = nip19.neventEncode({
-                      id: post.id,
-                    });
-                    const url = hasNostrMenu
-                      ? `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`
-                      : `https://njump.me/${nevent}`;
-                    const date = new Date(post.created_at * 1000);
-                    const dateTime = date.toLocaleString();
-                    const content = await _renderContent(post);
-                    return `      <h3><a href="${url}">${dateTime}</a></h3>
-      ${content}`;
-                  })
-                )
-              ).join("\n")
+` + (await _renderPosts(groupedPosts[tag], false))
           )
       )
     ).join("\n")
@@ -147,24 +151,7 @@ const generateIndexHtml = async (posts) => {
         Object.keys(groupedPosts).map(
           async (postDay) =>
             `      <h2>${postDay}</h2>
-` +
-            (
-              await Promise.all(
-                groupedPosts[postDay].map(async (post) => {
-                  const nevent = nip19.neventEncode({
-                    id: post.id,
-                  });
-                  const url = hasNostrMenu
-                    ? `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`
-                    : `https://njump.me/${nevent}`;
-                  const date = new Date(post.created_at * 1000);
-                  const time = date.toLocaleTimeString();
-                  const content = await _renderContent(post);
-                  return `      <h3><a href="${url}">${time}</a></h3>
-      ${content}`;
-                })
-              )
-            ).join("\n")
+` + (await _renderPosts(groupedPosts[postDay], true))
         )
       )
     ).join("\n")
