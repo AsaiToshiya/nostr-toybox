@@ -21,6 +21,31 @@ const RELAYS = JSON.parse(process.env.RELAYS.replace(/'/g, '"'));
 // 復号化するための秘密鍵 (16 進数)
 const DECRYPTION_SK = process.env.DECRYPTION_SK;
 
+const _groupByHashtag = (posts) => {
+  // 日時の降順にソートして、タグごとにグループ化する
+  const sortedPosts = [...posts].sort((a, b) => b.created_at - a.created_at);
+  const groupedPosts = sortedPosts.reduce((acc1, obj1) => {
+    const tags = (
+      obj1.content.match(
+        /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
+      ) ?? []
+    ).filter((tag) => !/#\d+/.test(tag));
+    return tags.reduce((acc2, obj2) => {
+      const tag = obj2.trim();
+      const key =
+        Object.keys(acc2).find(
+          (key) => key.toLowerCase() == tag.toLowerCase()
+        ) ?? tag;
+      const curGroup = acc2[key] ?? [];
+      return { ...acc2, [key]: [...curGroup, obj1] };
+    }, acc1);
+  }, {});
+  const sortedGroupedPosts = Object.keys(groupedPosts)
+    .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
+    .reduce((acc, obj) => ({ ...acc, [obj]: groupedPosts[obj] }), {});
+  return sortedGroupedPosts;
+};
+
 const _renderContent = async (post) =>
   marked.parse(
     post.content
@@ -57,27 +82,7 @@ const _renderPosts = async (posts, isTimeOnly) =>
   ).join("\n");
 
 const generateHashtagHtml = async (posts) => {
-  // 日時の降順にソートして、タグごとにグループ化する
-  const sortedPosts = [...posts].sort((a, b) => b.created_at - a.created_at);
-  const groupedPosts = sortedPosts.reduce((acc1, obj1) => {
-    const tags = (
-      obj1.content.match(
-        /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
-      ) ?? []
-    ).filter((tag) => !/#\d+/.test(tag));
-    return tags.reduce((acc2, obj2) => {
-      const tag = obj2.trim();
-      const key =
-        Object.keys(acc2).find(
-          (key) => key.toLowerCase() == tag.toLowerCase()
-        ) ?? tag;
-      const curGroup = acc2[key] ?? [];
-      return { ...acc2, [key]: [...curGroup, obj1] };
-    }, acc1);
-  }, {});
-  const sortedGroupedPosts = Object.keys(groupedPosts)
-    .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
-    .reduce((acc, obj) => ({ ...acc, [obj]: groupedPosts[obj] }), {});
+  const sortedGroupedPosts = _groupByHashtag(posts);
 
   // HTML を作成する
   return generateHtml(
