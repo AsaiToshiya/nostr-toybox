@@ -60,6 +60,10 @@ const _renderContent = async (post) =>
       .replace(/^#+ /g, "\\$&")
   );
 
+const _renderHashtag = async (tag, posts) =>
+  `      <h2 id="${tag.substring(1)}">${tag}</h2>
+` + (await _renderPosts(posts, false));
+
 const _renderPosts = async (posts, isTimeOnly) =>
   (
     await Promise.all(
@@ -89,9 +93,7 @@ const generateHashtagHtml = async (posts) => {
     (
       await Promise.all(
         Object.keys(sortedGroupedPosts).map(
-          async (tag) =>
-            `      <h2 id="${tag.substring(1)}">${tag}</h2>
-` + (await _renderPosts(sortedGroupedPosts[tag], false))
+          async (tag) => await _renderHashtag(tag, sortedGroupedPosts[tag])
         )
       )
     ).join("\n")
