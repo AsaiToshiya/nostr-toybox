@@ -12,16 +12,6 @@ const disableButtons = () => {
   decryptButton.disabled = true;
 };
 
-document.querySelector("#app").innerHTML = `
-  <h1>nsec encryption/decryption</h1>
-  <input id="passphrase" type="text" placeholder="passphrase" /><br />
-  <input id="nsec" type="text" size="80" placeholder="nsec" />
-  <button id="encrypt">encrypt</button><br />
-  <input id="ncryptsec" type="text" size="80" placeholder="ncryptsec" />
-  <button id="decrypt">decrypt</button><br />
-  <img id="nostrich" src="nostrich.gif" style="display: none; height: 1.3em; max-height: 1.3em;">
-`;
-
 const encryptButton = document.querySelector("#encrypt");
 const decryptButton = document.querySelector("#decrypt");
 const nostrich = document.querySelector("#nostrich");
