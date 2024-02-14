@@ -75,18 +75,19 @@ const generateHashtagHtml = async (posts) => {
       return { ...acc2, [key]: [...curGroup, obj1] };
     }, acc1);
   }, {});
+  const sortedGroupedPosts = Object.keys(groupedPosts)
+    .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
+    .reduce((acc, obj) => ({ ...acc, [obj]: groupedPosts[obj] }), {});
 
   // HTML を作成する
   return generateHtml(
     (
       await Promise.all(
-        Object.keys(groupedPosts)
-          .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
-          .map(
-            async (tag) =>
-              `      <h2 id="${tag.substring(1)}">${tag}</h2>
-` + (await _renderPosts(groupedPosts[tag], false))
-          )
+        Object.keys(sortedGroupedPosts).map(
+          async (tag) =>
+            `      <h2 id="${tag.substring(1)}">${tag}</h2>
+` + (await _renderPosts(sortedGroupedPosts[tag], false))
+        )
       )
     ).join("\n")
   );
