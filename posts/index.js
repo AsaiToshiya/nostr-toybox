@@ -21,6 +21,18 @@ const RELAYS = JSON.parse(process.env.RELAYS.replace(/'/g, '"'));
 // 復号化するための秘密鍵 (16 進数)
 const DECRYPTION_SK = process.env.DECRYPTION_SK;
 
+const _groupByDay = (posts) => {
+  // 日時の降順にソートして、日ごとにグループ化する
+  const sortedPosts = [...posts].sort((a, b) => b.created_at - a.created_at);
+  const groupedPosts = sortedPosts.reduce((acc, obj) => {
+    const date = new Date(obj.created_at * 1000);
+    const key = date.toLocaleDateString();
+    const curGroup = acc[key] ?? [];
+    return { ...acc, [key]: [...curGroup, obj] };
+  }, {});
+  return groupedPosts;
+};
+
 const _groupByHashtag = (posts) => {
   // 日時の降順にソートして、タグごとにグループ化する
   const sortedPosts = [...posts].sort((a, b) => b.created_at - a.created_at);
@@ -143,14 +155,7 @@ const generateHtml = (content) =>
   </html>`;
 
 const generateIndexHtml = async (posts) => {
-  // 日時の降順にソートして、日ごとにグループ化する
-  const sortedPosts = [...posts].sort((a, b) => b.created_at - a.created_at);
-  const groupedPosts = sortedPosts.reduce((acc, obj) => {
-    const date = new Date(obj.created_at * 1000);
-    const key = date.toLocaleDateString();
-    const curGroup = acc[key] ?? [];
-    return { ...acc, [key]: [...curGroup, obj] };
-  }, {});
+  const groupedPosts = _groupByDay(posts);
 
   // HTML を作成する
   return generateHtml(
