@@ -78,6 +78,14 @@ A command line tool to save posts as HTML
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## relay-list
+
+A library to get the relay list well
+
+[https://github.com/AsaiToshiya/nostr-toybox/tree/main/relay-list](https://github.com/AsaiToshiya/nostr-toybox/tree/main/relay-list)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## req
 
 A simple web-based tool to request Nostr events
