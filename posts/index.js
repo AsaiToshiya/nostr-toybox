@@ -72,6 +72,10 @@ const _renderContent = async (post) =>
       .replace(/^#+ /g, "\\$&")
   );
 
+const _renderDay = async (postDay, posts) =>
+            `      <h2>${postDay}</h2>
+` + (await _renderPosts(posts, true));
+
 const _renderHashtag = async (tag, posts) =>
   `      <h2 id="${tag.substring(1)}">${tag}</h2>
 ` + (await _renderPosts(posts, false));
@@ -162,9 +166,7 @@ const generateIndexHtml = async (posts) => {
     (
       await Promise.all(
         Object.keys(groupedPosts).map(
-          async (postDay) =>
-            `      <h2>${postDay}</h2>
-` + (await _renderPosts(groupedPosts[postDay], true))
+          async (postDay) => await _renderDay(postDay, groupedPosts[postDay])
         )
       )
     ).join("\n")
