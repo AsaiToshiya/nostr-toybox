@@ -18,6 +18,8 @@
     <input id="e" type="text" /><br />
     k:
     <input id="k" type="text" /><br />
+    p:
+    <input id="p" type="text" /><br />
     name:
     <input id="name" type="text" /><br />
     proxy:
@@ -65,6 +67,7 @@
               ...(d.value ? [["d", d.value]] : []),
               ...(e.value ? [["e", e.value]] : []),
               ...(k.value ? [["k", k.value]] : []),
+              ...(p.value ? [["p", k.value]] : []),
               ...(name.value ? [["name", name.value]] : []),
               ...(proxyID.value && proxyProtocol.value
                 ? [["proxy", proxyID.value, proxyProtocol.value]]
