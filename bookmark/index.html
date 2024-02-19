@@ -34,6 +34,7 @@
 
     <script src="https://unpkg.com/nostr-tools@2.3.0/lib/nostr.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="../relay-list/relayList.js"></script>
     <script>
       marked.setOptions({
         breaks: true,
@@ -58,6 +59,7 @@
         const pk = window.NostrTools.nip19.decode(npub.value).data;
 
         const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(pool, pk);
         const events = [
           ...(await Promise.all([
             pool.querySync(relays, {
@@ -79,6 +81,7 @@
 
       const loadBookmark = async () => {
         const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(pool, pk);
 
         event = await fetchBookmarksEvent();
 
@@ -130,6 +133,7 @@
         );
 
         const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(pool, pk);
         Promise.any(pool.publish(relays, newEvent));
         pool.close(relays);
 
@@ -166,6 +170,10 @@
         );
 
         const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(
+          pool,
+          window.NostrTools.getPublicKey(sk)
+        );
         Promise.any(pool.publish(relays, newEvent));
         pool.close(relays);
 
