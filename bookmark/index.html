@@ -40,14 +40,6 @@
         breaks: true,
       });
 
-      const relays = [
-        "wss://nos.lol",
-        "wss://nostr.bitcoiner.social",
-        "wss://nostr.mom",
-        "wss://relay.damus.io",
-        "wss://relay.nostr.bg",
-      ];
-
       const e = async (pool, relays, event) => [
         event,
         await pool.querySync(relays, {
