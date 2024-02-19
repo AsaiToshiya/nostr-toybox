@@ -32,7 +32,7 @@
     </p>
     <div id="bookmark"></div>
 
-    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
+    <script src="https://unpkg.com/nostr-tools@2.3.0/lib/nostr.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
       marked.setOptions({
@@ -49,28 +49,28 @@
 
       const e = async (pool, relays, event) => [
         event,
-        await pool.list(relays, [
-          {
-            ids: event.tags.filter((tag) => tag[0] == "e").map((tag) => tag[1]),
-          },
-        ]),
+        await pool.querySync(relays, {
+          ids: event.tags.filter((tag) => tag[0] == "e").map((tag) => tag[1]),
+        }),
       ];
 
       const fetchBookmarksEvent = async () => {
         const pk = window.NostrTools.nip19.decode(npub.value).data;
 
         const pool = new window.NostrTools.SimplePool();
-        const events = await pool.list(relays, [
-          {
-            authors: [pk],
-            kinds: [10003],
-          },
-          {
-            authors: [pk],
-            kinds: [30001],
-            "#d": ["bookmark"],
-          },
-        ]);
+        const events = [
+          ...(await Promise.all([
+            pool.querySync(relays, {
+              authors: [pk],
+              kinds: [10003],
+            }),
+            pool.querySync(relays, {
+              authors: [pk],
+              kinds: [30001],
+              "#d": ["bookmark"],
+            }),
+          ])),
+        ].flat();
 
         return events.sort((a, b) => b.created_at - a.created_at)[0];
       };
@@ -111,7 +111,7 @@
         npub.value = window.NostrTools.nip19.npubEncode(pk);
         event = await fetchBookmarksEvent();
 
-        const newEvent = window.NostrTools.finishEvent(
+        const newEvent = window.NostrTools.finalizeEvent(
           {
             ...event,
             kind: 10003,
@@ -130,7 +130,7 @@
         );
 
         const pool = new window.NostrTools.SimplePool();
-        pool.publish(relays, newEvent);
+        Promise.any(pool.publish(relays, newEvent));
         pool.close(relays);
 
         await loadBookmark();
@@ -151,7 +151,7 @@
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
 
-        const newEvent = window.NostrTools.finishEvent(
+        const newEvent = window.NostrTools.finalizeEvent(
           {
             ...event,
             kind: 10003,
@@ -166,7 +166,7 @@
         );
 
         const pool = new window.NostrTools.SimplePool();
-        pool.publish(relays, newEvent);
+        Promise.any(pool.publish(relays, newEvent));
         pool.close(relays);
 
         await loadBookmark();
