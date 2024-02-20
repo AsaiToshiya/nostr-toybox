@@ -73,6 +73,7 @@
 
       const loadBookmark = async () => {
         const pool = new window.NostrTools.SimplePool();
+        const pk = window.NostrTools.nip19.decode(npub.value).data;
         const relays = await getRelays(pool, pk);
 
         event = await fetchBookmarksEvent();
