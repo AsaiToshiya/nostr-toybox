@@ -8,12 +8,10 @@ const _defaultRelays = [
 ];
 
 const _getNip02Relays = async (pool, pk) => {
-  const events = await pool.querySync(_defaultRelays, [
-    {
-      authors: [pk],
-      kinds: [3],
-    },
-  ]);
+  const events = await pool.querySync(_defaultRelays, {
+    authors: [pk],
+    kinds: [3],
+  });
   const content = events.length
     ? events.sort((a, b) => b.created_at - a.created_at)[0].content
     : null;
