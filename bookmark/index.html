@@ -34,8 +34,9 @@
 
     <script src="https://unpkg.com/nostr-tools@2.3.0/lib/nostr.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script type="module" src="../relay-list/relayList.js"></script>
-    <script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
+
       marked.setOptions({
         breaks: true,
       });
@@ -174,6 +175,9 @@
 
         hideNostrich();
       };
+
+      window.handleAddClick = handleAddClick;
+      window.handleClick = handleClick;
 
       const params = new URLSearchParams(location.search);
       npub.value = params.get("npub");
