@@ -149,6 +149,8 @@
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
 
+        event = await fetchBookmarksEvent();
+
         const newEvent = window.NostrTools.finalizeEvent(
           {
             ...event,
