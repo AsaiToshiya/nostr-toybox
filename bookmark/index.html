@@ -77,7 +77,7 @@
         const pk = window.NostrTools.nip19.decode(npub.value).data;
         const relays = await getRelays(pool, pk);
 
-        event = await fetchBookmarksEvent();
+        const event = await fetchBookmarksEvent();
 
         const bookmarks = (await e(pool, relays, event))[1];
         bookmark.innerHTML = bookmarks
@@ -106,7 +106,7 @@
 
         const pk = window.NostrTools.getPublicKey(sk);
         npub.value = window.NostrTools.nip19.npubEncode(pk);
-        event = await fetchBookmarksEvent();
+        const event = await fetchBookmarksEvent();
 
         const newEvent = window.NostrTools.finalizeEvent(
           {
@@ -149,7 +149,7 @@
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
 
-        event = await fetchBookmarksEvent();
+        const event = await fetchBookmarksEvent();
 
         const newEvent = window.NostrTools.finalizeEvent(
           {
