@@ -21,6 +21,7 @@ NIP-25: Reactions,25.md
 NIP-26: Delegated Event Signing,26.md
 NIP-27: Text Note References,27.md
 NIP-28: Public Chat,28.md
+NIP-29: Relay-based Groups,29.md
 NIP-30: Custom Emoji,30.md
 NIP-31: Dealing with Unknown Events,31.md
 NIP-32: Labeling,32.md
