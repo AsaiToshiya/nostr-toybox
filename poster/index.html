@@ -67,10 +67,9 @@
         [...window.NostrTools.nip27.matchAll(content)]
           .filter(({ decoded: { type } }) => type == "nevent" || type == "note")
           .map(({ decoded: { type, data } }) => [
-            "e",
+            "q",
             data.id ? data.id : data,
             "",
-            "mention",
           ]);
 
       const createPubkeyTags = (content) =>
