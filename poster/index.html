@@ -18,6 +18,8 @@
     /><br />
     encryption nsec:
     <input id="encryptionNsec" type="text" size="50" /><br />
+    content warning:
+    <input id="contentWarning" type="checkbox" /><br />
     nsec:
     <input id="nsec" type="text" size="50" /><br />
     <button onclick="handleClick()">投稿</button>
@@ -50,6 +52,7 @@
               ...extractHashtagTags(content.value),
               ...(await createReplyTags(nip19.value)),
               ...(encryptionNsec.value ? [["encrypted"]] : []),
+              ...(contentWarning.checked ? [["content-warning"]] : []),
             ].filter((tag) => tag.length > 0),
             content: encryptionNsec.value
               ? await window.NostrTools.nip04.encrypt(
