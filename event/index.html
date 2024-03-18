@@ -63,29 +63,29 @@
           {
             kind: parseInt(kind.value, 10),
             created_at: Math.floor(Date.now() / 1000),
-            tags: [
-              ...(d.value ? [["d", d.value]] : []),
-              ...(e.value ? [["e", e.value]] : []),
-              ...(k.value ? [["k", k.value]] : []),
-              ...(p.value ? [["p", k.value]] : []),
-              ...(name.value ? [["name", name.value]] : []),
-              ...(proxyID.value && proxyProtocol.value
-                ? [["proxy", proxyID.value, proxyProtocol.value]]
-                : []),
-              ...(title.value ? [["title", title.value]] : []),
-              ...(start.value ? [["start", start.value]] : []),
-              ...(description.value
-                ? [["description", description.value]]
-                : []),
-              ...(clone.value ? [["clone", clone.value]] : []),
-              ...(web.value ? [["web", web.value]] : []),
-              ...(patches.value ? [["patches", patches.value]] : []),
-            ],
+            tags: createTags(),
             content: content.value,
           },
           sk
         );
       };
+
+      const createTags = () => [
+        ...(d.value ? [["d", d.value]] : []),
+        ...(e.value ? [["e", e.value]] : []),
+        ...(k.value ? [["k", k.value]] : []),
+        ...(p.value ? [["p", k.value]] : []),
+        ...(name.value ? [["name", name.value]] : []),
+        ...(proxyID.value && proxyProtocol.value
+          ? [["proxy", proxyID.value, proxyProtocol.value]]
+          : []),
+        ...(title.value ? [["title", title.value]] : []),
+        ...(start.value ? [["start", start.value]] : []),
+        ...(description.value ? [["description", description.value]] : []),
+        ...(clone.value ? [["clone", clone.value]] : []),
+        ...(web.value ? [["web", web.value]] : []),
+        ...(patches.value ? [["patches", patches.value]] : []),
+      ];
 
       const handleClick = async () => {
         const event = createEvent();
