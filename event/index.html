@@ -70,21 +70,24 @@
         );
       };
 
+      const createTag = (tagName, input) =>
+        input.value ? [[tagName, input.value]] : [];
+
       const createTags = () => [
-        ...(d.value ? [["d", d.value]] : []),
-        ...(e.value ? [["e", e.value]] : []),
-        ...(k.value ? [["k", k.value]] : []),
-        ...(p.value ? [["p", p.value]] : []),
-        ...(name.value ? [["name", name.value]] : []),
+        ...createTag("d", d),
+        ...createTag("e", e),
+        ...createTag("k", k),
+        ...createTag("p", p),
+        ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
           : []),
-        ...(title.value ? [["title", title.value]] : []),
-        ...(start.value ? [["start", start.value]] : []),
-        ...(description.value ? [["description", description.value]] : []),
-        ...(clone.value ? [["clone", clone.value]] : []),
-        ...(web.value ? [["web", web.value]] : []),
-        ...(patches.value ? [["patches", patches.value]] : []),
+        ...createTag("title", title),
+        ...createTag("start", start),
+        ...createTag("description", description),
+        ...createTag("clone", clone),
+        ...createTag("web", web),
+        ...createTag("patches", patches),
       ];
 
       const handleClick = async () => {
