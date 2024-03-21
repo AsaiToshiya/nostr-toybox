@@ -45,21 +45,15 @@
     JSON:
     <pre id="json"></pre>
 
-    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
-    <script>
-      const relays = [
-        "wss://nos.lol",
-        "wss://nostr.bitcoiner.social",
-        "wss://nostr.mom",
-        "wss://relay.damus.io",
-        "wss://relay.nostr.bg",
-      ];
+    <script src="https://unpkg.com/nostr-tools@2.3.1/lib/nostr.bundle.js"></script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
 
       const createEvent = () => {
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
         const pk = window.NostrTools.getPublicKey(sk);
 
-        return window.NostrTools.finishEvent(
+        return window.NostrTools.finalizeEvent(
           {
             kind: parseInt(kind.value, 10),
             created_at: Math.floor(Date.now() / 1000),
@@ -91,10 +85,14 @@
       ];
 
       const handleClick = async () => {
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const pk = window.NostrTools.getPublicKey(sk);
+
         const event = createEvent();
 
         const pool = new window.NostrTools.SimplePool();
-        pool.publish(relays, event);
+        const relays = await getRelays(pool, pk);
+        await Promise.any(pool.publish(relays, event));
         pool.close(relays);
 
         json.innerText = JSON.stringify(event, null, 2);
