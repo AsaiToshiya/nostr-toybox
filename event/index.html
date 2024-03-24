@@ -49,20 +49,16 @@
     <script type="module">
       import { getRelays } from "../relay-list/relayList.js";
 
-      const createEvent = () => {
-        const sk = window.NostrTools.nip19.decode(nsec.value).data;
-        const pk = window.NostrTools.getPublicKey(sk);
-
-        return window.NostrTools.finalizeEvent(
+      const createEvent = () =>
+        window.NostrTools.finalizeEvent(
           {
             kind: parseInt(kind.value, 10),
             created_at: Math.floor(Date.now() / 1000),
             tags: createTags(),
             content: content.value,
           },
-          sk
+          window.NostrTools.nip19.decode(nsec.value).data
         );
-      };
 
       const createTag = (tagName, input) =>
         input.value ? [[tagName, input.value]] : [];
