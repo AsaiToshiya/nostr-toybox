@@ -97,7 +97,7 @@
       const handleStringifyClick = async () => {
         const event = createEvent();
 
-        json.innerText = JSON.stringify(event);
+        json.innerText = JSON.stringify(event, null, 2);
       };
 
       window.handleClick = handleClick;
