@@ -20,6 +20,8 @@
     <input id="k" type="text" /><br />
     p:
     <input id="p" type="text" /><br />
+    r:
+    <input id="r" type="text" /><br />
     name:
     <input id="name" type="text" /><br />
     proxy:
@@ -68,6 +70,7 @@
         ...createTag("e", e),
         ...createTag("k", k),
         ...createTag("p", p),
+        ...createTag("r", r),
         ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
