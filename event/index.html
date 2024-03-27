@@ -21,7 +21,8 @@
     p:
     <input id="p" type="text" /><br />
     r:
-    <input id="r" type="text" /><br />
+    <input id="r" type="text" />
+    <input id="rParam" type="text" /><br />
     name:
     <input id="name" type="text" /><br />
     proxy:
@@ -70,7 +71,9 @@
         ...createTag("e", e),
         ...createTag("k", k),
         ...createTag("p", p),
-        ...createTag("r", r),
+        ...(r.value
+          ? [["r", r.value, ...(rParam.value ? [rParam.value] : [])]]
+          : []),
         ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
