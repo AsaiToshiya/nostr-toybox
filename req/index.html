@@ -23,7 +23,9 @@
     limit:
     <input id="limit" type="text" /><br />
     <button onclick="handleClick()">get</button>
-    <button onclick="handleListClick()">list</button><br />
+    <button onclick="handleListClick()">list</button>
+    <input type="checkbox" id="reorder" />
+    <label for="reorder">reorder on client</label><br />
     event:
     <pre id="event"></pre>
 
@@ -85,13 +87,21 @@
       const handleListClick = async () => {
         const pool = new window.NostrTools.SimplePool();
         const events = await pool.list(relays, [makeFilter()]);
-        $("event").innerText = events
+        $("event").innerText = (
+          reorder.checked
+            ? [...events].sort((a, b) => b.created_at - a.created_at)
+            : events
+        )
           .map((event) => JSON.stringify(event, null, 2))
           .join("\n");
       };
 
       const params = new URLSearchParams(location.search);
-      params.forEach((value, key) => value && ($(key).value = value));
+      params.forEach(
+        (value, key) =>
+          (key === "reorder" && (reorder.checked = true)) ||
+          (value && ($(key).value = value))
+      );
       params.size && handleListClick();
     </script>
   </body>
