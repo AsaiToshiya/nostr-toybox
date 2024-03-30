@@ -21,7 +21,7 @@
     p:
     <input id="p" type="text" /><br />
     r:
-    <input id="r" type="text" />
+    <input id="r" type="text" onchange="handleRChange(event)" />
     <input id="rParam" type="text" /><br />
     name:
     <input id="name" type="text" /><br />
@@ -63,6 +63,20 @@
           window.NostrTools.nip19.decode(nsec.value).data
         );
 
+      const createRTags = () => {
+        const rElements = [...document.querySelectorAll("#r")];
+        const rParamElements = document.querySelectorAll("#rParam");
+        return rElements.reduce((acc, r, i) => {
+          const rParam = rParamElements[i];
+          return [
+            ...acc,
+            ...(r.value
+              ? [["r", r.value, ...(rParam.value ? [rParam.value] : [])]]
+              : []),
+          ];
+        }, []);
+      };
+
       const createTag = (tagName, input) =>
         input.value ? [[tagName, input.value]] : [];
 
@@ -71,9 +85,7 @@
         ...createTag("e", e),
         ...createTag("k", k),
         ...createTag("p", p),
-        ...(r.value
-          ? [["r", r.value, ...(rParam.value ? [rParam.value] : [])]]
-          : []),
+        ...createRTags(),
         ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
@@ -100,6 +112,20 @@
         json.innerText = JSON.stringify(event, null, 2);
       };
 
+      const handleRChange = (event) => {
+        const input = event.target;
+        const elements = document.querySelectorAll("#r");
+        const isLast = input === elements[elements.length - 1];
+        const br = input.nextElementSibling.nextElementSibling;
+        isLast &&
+          br.insertAdjacentHTML(
+            "afterend",
+            `r:
+<input id="r" type="text" onchange="handleRChange(event)" />
+<input id="rParam" type="text" /><br />`
+          );
+      };
+
       const handleStringifyClick = async () => {
         const event = createEvent();
 
@@ -107,6 +133,7 @@
       };
 
       window.handleClick = handleClick;
+      window.handleRChange = handleRChange;
       window.handleStringifyClick = handleStringifyClick;
     </script>
   </body>
