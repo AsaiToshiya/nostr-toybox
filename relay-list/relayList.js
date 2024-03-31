@@ -7,7 +7,7 @@ const _defaultRelays = [
   "wss://relay.nostr.band",
 ];
 
-const _getNip02Relays = async (pool, pk) => {
+const _getNip02Relays = async (pool, pk, isRead = false) => {
   const events = await pool.querySync(_defaultRelays, {
     authors: [pk],
     kinds: [3],
@@ -18,20 +18,29 @@ const _getNip02Relays = async (pool, pk) => {
   const obj = content ? JSON.parse(content) : null;
   return obj
     ? Object.keys(obj)
-        .filter((key) => obj[key].write)
+        .filter((key) => (isRead ? obj[key].read : obj[key].write))
         .map((key) => key)
     : null;
 };
 
-const _getNip65Relays = async (pool, pk) => {
+const _getNip65Relays = async (pool, pk, isRead = false) => {
   const event = await pool.get(_defaultRelays, {
     authors: [pk],
     kinds: [10002],
   });
   return event?.tags
-    .filter((tag) => tag[0] == "r" && (tag.length == 2 || tag[2] == "write"))
+    .filter(
+      (tag) =>
+        tag[0] == "r" &&
+        (tag.length == 2 || tag[2] == (isRead ? "read" : "write"))
+    )
     .map((tag) => tag[1]);
 };
+
+export const getReadRelays = async (pool, pk) =>
+  (await _getNip65Relays(pool, pk, true)) ??
+  (await _getNip02Relays(pool, pk, true)) ??
+  _defaultRelays;
 
 export const getRelays = async (pool, pk) =>
   (await _getNip65Relays(pool, pk)) ??
