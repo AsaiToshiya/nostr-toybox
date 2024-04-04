@@ -45,15 +45,7 @@
           {
             kind: 1,
             created_at: Math.floor(Date.now() / 1000),
-            tags: [
-              ...createEventTags(content.value),
-              ...createPubkeyTags(content.value),
-              ...extractReferenceTags(content.value),
-              ...extractHashtagTags(content.value),
-              ...(await createReplyTags(nip19.value)),
-              ...(encryptionNsec.value ? [["encrypted"]] : []),
-              ...(contentWarning.checked ? [["content-warning"]] : []),
-            ].filter((tag) => tag.length > 0),
+            tags: await createTags(),
             content: encryptionNsec.value
               ? await window.NostrTools.nip04.encrypt(
                   window.NostrTools.nip19.decode(encryptionNsec.value).data,
@@ -109,6 +101,17 @@
             })(nip19)
           : [];
       };
+
+      const createTags = async () =>
+        [
+          ...createEventTags(content.value),
+          ...createPubkeyTags(content.value),
+          ...extractReferenceTags(content.value),
+          ...extractHashtagTags(content.value),
+          ...(await createReplyTags(nip19.value)),
+          ...(encryptionNsec.value ? [["encrypted"]] : []),
+          ...(contentWarning.checked ? [["content-warning"]] : []),
+        ].filter((tag) => tag.length > 0);
 
       const extractHashtagTags = (content) => {
         return (
