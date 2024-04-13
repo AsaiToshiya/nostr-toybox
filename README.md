@@ -24,6 +24,8 @@ A library for JavaScript to fetch events
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/fetch](https://github.com/AsaiToshiya/nostr-toybox/tree/main/fetch)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Fortune NIPs
 
 A bot on Nostr that tells your lucky NIP of the day
