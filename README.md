@@ -52,6 +52,8 @@ The day you joined Nostr
 
 [https://asaitoshiya.github.io/nostr-toybox/menu/](https://asaitoshiya.github.io/nostr-toybox/menu/)
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 ## nevent to naddr
 
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
