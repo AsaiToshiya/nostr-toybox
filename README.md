@@ -58,6 +58,8 @@ The day you joined Nostr
 
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## note-to-text
 
 A web-based tool to turn the `content` of an event (kind 1) into shareable text
