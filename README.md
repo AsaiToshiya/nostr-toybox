@@ -66,6 +66,8 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 [https://asaitoshiya.github.io/nostr-toybox/note-to-text/](https://asaitoshiya.github.io/nostr-toybox/note-to-text/)
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 ## nsec encryption/decryption
 
 Encrypt/Decrypt the nsec with NIP-49
