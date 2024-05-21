@@ -8,7 +8,7 @@ https://asaitoshiya.github.io/nostr-toybox/seven/
 
 [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md) extension is required to work.
 
-Currently it is 9 lines (684 bytes).
+Currently it is 9 lines (670 bytes).
 
 
 ## License

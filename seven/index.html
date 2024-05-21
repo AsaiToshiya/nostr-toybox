@@ -1,9 +1,9 @@
-<body id=B onload=nostr.getPublicKey().then(m)><script>g=e=>e.created_at;s=l=>w
-.send(JSON.stringify(["REQ","a",{authors:a,kinds:[l],limit:[,200][l]}]),e=[],k=
-l);w=new WebSocket("wss://nos.lol");w.onmessage=h=>{[m,,n]=P(h.data);({N:_=>e.
-push(n),E:e.sort((a,b)=>g(b)-g(a))&&[_=>s(1,p=e),_=>e.map(q=>{a=P(p.find(p=>p.
-pubkey==q.pubkey)?.content??"{}");B.innerHTML+=`<p>${a.display_name}@${a.name}
-</p><p>${"&amp;1&lt;1&gt;1&nbsp;1<br>".split(1).reduce((a,o,i)=>a.replaceAll(
-"&<> \n"[i],o),q.content)}</p><p>${new Date(g(q)*1e3).toLocaleString()}</p>`}),
-,_=>s(0,a=e[0].tags.map(t=>t[1]))][k]}[m[3]]())};P=JSON.parse;m=p=>{a=p&&[p];
-try{s(3)}catch{setTimeout(m,500)}}</script>
+<body id=B onload='g=e=>e.created_at;s=l=>w.send(JSON.stringify(["REQ","a",{
+authors:a,kinds:[l],limit:[,200][l]}]),e=[],k=l);w=new WebSocket(
+"wss://nos.lol");w.onmessage=h=>{[m,,n]=P(h.data);({N:_=>e.push(n),E:e.sort((a,
+b)=>g(b)-g(a))&&[_=>s(1,p=e),_=>e.map(q=>{a=P(p.find(p=>p.pubkey==q.pubkey)?.
+content??"{}");B.innerHTML+=`<p>${a.display_name}@${a.name}</p><p>${
+"&amp;1&lt;1&gt;1&nbsp;1<br>".split(1).reduce((a,o,i)=>a.replaceAll("&<> \n"[i]
+,o),q.content)}</p><p>${new Date(g(q)*1e3).toLocaleString()}</p>`}),,_=>s(0,a=e
+[0].tags.map(t=>t[1]))][k]}[m[3]]())};P=JSON.parse;m=p=>{a=p&&[p];try{s(3)}
+catch{setTimeout(m,500)}};nostr.getPublicKey().then(m)'>

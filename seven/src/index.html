@@ -1,5 +1,4 @@
-<body id=B onload=nostr.getPublicKey().then(m)>
-  <script>
+<body id=B onload='
     // イベントの created_at の値を返す関数
     g = e => e.created_at;
 
@@ -105,5 +104,7 @@
       } catch {
         setTimeout(m, 500) // 再帰する
       }
-    }
-  </script>
+    };
+
+    nostr.getPublicKey().then(m)'
+>

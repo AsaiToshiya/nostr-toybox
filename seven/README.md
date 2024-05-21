@@ -8,7 +8,7 @@ https://asaitoshiya.github.io/nostr-toybox/seven/
 
 動作には [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md) の拡張機能が必要です。
 
-現在は 9 行 (684 バイト) です。
+現在は 9 行 (670 バイト) です。
 
 
 ## License
