@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css"
+    />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 15px;
+        }
+      }
+
+      img {
+        max-width: 600px;
+      }
+
+      @media screen and (max-width: 600px) {
+        img {
+          max-width: 100%;
+        }
+      }
+    </style>
+    <title>latest-posts</title>
+  </head>
+  <body class="markdown-body">
+    <script src="https://unpkg.com/nostr-tools@2.6.0/lib/nostr.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
+
+      const npub = new URLSearchParams(location.search).get("npub");
+      const pk = window.NostrTools.nip19.decode(npub).data;
+      const pool = new window.NostrTools.SimplePool();
+      const relays = await getRelays(pool, pk);
+      const events = await pool.querySync(relays, {
+        authors: [pk],
+        kinds: [1],
+        limit: 20,
+      });
+      document.body.innerHTML = events
+        .sort((a, b) => b.created_at - a.created_at)
+        .map((post) => {
+          const nevent = window.NostrTools.nip19.neventEncode({
+            id: post.id,
+          });
+          const url = `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`;
+          const date = new Date(post.created_at * 1000);
+          const dateTime = date.toLocaleString();
+          const content = marked.parse(
+            post.content
+              .replace(
+                /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g,
+                '<a href="$1"><img src="$1" loading="lazy"></a>'
+              )
+              .replace(
+                /NIP-(\d{2})/g,
+                '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md">$&</a>'
+              )
+              .replace(/^#+ /g, "\\$&")
+          );
+          return `      <h3><a href="${url}">${dateTime}</a></h3>
+      ${content}`;
+        })
+        .join("\n");
+    </script>
+  </body>
+</html>
