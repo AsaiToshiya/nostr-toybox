@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>media</title>
+  </head>
+  <body>
+    <h1>media</h1>
+    npub:
+    <input id="npub" type="text" size="50" />
+    <button onclick="handleClick()">load</button>
+    <div id="media"></div>
+    <button id="loadMore" style="display: none">load more</button>
+    <img
+      id="nostrich"
+      src="nostrich.gif"
+      style="display: none; height: 1.3em; max-height: 1.3em"
+    />
+    <p>
+      Nostrich icon by
+      <a href="https://github.com/SovrynMatt/Nostr-Website-Button-Design"
+        >@SovrynMatt</a
+      >
+    </p>
+
+    <script src="https://unpkg.com/nostr-tools@2.6.0/lib/nostr.bundle.js"></script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
+
+      const hideLoadMore = () => (loadMore.style.display = "none");
+
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const loadMedias = async (pk, until) => {
+        const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(pool, pk);
+
+        const events = await pool.querySync(relays, {
+          authors: [pk],
+          kinds: [1],
+          until,
+          limit: 200,
+        });
+
+        const medias = events
+          .filter((event) => event.tags.some(referenceImageTag))
+          .sort((a, b) => b.created_at - a.created_at);
+
+        media.innerHTML += medias
+          .map((event) => {
+            const date = new Date(event.created_at * 1000);
+            const dateTime = date.toLocaleString();
+            const media = event.tags.find(referenceImageTag)[1];
+            return `<h3><a href="https://njump.me/${window.NostrTools.nip19.neventEncode(
+              {
+                id: event.id,
+              }
+            )}" target="_blank">${dateTime}</a></h3><a href="${media}"><img src="${media}" style="max-width: 640px;" loading="lazy"></a>`;
+          })
+          .join("\n");
+
+        loadMore.onclick = async () => {
+          hideLoadMore();
+          showNostrich();
+
+          await loadMedias(pk, medias[medias.length - 1].created_at - 1);
+
+          hideNostrich();
+          showLoadMore();
+        };
+      };
+
+      const referenceImageTag = (tag) =>
+        tag[0] == "r" &&
+        /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g.test(tag[1]);
+
+      const showLoadMore = () => (loadMore.style.display = "inline-block");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
+      const handleClick = async () => {
+        media.innerHTML = "";
+        hideLoadMore();
+        showNostrich();
+
+        const pk = window.NostrTools.nip19.decode(npub.value).data;
+        await loadMedias(pk, Math.floor(Date.now() / 1000));
+
+        hideNostrich();
+        showLoadMore();
+      };
+
+      window.handleClick = handleClick;
+
+      const params = new URLSearchParams(location.search);
+      npub.value = params.get("npub");
+      npub.value && handleClick();
+    </script>
+  </body>
+</html>

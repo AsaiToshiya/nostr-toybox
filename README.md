@@ -54,6 +54,12 @@ The day you joined Nostr
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
+## media
+
+[https://asaitoshiya.github.io/nostr-toybox/media/](https://asaitoshiya.github.io/nostr-toybox/media/)
+
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 ## menu
 
 [https://asaitoshiya.github.io/nostr-toybox/menu/](https://asaitoshiya.github.io/nostr-toybox/menu/)
