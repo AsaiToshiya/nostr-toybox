@@ -47,14 +47,12 @@
 
         media.innerHTML += medias
           .map((event) => {
-            const date = new Date(event.created_at * 1000);
-            const dateTime = date.toLocaleString();
             const media = event.tags.find(referenceImageTag)[1];
-            return `<h3><a href="https://njump.me/${window.NostrTools.nip19.neventEncode(
+            return `<p><a href="https://njump.me/${window.NostrTools.nip19.neventEncode(
               {
                 id: event.id,
               }
-            )}" target="_blank">${dateTime}</a></h3><a href="${media}"><img src="${media}" style="max-width: 640px;" loading="lazy"></a>`;
+            )}" target="_blank"><img src="${media}" style="max-width: 640px;" loading="lazy"></a></p>`;
           })
           .join("\n");
 
