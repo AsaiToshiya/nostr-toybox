@@ -39,6 +39,10 @@
     <script type="module">
       import { getRelays } from "../relay-list/relayList.js";
 
+      marked.setOptions({
+        breaks: true,
+      });
+
       const npub = new URLSearchParams(location.search).get("npub");
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
