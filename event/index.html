@@ -27,6 +27,8 @@
     <input id="t" type="text" /><br />
     encrypted:
     <input id="encrypted" type="checkbox" /><br />
+    content warning:
+    <input id="contentWarning" type="checkbox" /><br />
     name:
     <input id="name" type="text" /><br />
     proxy:
@@ -92,6 +94,7 @@
         ...createRTags(),
         ...createTag("t", t),
         ...(encrypted.checked ? [["encrypted"]] : []),
+        ...(contentWarning.checked ? [["content-warning"]] : []),
         ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
