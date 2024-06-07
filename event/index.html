@@ -23,6 +23,8 @@
     r:
     <input id="r" type="text" onchange="handleRChange(event)" />
     <input id="rParam" type="text" /><br />
+    t:
+    <input id="t" type="text" /><br />
     name:
     <input id="name" type="text" /><br />
     proxy:
@@ -86,6 +88,7 @@
         ...createTag("k", k),
         ...createTag("p", p),
         ...createRTags(),
+        ...createTag("t", t),
         ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
