@@ -25,6 +25,8 @@
     <input id="rParam" type="text" /><br />
     t:
     <input id="t" type="text" /><br />
+    encrypted:
+    <input id="encrypted" type="checkbox" /><br />
     name:
     <input id="name" type="text" /><br />
     proxy:
@@ -89,6 +91,7 @@
         ...createTag("p", p),
         ...createRTags(),
         ...createTag("t", t),
+        ...(encrypted.checked ? [["encrypted"]] : []),
         ...createTag("name", name),
         ...(proxyID.value && proxyProtocol.value
           ? [["proxy", proxyID.value, proxyProtocol.value]]
