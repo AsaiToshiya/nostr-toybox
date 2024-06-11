@@ -34,12 +34,6 @@
     <title>latest-posts</title>
   </head>
   <body class="markdown-body">
-    <p>
-      usage:
-      <code
-        >https://asaitoshiya.github.io/nostr-toybox/latest-posts/?npub=&lt;nip-19-npub&gt;</code
-      >
-    </p>
     <script src="https://unpkg.com/nostr-tools@2.6.0/lib/nostr.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script type="module">
@@ -50,6 +44,12 @@
       });
 
       const npub = new URLSearchParams(location.search).get("npub");
+      !npub && (document.body.innerHTML = `<p>
+      usage:
+      <code
+        >https://asaitoshiya.github.io/nostr-toybox/latest-posts/?npub=&lt;nip-19-npub&gt;</code
+      >
+    </p>`);
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
