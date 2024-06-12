@@ -10,6 +10,14 @@ A client for bookmarking events
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
+## broadcastr
+
+An alternative to leesalminen/nostr-broadcast
+
+[https://github.com/AsaiToshiya/nostr-toybox/tree/main/broadcastr](https://github.com/AsaiToshiya/nostr-toybox/tree/main/broadcastr)
+
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+
 ## event
 
 A web-based tool to publish events
