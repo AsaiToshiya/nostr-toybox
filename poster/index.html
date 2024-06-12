@@ -5,6 +5,7 @@
   </head>
   <body>
     <h1>poster</h1>
+    <input id="subject" type="text" size="50" placeholder="subject" />
     <div style="display: flex; align-items: start">
       content:
       <textarea id="content" rows="4" cols="50"></textarea>
@@ -111,6 +112,7 @@
           ...(await createReplyTags(nip19.value)),
           ...(encryptionNsec.value ? [["encrypted"]] : []),
           ...(contentWarning.checked ? [["content-warning"]] : []),
+          ...(subject.value ? [["subject", subject.value]] : []),
         ].filter((tag) => tag.length > 0);
 
       const extractHashtagTags = (content) => {
@@ -141,6 +143,7 @@
           2
         );
 
+        subject.value = "";
         content.value = "";
       };
 
