@@ -18,6 +18,8 @@
     <input id="kind" type="text" /><br />
     #e:
     <input id="e" type="text" size="50" placeholder="nevent1..." /><br />
+    #d:
+    <input id="d" type="text" /><br />
     #p:
     <input id="p" type="text" size="50" placeholder="npub1..." /><br />
     limit:
@@ -63,6 +65,7 @@
           .split(",")
           .filter((value) => value)
           .map((value) => window.NostrTools.nip19.decode(value).data.id);
+        const dTagValues = d.value.split(",").filter((value) => value);
         const pTagValues = p.value
           .split(",")
           .filter((value) => value)
@@ -73,6 +76,7 @@
           authors: authors.length > 0 ? authors : undefined,
           kinds: kinds.length > 0 ? kinds : undefined,
           "#e": eTagValues.length > 0 ? eTagValues : undefined,
+          "#d": dTagValues.length > 0 ? dTagValues : undefined,
           "#p": pTagValues.length > 0 ? pTagValues : undefined,
           limit: limit.value ? parseInt(limit.value) : undefined,
         };
