@@ -135,7 +135,7 @@
         const event = await createEvent();
 
         const pool = new window.NostrTools.SimplePool();
-        pool.publish(relays, event);
+        await pool.publish(relays, event);
 
         document.querySelector("#event").innerText = JSON.stringify(
           event,
