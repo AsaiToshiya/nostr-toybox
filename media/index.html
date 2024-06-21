@@ -51,11 +51,11 @@
           kinds: [1],
           until,
           limit: 200,
-        });
+        })
+          .sort((a, b) => b.created_at - a.created_at);
 
         const medias = events
-          .filter((event) => event.tags.some(referenceImageTag))
-          .sort((a, b) => b.created_at - a.created_at);
+          .filter((event) => event.tags.some(referenceImageTag));
 
         media.innerHTML += medias
           .map((event) => {
@@ -72,7 +72,7 @@
           hideLoadMore();
           showNostrich();
 
-          await loadMedias(pk, medias[medias.length - 1].created_at - 1);
+          await loadMedias(pk, events[events.length - 1].created_at - 1);
 
           hideNostrich();
           showLoadMore();
