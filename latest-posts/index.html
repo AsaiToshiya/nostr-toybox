@@ -53,12 +53,12 @@
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
-      const events = await pool.querySync(relays, {
+      const posts = await pool.querySync(relays, {
         authors: [pk],
         kinds: [1],
         limit: 50,
       });
-      document.body.innerHTML = events
+      document.body.innerHTML = posts
         .sort((a, b) => b.created_at - a.created_at)
         .map((post) => {
           const nevent = window.NostrTools.nip19.neventEncode({
