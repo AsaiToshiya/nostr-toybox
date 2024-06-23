@@ -110,6 +110,8 @@ A simple web-based tool to post events (kind 1)
 
 [https://asaitoshiya.github.io/nostr-toybox/poster/](https://asaitoshiya.github.io/nostr-toybox/poster/)
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 ## posts
 
 A command line tool to save posts as HTML
