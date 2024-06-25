@@ -7,25 +7,41 @@
   </head>
   <body style="display: flex; flex-direction: column; height: 100%; margin: 0; padding: 0; width: 100%">
     <div style="margin: 8px">
-      <a href="javascript:openUrl('https://asaitoshiya.github.io/nostr-toybox/latest-posts/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38');">最新</a>
-      <a href="javascript:openUrl('https://notes.asaitoshiya.com/');">アーカイブ</a>
-      <a href="javascript:openUrl('https://notes.asaitoshiya.com/toc.html');">ハッシュタグ</a>
-      <a href="javascript:openUrl('https://asaitoshiya.github.io/nostr-toybox/media/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38');">メディア</a>
-      <a href="javascript:openUrl('https://asaitoshiya.github.io/nostr-toybox/bookmark/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38');">ブックマーク</a>
+      <a href="javascript:openUrl('latest');">最新</a>
+      <a href="javascript:openUrl('archives');">アーカイブ</a>
+      <a href="javascript:openUrl('hashtag');">ハッシュタグ</a>
+      <a href="javascript:openUrl('media');">メディア</a>
+      <a href="javascript:openUrl('bookmark');">ブックマーク</a>
     </div>
     <iframe
-      id="iframe"
+      id="latest"
       src="https://asaitoshiya.github.io/nostr-toybox/latest-posts/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"
       style="flex-grow: 1; margin: 0; padding: 0; border: none"
     ></iframe>
+    <iframe id="archives" src="https://notes.asaitoshiya.com/" style="flex-grow: 1; margin: 0; padding: 0; border: none"></iframe>
+    <iframe id="hashtag" src="https://notes.asaitoshiya.com/toc.html" style="flex-grow: 1; margin: 0; padding: 0; border: none"></iframe>
+    <iframe
+      id="media"
+      src="https://asaitoshiya.github.io/nostr-toybox/media/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"
+      style="flex-grow: 1; margin: 0; padding: 0; border: none"
+    ></iframe>
+    <iframe
+      id="bookmark"
+      src="https://asaitoshiya.github.io/nostr-toybox/bookmark/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"
+      style="flex-grow: 1; margin: 0; padding: 0; border: none"
+    ></iframe>
+    <iframe id="post" src="https://asaitoshiya.github.io/nostr-toybox/poster/" style="flex-grow: 1; margin: 0; padding: 0; border: none"></iframe>
     <div style="text-align: right; margin: 8px">
-      <a href="javascript:openUrl('https://asaitoshiya.github.io/nostr-toybox/poster/');">投稿</a>
+      <a href="javascript:openUrl('post');">投稿</a>
     </div>
 
     <script>
       function openUrl(url) {
-        iframe.src = url;
+        document.querySelectorAll("iframe").forEach((iframe) => (iframe.style.display = "none"));
+        document.querySelector("#" + url).style.display = "block";
       }
+
+      openUrl("latest");
     </script>
   </body>
 </html>
