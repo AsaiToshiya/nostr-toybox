@@ -23,7 +23,11 @@
     #p:
     <input id="p" type="text" size="50" placeholder="npub1..." /><br />
     limit:
-    <input id="limit" type="text" /><br />
+    <input id="limit" type="text" />
+    <details>
+      <summary>Relay</summary>
+      <div id="relays"></div>
+    </details>
     <button onclick="handleClick()">get</button>
     <button onclick="handleListClick()">list</button>
     <input type="checkbox" id="reorder" />
@@ -43,6 +47,23 @@
         "wss://relay.nostr.bg",
         "wss://r.hostr.cc",
       ];
+
+      const addRelay = (url = "") => {
+        relays.appendChild(
+          Object.assign(document.createElement("input"), {
+            className: "relay",
+            type: "text",
+            value: url,
+            onchange: handleChange,
+          })
+        );
+        relays.appendChild(document.createElement("br"));
+      };
+
+      const getRelays = () =>
+        [...document.querySelectorAll(".relay")]
+          .filter((element) => element.value)
+          .map((element) => element.value);
 
       const makeFilter = () => {
         const ids = $("ids")
@@ -82,15 +103,22 @@
         };
       };
 
+      const handleChange = (event) => {
+        const input = event.target;
+        const relays = document.querySelectorAll(".relay");
+        const isLast = input === relays[relays.length - 1];
+        isLast && addRelay();
+      };
+
       const handleClick = async () => {
         const pool = new window.NostrTools.SimplePool();
-        const event = await pool.get(defaultRelays, makeFilter());
+        const event = await pool.get(getRelays(), makeFilter());
         $("event").innerText = JSON.stringify(event, null, 2);
       };
 
       const handleListClick = async () => {
         const pool = new window.NostrTools.SimplePool();
-        const events = await pool.list(defaultRelays, [makeFilter()]);
+        const events = await pool.list(getRelays(), [makeFilter()]);
         $("event").innerText = (
           reorder.checked
             ? [...events].sort((a, b) => b.created_at - a.created_at)
@@ -107,6 +135,9 @@
           (value && ($(key).value = value))
       );
       params.size && handleListClick();
+
+      defaultRelays.forEach((url) => addRelay(url));
+      addRelay();
     </script>
   </body>
 </html>
