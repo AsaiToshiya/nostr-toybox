@@ -128,6 +128,9 @@
           .join("\n");
       };
 
+      defaultRelays.forEach((url) => addRelay(url));
+      addRelay();
+
       const params = new URLSearchParams(location.search);
       params.forEach(
         (value, key) =>
@@ -135,9 +138,6 @@
           (value && ($(key).value = value))
       );
       params.size && handleListClick();
-
-      defaultRelays.forEach((url) => addRelay(url));
-      addRelay();
     </script>
   </body>
 </html>
