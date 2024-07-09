@@ -144,7 +144,9 @@
       document.body.innerHTML = events
         .sort((a, b) => b.created_at - a.created_at)
         .map((event) => {
-          const date = new Date(event.created_at * 1000);
+          const date = new Date(
+            event.created_at * 1000 - new Date().getTimezoneOffset() * 60000
+          );
           const dateTime = date.toISOString().replace("T", " ").split(".")[0];
           const kind = event.kind;
           return `${dateTime} ${getKindDescription(kind)} (kind ${kind})`;
