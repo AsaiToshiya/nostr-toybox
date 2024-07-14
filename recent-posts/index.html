@@ -31,7 +31,7 @@
         }
       }
     </style>
-    <title>latest-posts</title>
+    <title>recent-posts</title>
   </head>
   <body class="markdown-body">
     <script src="https://unpkg.com/nostr-tools@2.6.0/lib/nostr.bundle.js"></script>
@@ -47,7 +47,7 @@
       !npub && (document.body.innerHTML = `<p>
       usage:
       <code
-        >https://asaitoshiya.github.io/nostr-toybox/latest-posts/?npub=&lt;nip-19-npub&gt;</code
+        >https://asaitoshiya.github.io/nostr-toybox/recent-posts/?npub=&lt;nip-19-npub&gt;</code
       >
     </p>`);
       const pk = window.NostrTools.nip19.decode(npub).data;

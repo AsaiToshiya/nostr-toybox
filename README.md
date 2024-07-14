@@ -56,12 +56,6 @@ The day you joined Nostr
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## latest-posts
-
-[https://asaitoshiya.github.io/nostr-toybox/latest-posts/](https://asaitoshiya.github.io/nostr-toybox/latest-posts/)
-
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-
 ## media
 
 [https://asaitoshiya.github.io/nostr-toybox/media/](https://asaitoshiya.github.io/nostr-toybox/media/)
@@ -133,6 +127,12 @@ A command line tool to save posts as HTML
 [https://asaitoshiya.github.io/nostr-toybox/recent-activities/](https://asaitoshiya.github.io/nostr-toybox/recent-activities/)
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+
+## recent-posts
+
+[https://asaitoshiya.github.io/nostr-toybox/recent-posts/](https://asaitoshiya.github.io/nostr-toybox/recent-posts/)
+
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 ## relay-list
 
