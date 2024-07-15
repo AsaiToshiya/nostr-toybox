@@ -12,6 +12,7 @@
     text:<br />
     <textarea id="text" rows="4" cols="50"></textarea><br />
     <button onclick="handleCopyClick()">copy</button>
+    <span id="copied" style="display: none">copied!</span>
 
     <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
     <script>
@@ -39,7 +40,12 @@
 https://njump.me/${nip19}`;
       };
 
-      const handleCopyClick = () => navigator.clipboard.writeText(text.value);
+      const handleCopyClick = () =>
+        navigator.clipboard.writeText(text.value).then(() => {
+          const style = copied.style;
+          style.display = "inline";
+          setTimeout(() => (style.display = "none"), 3000);
+        });
     </script>
   </body>
 </html>
