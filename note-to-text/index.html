@@ -46,6 +46,10 @@ https://njump.me/${nip19}`;
           style.display = "inline";
           setTimeout(() => (style.display = "none"), 3000);
         });
+
+      const params = new URLSearchParams(location.search);
+      nevent.value = params.get("nevent");
+      nevent.value && handleNoteToTextClick();
     </script>
   </body>
 </html>
