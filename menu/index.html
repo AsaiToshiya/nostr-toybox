@@ -17,6 +17,7 @@
     <p><a id="reply">reply with poster</a></p>
     <p><a id="bookmark">bookmark with bookmark</a></p>
     <p><a id="share">share with note-to-text</a></p>
+    <p><a id="deleteEvent">delete with event</a></p>
     <p>
       <button id="copyContent" disabled onclick="handleCopyContentClick()">
         copy content
@@ -58,9 +59,9 @@
       const handleCopyNip21Click = () => copy(`nostr:${nevent}`, "copiedNip21");
 
       const nevent = new URLSearchParams(location.search).get("nevent");
+      const id = window.NostrTools.nip19.decode(nevent).data.id;
 
       (async () => {
-        const id = window.NostrTools.nip19.decode(nevent).data.id;
         const pool = new window.NostrTools.SimplePool();
         event = await pool.get(relays, {
           ids: [id],
@@ -80,6 +81,7 @@
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
       bookmark.href = `https://asaitoshiya.github.io/nostr-toybox/bookmark/?nevent=${nevent}`;
       share.href = `https://asaitoshiya.github.io/nostr-toybox/note-to-text/?nevent=${nevent}`;
+      deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}`;
     </script>
   </body>
 </html>
