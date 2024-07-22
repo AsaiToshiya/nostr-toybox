@@ -145,6 +145,11 @@
       window.handleClick = handleClick;
       window.handleRChange = handleRChange;
       window.handleStringifyClick = handleStringifyClick;
+
+      const params = new URLSearchParams(location.search);
+      params.forEach(
+        (value, key) => value && (document.getElementById(key).value = value)
+      );
     </script>
   </body>
 </html>
