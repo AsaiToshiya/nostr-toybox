@@ -68,6 +68,7 @@
         });
         pool.close(relays);
 
+        deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         copyContent.disabled = false;
         document.querySelector("#event").innerText = JSON.stringify(
           event,
@@ -81,7 +82,6 @@
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
       bookmark.href = `https://asaitoshiya.github.io/nostr-toybox/bookmark/?nevent=${nevent}`;
       share.href = `https://asaitoshiya.github.io/nostr-toybox/note-to-text/?nevent=${nevent}`;
-      deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}`;
     </script>
   </body>
 </html>
