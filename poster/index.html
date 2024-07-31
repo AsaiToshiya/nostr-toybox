@@ -158,7 +158,9 @@
         );
       };
 
-      nip19.value = new URLSearchParams(location.search).get("nip19");
+      const params = new URLSearchParams(location.search);
+      content.value = params.get("content");
+      nip19.value = params.get("nip19");
     </script>
   </body>
 </html>
