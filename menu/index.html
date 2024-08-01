@@ -15,6 +15,7 @@
     <p><a id="njump">njump.me</a></p>
     <p><a id="replies">Replies</a></p>
     <p><a id="reply">reply with poster</a></p>
+    <p><a id="quoteReply">quote reply with poster</a></p>
     <p><a id="bookmark">bookmark with bookmark</a></p>
     <p><a id="share">share with note-to-text</a></p>
     <p><a id="deleteEvent">delete with event</a></p>
@@ -80,6 +81,11 @@
       njump.href = `https://njump.me/${nevent}`;
       replies.href = `https://replies.nostrapps.org/?id=${nevent}`;
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
+      quoteReply.href =
+        "https://asaitoshiya.github.io/nostr-toybox/poster/?content=" +
+        encodeURIComponent(`
+
+nostr:${nevent}`);
       bookmark.href = `https://asaitoshiya.github.io/nostr-toybox/bookmark/?nevent=${nevent}`;
       share.href = `https://asaitoshiya.github.io/nostr-toybox/note-to-text/?nevent=${nevent}`;
     </script>
