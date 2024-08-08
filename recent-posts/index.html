@@ -43,6 +43,31 @@
         breaks: true,
       });
 
+      const toHtml = (post) => {
+        const nevent = window.NostrTools.nip19.neventEncode({
+          id: post.id,
+        });
+        const url = `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`;
+        const date = new Date(post.created_at * 1000);
+        const dateTime = date.toLocaleString();
+        const content = marked
+          .parse(
+            post.content
+              .replace(
+                /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g,
+                '<a href="$1"><img src="$1" loading="lazy"></a>'
+              )
+              .replace(
+                /NIP-(\d{2})/g,
+                '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md">$&</a>'
+              )
+              .replace(/^#+ /g, "\\$&")
+          )
+          .replace(/<a /g, '<a target="_blank" ');
+        return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
+      ${content}`;
+      };
+
       const npub = new URLSearchParams(location.search).get("npub");
       !npub && (document.body.innerHTML = `<p>
       usage:
@@ -60,30 +85,7 @@
       });
       document.body.innerHTML = posts
         .sort((a, b) => b.created_at - a.created_at)
-        .map((post) => {
-          const nevent = window.NostrTools.nip19.neventEncode({
-            id: post.id,
-          });
-          const url = `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`;
-          const date = new Date(post.created_at * 1000);
-          const dateTime = date.toLocaleString();
-          const content = marked
-            .parse(
-              post.content
-                .replace(
-                  /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g,
-                  '<a href="$1"><img src="$1" loading="lazy"></a>'
-                )
-                .replace(
-                  /NIP-(\d{2})/g,
-                  '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md">$&</a>'
-                )
-                .replace(/^#+ /g, "\\$&")
-            )
-            .replace(/<a /g, '<a target="_blank" ');
-          return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
-      ${content}`;
-        })
+        .map(toHtml)
         .join("\n");
     </script>
   </body>
