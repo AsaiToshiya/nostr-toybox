@@ -75,6 +75,10 @@
         >https://asaitoshiya.github.io/nostr-toybox/recent-posts/?npub=&lt;nip-19-npub&gt;</code
       >
     </p>`);
+
+      const cache = localStorage.getItem(location.href);
+      cache && (document.body.innerHTML = cache);
+
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
@@ -87,6 +91,8 @@
         .sort((a, b) => b.created_at - a.created_at)
         .map(toHtml)
         .join("\n");
+
+      localStorage.setItem(location.href, document.body.innerHTML);
     </script>
   </body>
 </html>
