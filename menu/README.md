@@ -1,5 +1,7 @@
 # menu
 
+menu is a Nostr dynamic gateway.
+
 <kbd>![screenshot.png](screenshot.png)</kbd>
 
 
