@@ -127,6 +127,20 @@
           : undefined;
       };
 
+      const querySyncMany = async (pool, relays, filters) => {
+        return new Promise(async (resolve) => {
+          const events = [];
+          pool.subscribeManyEose(relays, filters, {
+            onevent(event) {
+              events.push(event);
+            },
+            onclose(_) {
+              resolve(events);
+            },
+          });
+        });
+      };
+
       const npub = new URLSearchParams(location.search).get("npub");
       !npub &&
         (document.body.innerHTML = `<p>
@@ -138,12 +152,20 @@
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
-      const events = await pool.querySync(relays, {
-        authors: [pk],
-        limit: 50,
-      });
+      const events = await querySyncMany(pool, relays, [
+        {
+          authors: [pk],
+          limit: 50,
+        },
+        {
+          kinds: [9735],
+          "#P": [pk],
+          limit: 50,
+        },
+      ]);
       document.body.innerHTML = events
         .sort((a, b) => b.created_at - a.created_at)
+        .slice(0, 50)
         .map((event) => {
           const date = new Date(
             event.created_at * 1000 - new Date().getTimezoneOffset() * 60000
