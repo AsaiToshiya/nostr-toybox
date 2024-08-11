@@ -166,6 +166,11 @@
       document.body.innerHTML = events
         .sort((a, b) => b.created_at - a.created_at)
         .slice(0, 50)
+        .map((event) =>
+          event.kind == 9735
+            ? JSON.parse(event.tags.find((tag) => tag[0] == "description")[1])
+            : event
+        )
         .map((event) => {
           const date = new Date(
             event.created_at * 1000 - new Date().getTimezoneOffset() * 60000
