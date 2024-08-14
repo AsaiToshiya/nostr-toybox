@@ -148,3 +148,29 @@ test("get NIP-65 read relays", async () => {
     "wss://nostr-relay.example.com",
   ]);
 });
+
+test("empty NIP-65 relays", async () => {
+  // スタブ
+  const pool = {
+    get: async () => ({
+      kind: 10002,
+      tags: [],
+      content: "",
+    }),
+    querySync: async () => [],
+  };
+
+  const relays = await getRelays(
+    pool,
+    "0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a"
+  );
+
+  expect(relays).toEqual([
+    "wss://nos.lol",
+    "wss://nostr.bitcoiner.social",
+    "wss://nostr.mom",
+    "wss://relay.damus.io",
+    "wss://relay.nostr.bg",
+    "wss://relay.nostr.band",
+  ]);
+});

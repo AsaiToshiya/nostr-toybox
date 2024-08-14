@@ -28,13 +28,12 @@ const _getNip65Relays = async (pool, pk, isRead = false) => {
     authors: [pk],
     kinds: [10002],
   });
-  return event?.tags
-    .filter(
-      (tag) =>
-        tag[0] == "r" &&
-        (tag.length == 2 || tag[2] == (isRead ? "read" : "write"))
-    )
-    .map((tag) => tag[1]);
+  const tags = event?.tags.filter(
+    (tag) =>
+      tag[0] == "r" &&
+      (tag.length == 2 || tag[2] == (isRead ? "read" : "write"))
+  );
+  return tags?.length ? tags.map((tag) => tag[1]) : null;
 };
 
 export const getReadRelays = async (pool, pk) =>
