@@ -82,17 +82,33 @@
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
-      const posts = await pool.querySync(relays, {
-        authors: [pk],
-        kinds: [1],
-        limit: 50,
-      });
-      document.body.innerHTML = posts
-        .sort((a, b) => b.created_at - a.created_at)
-        .map(toHtml)
-        .join("\n");
+      const posts = (
+        await pool.querySync(relays, {
+          authors: [pk],
+          kinds: [1],
+          limit: 50,
+        })
+      ).sort((a, b) => b.created_at - a.created_at);
+      document.body.innerHTML = posts.map(toHtml).join("\n");
 
       localStorage.setItem(location.href, document.body.innerHTML);
+
+      pool.subscribeMany(
+        relays,
+        [
+          {
+            authors: [pk],
+            kinds: [1],
+            since: posts.length ? posts[0].created_at + 1 : undefined,
+          },
+        ],
+        {
+          onevent(event) {
+            document.body.innerHTML = toHtml(event) + document.body.innerHTML;
+            localStorage.setItem(location.href, document.body.innerHTML);
+          },
+        }
+      );
     </script>
   </body>
 </html>
