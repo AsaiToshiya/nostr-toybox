@@ -126,6 +126,11 @@
           : undefined;
       };
 
+      const getZapRequestIfZap = (event) =>
+        event.kind == 9735
+          ? JSON.parse(event.tags.find((tag) => tag[0] == "description")[1])
+          : event;
+
       const querySyncMany = async (pool, relays, filters) => {
         return new Promise(async (resolve) => {
           const events = [];
@@ -165,11 +170,7 @@
       document.body.innerHTML = events
         .sort((a, b) => b.created_at - a.created_at)
         .slice(0, 50)
-        .map((event) =>
-          event.kind == 9735
-            ? JSON.parse(event.tags.find((tag) => tag[0] == "description")[1])
-            : event
-        )
+        .map(getZapRequestIfZap)
         .map((event) => {
           const date = new Date(
             event.created_at * 1000 - new Date().getTimezoneOffset() * 60000
