@@ -147,6 +147,15 @@
         });
       };
 
+      const toText = (event) => {
+        const date = new Date(
+          event.created_at * 1000 - new Date().getTimezoneOffset() * 60000
+        );
+        const dateTime = date.toISOString().replace("T", " ").split(".")[0];
+        const kind = event.kind;
+        return `${dateTime} ${getKindDescription(kind)} (kind ${kind})`;
+      };
+
       const npub = new URLSearchParams(location.search).get("npub");
       !npub &&
         (document.body.innerHTML = `<p>
@@ -173,14 +182,7 @@
         .sort((a, b) => b.created_at - a.created_at)
         .slice(0, 50)
         .map(getZapRequestIfZap)
-        .map((event) => {
-          const date = new Date(
-            event.created_at * 1000 - new Date().getTimezoneOffset() * 60000
-          );
-          const dateTime = date.toISOString().replace("T", " ").split(".")[0];
-          const kind = event.kind;
-          return `${dateTime} ${getKindDescription(kind)} (kind ${kind})`;
-        })
+        .map(toText)
         .join("<br />");
     </script>
   </body>
