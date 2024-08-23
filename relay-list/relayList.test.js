@@ -28,8 +28,9 @@ const nip65Event = {
 test("get default relays", async () => {
   // スタブ
   const pool = {
-    get: async () => null,
-    querySync: async () => [],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onclose();
+    },
   };
 
   const relays = await getRelays(
@@ -50,8 +51,10 @@ test("get default relays", async () => {
 test("get NIP-02 relays", async () => {
   // スタブ
   const pool = {
-    get: async () => null,
-    querySync: async () => [nip02Event],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onevent(nip02Event);
+      params.onclose();
+    },
   };
 
   const relays = await getRelays(
@@ -71,8 +74,11 @@ test("get NIP-02 relays", async () => {
 test("get NIP-65 relays", async () => {
   // スタブ
   const pool = {
-    get: async () => nip65Event,
-    querySync: async () => [nip02Event],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onevent(nip02Event);
+      params.onevent(nip65Event);
+      params.onclose();
+    },
   };
 
   const relays = await getRelays(
@@ -90,8 +96,9 @@ test("get NIP-65 relays", async () => {
 test("get default read relays", async () => {
   // スタブ
   const pool = {
-    get: async () => null,
-    querySync: async () => [],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onclose();
+    },
   };
 
   const relays = await getReadRelays(
@@ -112,8 +119,10 @@ test("get default read relays", async () => {
 test("get NIP-02 read relays", async () => {
   // スタブ
   const pool = {
-    get: async () => null,
-    querySync: async () => [nip02Event],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onevent(nip02Event);
+      params.onclose();
+    },
   };
 
   const relays = await getReadRelays(
@@ -133,8 +142,11 @@ test("get NIP-02 read relays", async () => {
 test("get NIP-65 read relays", async () => {
   // スタブ
   const pool = {
-    get: async () => nip65Event,
-    querySync: async () => [nip02Event],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onevent(nip02Event);
+      params.onevent(nip65Event);
+      params.onclose();
+    },
   };
 
   const relays = await getReadRelays(
@@ -152,12 +164,14 @@ test("get NIP-65 read relays", async () => {
 test("empty NIP-65 relays", async () => {
   // スタブ
   const pool = {
-    get: async () => ({
-      kind: 10002,
-      tags: [],
-      content: "",
-    }),
-    querySync: async () => [],
+    subscribeManyEose: (relays, filters, params) => {
+      params.onevent({
+        kind: 10002,
+        tags: [],
+        content: "",
+      });
+      params.onclose();
+    },
   };
 
   const relays = await getRelays(
