@@ -41,9 +41,7 @@ const _getNip02Relays = async (events, isRead = false) => {
 const _getNip65Relays = async (events, isRead = false) => {
   const event = events.find((event) => event.kind == 10002);
   const tags = event?.tags.filter(
-    (tag) =>
-      tag[0] == "r" &&
-      (tag.length == 2 || tag[2] == (isRead ? "read" : "write"))
+    (tag) => isRead || (tag[0] == "r" && (tag.length == 2 || tag[2] == "write"))
   );
   return tags?.length ? tags.map((tag) => tag[1]) : null;
 };

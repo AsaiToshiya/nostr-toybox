@@ -157,6 +157,7 @@ test("get NIP-65 read relays", async () => {
   expect(relays).toEqual([
     "wss://alicerelay.example.com",
     "wss://brando-relay.com",
+    "wss://expensive-relay.example2.com",
     "wss://nostr-relay.example.com",
   ]);
 });
