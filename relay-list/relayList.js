@@ -7,6 +7,24 @@ const _defaultRelays = [
   "wss://relay.nostr.band",
 ];
 
+const _getRelays = async (pool, pk, isRead = false) => {
+  const events = await _querySyncMany(pool, _defaultRelays, [
+    {
+      authors: [pk],
+      kinds: [3],
+    },
+    {
+      authors: [pk],
+      kinds: [10002],
+    },
+  ]);
+  return (
+    (await _getNip65Relays(events, isRead)) ??
+    (await _getNip02Relays(events, isRead)) ??
+    _defaultRelays
+  );
+};
+
 const _getNip02Relays = async (events, isRead = false) => {
   const kind3Events = events.filter((event) => event.kind == 3);
   const content = kind3Events.length
@@ -44,38 +62,7 @@ const _querySyncMany = async (pool, relays, filters) => {
   });
 };
 
-export const getReadRelays = async (pool, pk) => {
-  const events = await _querySyncMany(pool, _defaultRelays, [
-    {
-      authors: [pk],
-      kinds: [3],
-    },
-    {
-      authors: [pk],
-      kinds: [10002],
-    },
-  ]);
-  return (
-    (await _getNip65Relays(events, true)) ??
-    (await _getNip02Relays(events, true)) ??
-    _defaultRelays
-  );
-};
+export const getReadRelays = async (pool, pk) =>
+  await _getRelays(pool, pk, true);
 
-export const getRelays = async (pool, pk) => {
-  const events = await _querySyncMany(pool, _defaultRelays, [
-    {
-      authors: [pk],
-      kinds: [3],
-    },
-    {
-      authors: [pk],
-      kinds: [10002],
-    },
-  ]);
-  return (
-    (await _getNip65Relays(events)) ??
-    (await _getNip02Relays(events)) ??
-    _defaultRelays
-  );
-};
+export const getRelays = async (pool, pk) => await _getRelays(pool, pk);
