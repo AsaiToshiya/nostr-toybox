@@ -16,10 +16,12 @@
     <title>media</title>
   </head>
   <body>
-    <h1>media</h1>
-    npub:
-    <input id="npub" type="text" size="50" />
-    <button onclick="handleClick()">load</button>
+    <div id="headingAndInput">
+      <h1>media</h1>
+      npub:
+      <input id="npub" type="text" size="50" />
+      <button onclick="handleClick()">load</button>
+    </div>
     <div id="media"></div>
     <button id="loadMore" style="display: none">load more</button>
     <img
@@ -46,16 +48,18 @@
         const pool = new window.NostrTools.SimplePool();
         const relays = await getRelays(pool, pk);
 
-        const events = (await pool.querySync(relays, {
-          authors: [pk],
-          kinds: [1],
-          until,
-          limit: 200,
-        }))
-          .sort((a, b) => b.created_at - a.created_at);
+        const events = (
+          await pool.querySync(relays, {
+            authors: [pk],
+            kinds: [1],
+            until,
+            limit: 200,
+          })
+        ).sort((a, b) => b.created_at - a.created_at);
 
-        const medias = events
-          .filter((event) => event.tags.some(referenceImageTag));
+        const medias = events.filter((event) =>
+          event.tags.some(referenceImageTag)
+        );
 
         media.innerHTML += medias
           .map((event) => {
@@ -102,6 +106,9 @@
       window.handleClick = handleClick;
 
       const params = new URLSearchParams(location.search);
+      params.has("npub") &&
+        params.has("contentonly") &&
+        (headingAndInput.style.display = "none");
       npub.value = params.get("npub");
       npub.value && handleClick();
     </script>
