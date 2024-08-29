@@ -121,10 +121,16 @@
           content.match(
             /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
           ) ?? []
-        ).map((tag) => [
-          "t",
-          tag.substring(tag.indexOf("#") + 1).toLowerCase(),
-        ]);
+        )
+          .map((tag) => {
+            const keyword = tag.substring(tag.indexOf("#") + 1);
+            const lowercaseKeyword = keyword.toLowerCase();
+            return [
+              ["t", keyword],
+              keyword != lowercaseKeyword && ["t", lowercaseKeyword],
+            ];
+          })
+          .flat();
       };
 
       const extractReferenceTags = (content) => {
