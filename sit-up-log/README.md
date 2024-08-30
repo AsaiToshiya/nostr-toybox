@@ -7,14 +7,6 @@ git clone --filter=blob:none --no-checkout --sparse https://github.com/AsaiToshi
 cd nostr-toybox
 git sparse-checkout set sit-up-log
 git checkout main
-cd sit-up-log
-curl -O https://raw.githubusercontent.com/AsaiToshiya/nostr-toybox/main/relay-list/relayList.js
-```
-
-## ビルド
-
-```
-build
 ```
 
 
