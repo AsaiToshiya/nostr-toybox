@@ -158,6 +158,14 @@ A simple web-based tool to request Nostr events
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
+## sit-up-log
+
+My personal sit up log with Nostr
+
+[https://github.com/AsaiToshiya/nostr-toybox/tree/main/sit-up-log](https://github.com/AsaiToshiya/nostr-toybox/tree/main/sit-up-log)
+
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 ## timeline
 
 A command line tool to save Nostr timelines as HTML
