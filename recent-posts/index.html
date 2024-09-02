@@ -99,7 +99,9 @@
           {
             authors: [pk],
             kinds: [1],
-            since: posts.length ? posts[0].created_at + 1 : undefined,
+            since: posts.length
+              ? posts[0].created_at + 1
+              : Math.floor(Date.now() / 1000),
           },
         ],
         {
