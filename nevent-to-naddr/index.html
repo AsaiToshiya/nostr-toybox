@@ -9,6 +9,8 @@
     <input id="nevent" type="text" size="50" placeholder="nevent" />
     <button onclick="handleClick()">convert</button><br />
     <span id="naddr"></span>
+    <button id="copy" disabled onclick="handleCopyClick()">copy</button>
+    <span id="copied" style="display: none">copied!</span>
 
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
     <script src="fluent.js"></script>
@@ -21,10 +23,20 @@
         "wss://relay.nostr.bg",
       ];
 
-      const handleClick = async () =>
-        (naddr.innerText = (
+      const handleClick = async () => {
+        copy.disabled = true;
+        naddr.innerText = (
           await fluent(relays).ids([nevent.value]).get()
-        ).naddr());
+        ).naddr();
+        copy.disabled = false;
+      };
+
+      const handleCopyClick = () =>
+        navigator.clipboard.writeText(naddr.innerText).then(() => {
+          const style = copied.style;
+          style.display = "inline";
+          setTimeout(() => (style.display = "none"), 3000);
+        });
     </script>
   </body>
 </html>
