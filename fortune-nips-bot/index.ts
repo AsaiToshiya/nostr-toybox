@@ -8,18 +8,20 @@ import {
   SimplePool,
   nip19,
   getPublicKey,
-  finishEvent,
+  finalizeEvent,
   Event,
-  Kind,
 } from "nostr-tools";
-import "websocket-polyfill";
+import { ShortTextNote } from "nostr-tools/kinds";
+import { useWebSocketImplementation } from "nostr-tools/pool";
+import WebSocket from "ws";
+useWebSocketImplementation(WebSocket);
 
 // コンテキストを生成する
-const createContent = (post: Event<Kind.Text>) => {
+const createContent = (post: Event) => {
   const hash = generateHash(
     post.pubkey,
     withoutTime(new Date(post.created_at * 1000)),
-    sk
+    new TextDecoder().decode(sk)
   ).substring(0, 2);
   const index = convertToNumber(hash, nips.length - 1);
   const nip = nips[index];
@@ -30,7 +32,7 @@ https://github.com/nostr-protocol/nips/blob/master/${nip.filename}`;
 };
 
 // タグの配列を生成する
-const createTags = (post: Event<Kind.Text>) => {
+const createTags = (post: Event) => {
   // 投稿者を除外する
   const pTags = post.tags.filter(
     (tag: string[]) => tag[0] == "p" && tag[1] != post.pubkey
@@ -71,7 +73,7 @@ const nips = fs
     filename: data[1],
   }));
 const relays = JSON.parse(process.env.RELAYS!.replace(/'/g, '"'));
-const sk = nip19.decode(process.env.NSEC!).data as string;
+const sk = nip19.decode(process.env.NSEC!).data as Uint8Array;
 const pk = getPublicKey(sk);
 const npub = nip19.npubEncode(pk);
 
@@ -82,37 +84,32 @@ const twoMinutesAgo = now - 2 * 60;
 const pool = new SimplePool();
 
 // 投稿
-const posts = await pool.list(relays, [
-  {
-    kinds: [Kind.Text],
-    "#p": [pk],
-    since: twoMinutesAgo,
-    until: now,
-  },
-]);
+const posts = await pool.querySync(relays, {
+  kinds: [ShortTextNote],
+  "#p": [pk],
+  since: twoMinutesAgo,
+  until: now,
+});
 
 // 返信済みの投稿の ID
 const repliedPostIds = posts
-  .filter((post: Event<Kind.Text>) => post.pubkey == pk) // ボットか
-  .map(
-    (post: Event<Kind.Text>) =>
-      post.tags.find((tag: string[]) => tag[0] == "e")![1]
-  );
+  .filter((post: Event) => post.pubkey == pk) // ボットか
+  .map((post: Event) => post.tags.find((tag: string[]) => tag[0] == "e")![1]);
 
 // メンション
 // prettier-ignore
 const mentions = posts.filter(
-  (post: Event<Kind.Text>) => post.pubkey != pk &&                       // ボットではないか
+  (post: Event) => post.pubkey != pk &&                       // ボットではないか
   !repliedPostIds.includes(post.id) &&       // 返信済みではないか
   post.tags.every((tag: string[]) => tag[0] != "e") && // 返信に返信しない
   post.content.includes(`nostr:${npub}`)     // content にボットの npub を含むか
 );
 
 // 返信
-const replies = mentions.map((post: Event<1>) =>
-  finishEvent(
+const replies = mentions.map((post: Event) =>
+  finalizeEvent(
     {
-      kind: Kind.Text,
+      kind: ShortTextNote,
       created_at: unixTimeNow(),
       tags: createTags(post),
       content: createContent(post),
@@ -123,14 +120,7 @@ const replies = mentions.map((post: Event<1>) =>
 
 // 返信を発行する
 await Promise.all(
-  replies.map(
-    (reply: Event<Kind.Text>) =>
-      new Promise((resolve, reject) => {
-        const pub = pool.publish(relays, reply);
-        pub.on("ok", resolve);
-        pub.on("failed", reject);
-      })
-  )
+  replies.map((reply: Event) => Promise.all(pool.publish(relays, reply)))
 );
 
 // 後処理を実行する

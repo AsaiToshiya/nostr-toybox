@@ -3,11 +3,14 @@ import crypto from "crypto";
 import * as dotenv from "dotenv";
 dotenv.config();
 dotenv.config({ path: ".env.local", override: true });
-import { SimplePool, nip19, getPublicKey, finishEvent, Kind, } from "nostr-tools";
-import "websocket-polyfill";
+import { SimplePool, nip19, getPublicKey, finalizeEvent, } from "nostr-tools";
+import { ShortTextNote } from "nostr-tools/kinds";
+import { useWebSocketImplementation } from "nostr-tools/pool";
+import WebSocket from "ws";
+useWebSocketImplementation(WebSocket);
 // コンテキストを生成する
 const createContent = (post) => {
-    const hash = generateHash(post.pubkey, withoutTime(new Date(post.created_at * 1000)), sk).substring(0, 2);
+    const hash = generateHash(post.pubkey, withoutTime(new Date(post.created_at * 1000)), new TextDecoder().decode(sk)).substring(0, 2);
     const index = convertToNumber(hash, nips.length - 1);
     const nip = nips[index];
     return `今日のラッキー NIP
@@ -57,14 +60,12 @@ const now = unixTimeNow();
 const twoMinutesAgo = now - 2 * 60;
 const pool = new SimplePool();
 // 投稿
-const posts = await pool.list(relays, [
-    {
-        kinds: [Kind.Text],
-        "#p": [pk],
-        since: twoMinutesAgo,
-        until: now,
-    },
-]);
+const posts = await pool.querySync(relays, {
+    kinds: [ShortTextNote],
+    "#p": [pk],
+    since: twoMinutesAgo,
+    until: now,
+});
 // 返信済みの投稿の ID
 const repliedPostIds = posts
     .filter((post) => post.pubkey == pk) // ボットか
@@ -77,18 +78,14 @@ const mentions = posts.filter((post) => post.pubkey != pk && // ボットでは�
     post.content.includes(`nostr:${npub}`) // content にボットの npub を含むか
 );
 // 返信
-const replies = mentions.map((post) => finishEvent({
-    kind: Kind.Text,
+const replies = mentions.map((post) => finalizeEvent({
+    kind: ShortTextNote,
     created_at: unixTimeNow(),
     tags: createTags(post),
     content: createContent(post),
 }, sk));
 // 返信を発行する
-await Promise.all(replies.map((reply) => new Promise((resolve, reject) => {
-    const pub = pool.publish(relays, reply);
-    pub.on("ok", resolve);
-    pub.on("failed", reject);
-})));
+await Promise.all(replies.map((reply) => Promise.all(pool.publish(relays, reply))));
 // 後処理を実行する
 pool.close(relays);
 process.exit();
