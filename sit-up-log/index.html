@@ -45,7 +45,7 @@
       const relays = await getRelays(pool, pk);
       const events = await pool.querySync(relays, {
         authors: [pk],
-        kinds: [1],
+        kinds: [1, 1081],
         "#t": ["腹筋"],
       });
 
