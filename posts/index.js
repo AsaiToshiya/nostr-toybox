@@ -189,7 +189,7 @@ const posts = await Promise.all(
       (
         await fetch(pool, RELAYS, {
           authors: [PK],
-          kinds: [1],
+          kinds: [1, 1081],
         })
       ).map(async (post) =>
         post.tags.find((tag) => tag[0] == "encrypted")
