@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal Log Publisher</title>
+  </head>
+  <body>
+    <h1>Personal Log Publisher</h1>
+    as the log of: <input id="keyHashTag" type="text" /><br />
+    <div style="display: flex; align-items: start">
+      note (optional):
+      <textarea id="note" rows="4" cols="50"></textarea>
+    </div>
+    nsec:
+    <input id="nsec" type="text" size="50" /><br />
+    <button onclick="handleClick()">publish</button>
+    <button onclick="handleStringifyClick()">stringify (not publish)</button
+    ><br />
+    event:
+    <pre id="event"></pre>
+
+    <script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js"></script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
+
+      const createEvent = async (keyHashTag, note, sk) => {
+        return window.NostrTools.finalizeEvent(
+          {
+            kind: 1081,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: await createTags(keyHashTag, note),
+            content: note,
+          },
+          sk
+        );
+      };
+
+      const createEventTags = (content) =>
+        [...window.NostrTools.nip27.matchAll(content)]
+          .filter(({ decoded: { type } }) => type == "nevent" || type == "note")
+          .map(({ decoded: { type, data } }) => [
+            "q",
+            data.id ? data.id : data,
+            "",
+          ]);
+
+      const createHashtagTags = (keyHashTag, content) =>
+        [
+          ...new Set([
+            ...(keyHashTag ? [keyHashTag] : []),
+            ...extractHashtag(content),
+          ]),
+        ]
+          .map((tag) => {
+            const lowerCaseTag = tag.toLowerCase();
+            return [["t", tag], tag != lowerCaseTag && ["t", lowerCaseTag]];
+          })
+          .flat();
+
+      const createPubkeyTags = (content) =>
+        [...window.NostrTools.nip27.matchAll(content)]
+          .filter(
+            ({ decoded: { type } }) => type == "npub" || type == "nprofile"
+          )
+          .map(({ decoded: { type, data } }) => [
+            "p",
+            data.pubkey ? data.pubkey : data,
+            "",
+            "mention",
+          ]);
+
+      const createTags = async (keyHashTag, note) =>
+        [
+          ...createEventTags(note),
+          ...createPubkeyTags(note),
+          ...extractReferenceTags(note),
+          ...createHashtagTags(keyHashTag, note),
+        ].filter((tag) => tag.length > 0);
+
+      const extractHashtag = (content) =>
+        (
+          content.match(
+            /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
+          ) ?? []
+        ).map((tag) => tag.substring(tag.indexOf("#") + 1));
+
+      const extractReferenceTags = (content) => {
+        return (
+          content.match(
+            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi
+          ) ?? []
+        ).map((url) => ["r", url]);
+      };
+
+      const handleClick = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const pk = window.NostrTools.getPublicKey(sk);
+        const relays = await getRelays(pool, pk);
+        const event = await createEvent(keyHashTag.value, note.value, sk);
+        await Promise.any(pool.publish(relays, event));
+        pool.close(relays);
+
+        document.querySelector("#event").innerText = JSON.stringify(
+          event,
+          null,
+          2
+        );
+
+        keyHashTag.value = "";
+        note.value = "";
+      };
+
+      const handleStringifyClick = async () => {
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const event = await createEvent(keyHashTag.value, note.value, sk);
+        document.querySelector("#event").innerText = JSON.stringify(
+          event,
+          null,
+          2
+        );
+      };
+
+      window.handleClick = handleClick;
+      window.handleStringifyClick = handleStringifyClick;
+
+      const params = new URLSearchParams(location.search);
+      keyHashTag.value = params.get("keyhashtag");
+      note.value = params.get("note");
+    </script>
+  </body>
+</html>
