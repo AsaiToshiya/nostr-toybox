@@ -110,7 +110,7 @@ Encrypt/Decrypt the nsec with NIP-49
 
 ## Personal Log Publisher
 
-Publish personal log events (kind 1081)
+Publish personal log events (unofficial kind 1081)
 
 [https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/](https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/)
 
