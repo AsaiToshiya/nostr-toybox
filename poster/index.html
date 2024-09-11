@@ -117,11 +117,13 @@
         ].filter((tag) => tag.length > 0);
 
       const extractHashtagTags = (content) => {
-        return (
-          content.match(
-            /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
-          ) ?? []
-        )
+        return [
+          ...new Set(
+            content.match(
+              /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
+            ) ?? []
+          ),
+        ]
           .map((tag) => {
             const keyword = tag.substring(tag.indexOf("#") + 1);
             const lowercaseKeyword = keyword.toLowerCase();
