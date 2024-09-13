@@ -19,7 +19,7 @@
           authors: author ? [author] : undefined,
           search: query.value,
         });
-        pool.close();
+        pool.close(["wss://relay.nostr.band/"]);
 
         result.innerText = events
           .map((event) => JSON.stringify(event, null, 2))
