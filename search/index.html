@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>search</title>
+  </head>
+  <body>
+    <h1>search</h1>
+    <input id="query" type="text" size="50" placeholder="query" /><br />
+    <button onclick="handleClick()">search</button><br />
+    result:
+    <pre id="result"></pre>
+
+    <script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js"></script>
+    <script>
+      const handleClick = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const events = await pool.querySync(["wss://relay.nostr.band/"], {
+          authors: author ? [author] : undefined,
+          search: query.value,
+        });
+        pool.close();
+
+        result.innerText = events
+          .map((event) => JSON.stringify(event, null, 2))
+          .join("\n");
+      };
+
+      const author = new URLSearchParams(location.search).get("author");
+    </script>
+  </body>
+</html>
