@@ -124,13 +124,13 @@
       const handleListClick = async () => {
         const pool = new window.NostrTools.SimplePool();
         const events = await pool.list(getRelays(), [makeFilter()]);
-        $("event").innerText = (
+        $("event").innerText = JSON.stringify(
           reorder.checked
             ? [...events].sort((a, b) => b.created_at - a.created_at)
-            : events
-        )
-          .map((event) => JSON.stringify(event, null, 2))
-          .join("\n");
+            : events,
+          null,
+          2
+        );
       };
 
       defaultRelays.forEach((url) => addRelay(url));
