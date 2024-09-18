@@ -35,7 +35,9 @@
     <button onclick="handleListClick()">list</button>
     <input type="checkbox" id="reorder" />
     <label for="reorder">reorder on client</label><br />
-    event:
+    event:<br />
+    <button id="copy" disabled onclick="handleCopyClick()">copy</button>
+    <span id="copied" style="display: none">copied!</span>
     <pre id="event"></pre>
 
     <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
@@ -116,12 +118,22 @@
       };
 
       const handleClick = async () => {
+        copy.disabled = true;
         const pool = new window.NostrTools.SimplePool();
         const event = await pool.get(getRelays(), makeFilter());
         $("event").innerText = JSON.stringify(event, null, 2);
+        copy.disabled = false;
       };
 
+      const handleCopyClick = () =>
+        navigator.clipboard.writeText($("event").innerText).then(() => {
+          const style = copied.style;
+          style.display = "inline";
+          setTimeout(() => (style.display = "none"), 3000);
+        });
+
       const handleListClick = async () => {
+        copy.disabled = true;
         const pool = new window.NostrTools.SimplePool();
         const events = await pool.list(getRelays(), [makeFilter()]);
         $("event").innerText = JSON.stringify(
@@ -131,6 +143,7 @@
           null,
           2
         );
+        copy.disabled = false;
       };
 
       defaultRelays.forEach((url) => addRelay(url));
