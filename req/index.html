@@ -23,6 +23,8 @@
     <input id="d" type="text" /><br />
     #p:
     <input id="p" type="text" size="50" placeholder="npub1..." /><br />
+    #r:
+    <input id="r" type="text" /><br />
     #t:
     <input id="t" type="text" /><br />
     limit:
@@ -96,6 +98,7 @@
           .split(",")
           .filter((value) => value)
           .map((value) => window.NostrTools.nip19.decode(value).data);
+        const rTagValues = r.value.split(",").filter((value) => value);
         const tTagValues = t.value.split(",").filter((value) => value);
 
         return {
@@ -105,6 +108,7 @@
           "#e": eTagValues.length > 0 ? eTagValues : undefined,
           "#d": dTagValues.length > 0 ? dTagValues : undefined,
           "#p": pTagValues.length > 0 ? pTagValues : undefined,
+          "#r": rTagValues.length > 0 ? rTagValues : undefined,
           "#t": tTagValues.length > 0 ? tTagValues : undefined,
           limit: limit.value ? parseInt(limit.value) : undefined,
         };
