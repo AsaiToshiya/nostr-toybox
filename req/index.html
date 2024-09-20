@@ -73,33 +73,25 @@
           .map((element) => element.value);
 
       const makeFilter = () => {
-        const ids = $("ids")
-          .value.split(",")
-          .filter((value) => value)
-          .map(
-            (value) =>
-              window.NostrTools.nip19.decode(value.replace(/^nostr:/, "")).data
-                .id
-          );
-        const authors = $("author")
-          .value.split(",")
-          .filter((value) => value)
-          .map((value) => window.NostrTools.nip19.decode(value).data);
-        const kinds = $("kind")
-          .value.split(",")
-          .filter((value) => value)
-          .map((value) => parseInt(value));
-        const eTagValues = e.value
-          .split(",")
-          .filter((value) => value)
-          .map((value) => window.NostrTools.nip19.decode(value).data.id);
-        const dTagValues = d.value.split(",").filter((value) => value);
-        const pTagValues = p.value
-          .split(",")
-          .filter((value) => value)
-          .map((value) => window.NostrTools.nip19.decode(value).data);
-        const rTagValues = r.value.split(",").filter((value) => value);
-        const tTagValues = t.value.split(",").filter((value) => value);
+        const ids = normalizeElementValue($("ids")).map(
+          (value) =>
+            window.NostrTools.nip19.decode(value.replace(/^nostr:/, "")).data.id
+        );
+        const authors = normalizeElementValue($("author")).map(
+          (value) => window.NostrTools.nip19.decode(value).data
+        );
+        const kinds = normalizeElementValue($("kind")).map((value) =>
+          parseInt(value)
+        );
+        const eTagValues = normalizeElementValue(e).map(
+          (value) => window.NostrTools.nip19.decode(value).data.id
+        );
+        const dTagValues = normalizeElementValue(d);
+        const pTagValues = normalizeElementValue(p).map(
+          (value) => window.NostrTools.nip19.decode(value).data
+        );
+        const rTagValues = normalizeElementValue(r);
+        const tTagValues = normalizeElementValue(t);
 
         return {
           ids: ids.length > 0 ? ids : undefined,
@@ -113,6 +105,9 @@
           limit: limit.value ? parseInt(limit.value) : undefined,
         };
       };
+
+      const normalizeElementValue = (element) =>
+        element.value.split(",").filter((value) => value);
 
       const handleChange = (event) => {
         const input = event.target;
