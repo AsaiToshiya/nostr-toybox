@@ -140,7 +140,7 @@
           ? JSON.parse(event.tags.find((tag) => tag[0] == "description")[1])
           : event;
 
-      const querySyncMany = async (pool, relays, filters) => {
+      const querySync = async (pool, relays, filters) => {
         return new Promise(async (resolve) => {
           const events = [];
           pool.subscribeManyEose(relays, filters, {
@@ -174,7 +174,7 @@
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
-      const events = await querySyncMany(pool, relays, [
+      const events = await querySync(pool, relays, [
         {
           authors: [pk],
           limit: 50,
