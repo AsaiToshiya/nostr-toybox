@@ -8,7 +8,7 @@ const _defaultRelays = [
 ];
 
 const _getRelays = async (pool, pk, isRead = false) => {
-  const events = await _querySyncMany(pool, _defaultRelays, [
+  const events = await _querySync(pool, _defaultRelays, [
     {
       authors: [pk],
       kinds: [3],
@@ -46,7 +46,7 @@ const _getNip65Relays = async (events, isRead = false) => {
   return tags?.length ? tags.map((tag) => tag[1]) : null;
 };
 
-const _querySyncMany = async (pool, relays, filters) => {
+const _querySync = async (pool, relays, filters) => {
   return new Promise(async (resolve) => {
     const events = [];
     pool.subscribeManyEose(relays, filters, {
