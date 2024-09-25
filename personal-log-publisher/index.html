@@ -7,9 +7,30 @@
   <body>
     <h1>Personal Log Publisher</h1>
     as the log of: <input id="keyHashTag" type="text" /><br />
-    <div style="display: flex; align-items: start">
-      note (optional):
-      <textarea id="note" rows="4" cols="50"></textarea>
+    type:
+    <input
+      type="radio"
+      id="metadata"
+      name="type"
+      onchange="handleMetadataClick();"
+      checked
+    />
+    <label for="metadata">metadata</label>
+    <input type="radio" id="log" name="type" onchange="handleLogClick();" />
+    <label for="log">log</label>
+    <div id="metadataDiv">
+      title:
+      <input id="title" type="text" /><br />
+      <div style="display: flex; align-items: start">
+        description:
+        <textarea id="description" rows="4" cols="50"></textarea>
+      </div>
+    </div>
+    <div id="logDiv" style="display: none">
+      <div style="display: flex; align-items: start">
+        note (optional):
+        <textarea id="note" rows="4" cols="50"></textarea>
+      </div>
     </div>
     nsec:
     <input id="nsec" type="text" size="50" /><br />
@@ -57,6 +78,27 @@
           })
           .flat();
 
+      const createMetadataEvent = async (
+        keyHashTag,
+        title,
+        description,
+        sk
+      ) => {
+        return window.NostrTools.finalizeEvent(
+          {
+            kind: 31081,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ["d", keyHashTag],
+              ...(title ? [["title", title]] : []),
+              ...(await createTags(null, description)),
+            ],
+            content: description,
+          },
+          sk
+        );
+      };
+
       const createPubkeyTags = (content) =>
         [...window.NostrTools.nip27.matchAll(content)]
           .filter(
@@ -97,7 +139,15 @@
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
         const pk = window.NostrTools.getPublicKey(sk);
         const relays = await getRelays(pool, pk);
-        const event = await createEvent(keyHashTag.value, note.value, sk);
+        const event =
+          metadataDiv.style.display === "none"
+            ? await createEvent(keyHashTag.value, note.value, sk)
+            : await createMetadataEvent(
+                keyHashTag.value,
+                title.value,
+                description.value,
+                sk
+              );
         await Promise.any(pool.publish(relays, event));
         pool.close(relays);
 
@@ -111,9 +161,27 @@
         note.value = "";
       };
 
+      const handleLogClick = () => {
+        metadataDiv.style.display = "none";
+        logDiv.style.display = "block";
+      };
+
+      const handleMetadataClick = () => {
+        metadataDiv.style.display = "block";
+        logDiv.style.display = "none";
+      };
+
       const handleStringifyClick = async () => {
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
-        const event = await createEvent(keyHashTag.value, note.value, sk);
+        const event =
+          metadataDiv.style.display === "none"
+            ? await createEvent(keyHashTag.value, note.value, sk)
+            : await createMetadataEvent(
+                keyHashTag.value,
+                title.value,
+                description.value,
+                sk
+              );
         document.querySelector("#event").innerText = JSON.stringify(
           event,
           null,
@@ -122,6 +190,8 @@
       };
 
       window.handleClick = handleClick;
+      window.handleLogClick = handleLogClick;
+      window.handleMetadataClick = handleMetadataClick;
       window.handleStringifyClick = handleStringifyClick;
 
       const params = new URLSearchParams(location.search);
