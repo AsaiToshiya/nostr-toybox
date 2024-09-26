@@ -193,17 +193,22 @@
         .map(toText)
         .join("<br />");
 
+      const since = events.length
+        ? events[0].created_at + 1
+        : Math.floor(Date.now() / 1000);
       pool.subscribeMany(
         relays,
         [
           {
             authors: [pk],
             limit: 50,
+            since,
           },
           {
             kinds: [9735],
             "#P": [pk],
             limit: 50,
+            since,
           },
         ],
         {
