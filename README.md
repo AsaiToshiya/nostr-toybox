@@ -76,6 +76,14 @@ Nostr Dynamic Gateway
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## nocomment Playground
+
+A worthless playground for [nocomment](https://github.com/fiatjaf/nocomment)
+
+[https://github.com/AsaiToshiya/nostr-toybox/tree/main/nocomment-playground](https://github.com/AsaiToshiya/nostr-toybox/tree/main/nocomment-playground)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## nosns
 
 My personal note-taking client that combines micro-apps

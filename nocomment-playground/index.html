@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>nocomment Playground</title>
+  </head>
+  <body>
+    <h1>nocomment Playground</h1>
+    data-relays:
+    <input
+      id="relays"
+      type="text"
+      size="50"
+      placeholder="wss://my.custom.relay,..."
+    /><br />
+    data-custom-base:
+    <input
+      id="customBase"
+      type="text"
+      size="50"
+      placeholder="hex, note, nevent or naddr"
+    /><br />
+    <button onclick="handleClick()">refresh</button><br />
+    nocomment:
+    <div id="nocommentDiv"></div>
+
+    <script>
+      const handleClick = () => {
+        nocommentDiv.innerHTML = "";
+        const script = Object.assign(document.createElement("script"), {
+          src: "embed.js?" + new Date().getTime(),
+        });
+        relays.value &&
+          (script.dataset.relays = JSON.stringify(relays.value.split(",")));
+        script.dataset.customBase = customBase.value;
+        nocommentDiv.appendChild(script);
+      };
+
+      handleClick();
+    </script>
+  </body>
+</html>
