@@ -28,6 +28,7 @@
         nocommentDiv.innerHTML = "";
         const script = Object.assign(document.createElement("script"), {
           src: "embed.js?" + new Date().getTime(),
+          id: "nocomment",
         });
         relays.value &&
           (script.dataset.relays = JSON.stringify(relays.value.split(",")));
