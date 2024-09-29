@@ -49,7 +49,10 @@
           {
             kind: 1081,
             created_at: Math.floor(Date.now() / 1000),
-            tags: await createTags(keyHashTag, note),
+            tags: [
+              ["i", `#${keyHashTag.toLowerCase()}`],
+              ...(await createTags(note)),
+            ],
             content: note,
           },
           sk
@@ -65,13 +68,8 @@
             "",
           ]);
 
-      const createHashtagTags = (keyHashTag, content) =>
-        [
-          ...new Set([
-            ...(keyHashTag ? [keyHashTag] : []),
-            ...extractHashtag(content),
-          ]),
-        ]
+      const createHashtagTags = (content) =>
+        extractHashtag(content)
           .map((tag) => {
             const lowerCaseTag = tag.toLowerCase();
             return [["t", tag], tag != lowerCaseTag && ["t", lowerCaseTag]];
@@ -91,7 +89,7 @@
             tags: [
               ["d", keyHashTag],
               ...(title ? [["title", title]] : []),
-              ...(await createTags(null, description)),
+              ...(await createTags(description)),
             ],
             content: description,
           },
@@ -111,12 +109,12 @@
             "mention",
           ]);
 
-      const createTags = async (keyHashTag, note) =>
+      const createTags = async (note) =>
         [
           ...createEventTags(note),
           ...createPubkeyTags(note),
           ...extractReferenceTags(note),
-          ...createHashtagTags(keyHashTag, note),
+          ...createHashtagTags(note),
         ].filter((tag) => tag.length > 0);
 
       const extractHashtag = (content) =>
