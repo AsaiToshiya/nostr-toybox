@@ -40,14 +40,35 @@
       const pk =
         "0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a";
 
+      const querySync = async (pool, relays, filters) => {
+        return new Promise(async (resolve) => {
+          const events = [];
+          pool.subscribeManyEose(relays, filters, {
+            onevent(event) {
+              events.push(event);
+            },
+            onclose(_) {
+              resolve(events);
+            },
+          });
+        });
+      };
+
       // 投稿を取得する
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
-      const events = await pool.querySync(relays, {
-        authors: [pk],
-        kinds: [1, 1081],
-        "#t": ["腹筋"],
-      });
+      const events = await querySync(pool, relays, [
+        {
+          authors: [pk],
+          kinds: [1, 1081],
+          "#t": ["腹筋"],
+        },
+        {
+          authors: [pk],
+          kinds: [1081],
+          "#i": ["#腹筋"],
+        },
+      ]);
 
       // 日ごとのカウント数
       const data = events
