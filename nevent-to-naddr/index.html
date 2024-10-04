@@ -6,7 +6,14 @@
   </head>
   <body>
     <h1>nevent to naddr</h1>
-    <input id="nevent" type="text" size="50" placeholder="nevent" />
+    <input id="nevent" type="text" size="50" placeholder="nevent" /><br />
+    relays:
+    <input
+      id="relaysInput"
+      type="text"
+      size="50"
+      placeholder="wss://relay.example.com,..."
+    /><br />
     <button onclick="handleClick()">convert</button><br />
     <span id="naddr"></span>
     <button id="copy" disabled onclick="handleCopyClick()">copy</button>
@@ -26,7 +33,11 @@
       const handleClick = async () => {
         copy.disabled = true;
         naddr.innerText = (
-          await fluent(relays).ids([nevent.value]).get()
+          await fluent(
+            relaysInput.value ? relaysInput.value.split(",") : relays
+          )
+            .ids([nevent.value])
+            .get()
         ).naddr();
         copy.disabled = false;
       };
