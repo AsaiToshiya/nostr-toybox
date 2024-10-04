@@ -47,6 +47,13 @@
     <input id="web" type="text" /><br />
     patches:
     <input id="patches" type="text" /><br />
+    relays:
+    <input
+      id="relaysInput"
+      type="text"
+      size="50"
+      placeholder="wss://relay.example.com,..."
+    /><br />
     nsec:
     <input id="nsec" type="text" size="50" /><br />
     <button onclick="handleClick()">publish</button>
@@ -115,7 +122,9 @@
         const event = createEvent();
 
         const pool = new window.NostrTools.SimplePool();
-        const relays = await getRelays(pool, pk);
+        const relays = relaysInput.value
+          ? relaysInput.value.split(",")
+          : await getRelays(pool, pk);
         await Promise.any(pool.publish(relays, event));
         pool.close(relays);
 
