@@ -19,6 +19,8 @@
       size="50"
       placeholder="hex, note, nevent or naddr"
     /><br />
+    data-skip:
+    <input id="skip" type="text" value="/" /><br />
     <button onclick="handleClick()">refresh</button><br />
     nocomment:
     <div id="nocommentDiv"></div>
@@ -33,6 +35,7 @@
         relays.value &&
           (script.dataset.relays = JSON.stringify(relays.value.split(",")));
         script.dataset.customBase = customBase.value;
+        script.dataset.skip = skip.value;
         nocommentDiv.appendChild(script);
       };
 
