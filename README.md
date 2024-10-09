@@ -12,7 +12,7 @@ A client for bookmarking events
 
 ## broadcastr
 
-An alternative to leesalminen/nostr-broadcast
+An alternative to [leesalminen/nostr-broadcast](https://github.com/leesalminen/nostr-broadcast)
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/broadcastr](https://github.com/AsaiToshiya/nostr-toybox/tree/main/broadcastr)
 
