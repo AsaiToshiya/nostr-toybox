@@ -82,6 +82,15 @@
       const pk = window.NostrTools.nip19.decode(npub).data;
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
+      const user = JSON.parse(
+        (
+          await pool.get(relays, {
+            authors: [pk],
+            kinds: [0],
+          })
+        ).content
+      );
+      document.title = `${user.display_name || user.name} / recent-posts`;
       const posts = (
         await pool.querySync(relays, {
           authors: [pk],
