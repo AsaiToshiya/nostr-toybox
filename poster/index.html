@@ -29,7 +29,7 @@
     event:
     <pre id="event"></pre>
 
-    <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
+    <script src="https://unpkg.com/nostr-tools@2.8.0/lib/nostr.bundle.js"></script>
     <script>
       const relays = [
         "wss://nos.lol",
@@ -43,7 +43,7 @@
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
         const pk = window.NostrTools.getPublicKey(sk);
 
-        return window.NostrTools.finishEvent(
+        return window.NostrTools.finalizeEvent(
           {
             kind: 1,
             created_at: Math.floor(Date.now() / 1000),
