@@ -28,6 +28,8 @@
     <button onclick="handleStringifyClick()">stringify (not post)</button><br />
     event:
     <pre id="event"></pre>
+    published to:
+    <ul id="publishedTo"></ul>
 
     <script src="https://unpkg.com/nostr-tools@2.8.0/lib/nostr.bundle.js"></script>
     <script>
@@ -147,6 +149,7 @@
         const event = await createEvent();
 
         const pool = new window.NostrTools.SimplePool();
+        pool.trackRelays = true;
         await Promise.allSettled(pool.publish(relays, event));
 
         document.querySelector("#event").innerText = JSON.stringify(
@@ -154,6 +157,11 @@
           null,
           2
         );
+        const toRelays = pool.seenOn.get(event.id);
+        toRelays &&
+          (publishedTo.innerHTML = Array.from(toRelays)
+            .map((relay) => `<li>${relay.url}</li>`)
+            .join(""));
 
         subject.value = "";
         content.value = "";
