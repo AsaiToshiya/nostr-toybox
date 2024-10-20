@@ -125,7 +125,7 @@
         const relays = relaysInput.value
           ? relaysInput.value.split(",")
           : await getRelays(pool, pk);
-        await Promise.any(pool.publish(relays, event));
+        await Promise.allSettled(pool.publish(relays, event));
         pool.close(relays);
 
         json.innerText = JSON.stringify(event, null, 2);
