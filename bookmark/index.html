@@ -132,7 +132,7 @@
 
         const pool = new window.NostrTools.SimplePool();
         const relays = await getRelays(pool, pk);
-        await Promise.any(pool.publish(relays, newEvent));
+        await Promise.allSettled(pool.publish(relays, newEvent));
         pool.close(relays);
 
         await loadBookmark();
@@ -174,7 +174,7 @@
           pool,
           window.NostrTools.getPublicKey(sk)
         );
-        await Promise.any(pool.publish(relays, newEvent));
+        await Promise.allSettled(pool.publish(relays, newEvent));
         pool.close(relays);
 
         await loadBookmark();
