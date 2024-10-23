@@ -61,6 +61,8 @@
     ><br />
     JSON:
     <pre id="json"></pre>
+    published to:
+    <ul id="publishedTo"></ul>
 
     <script src="https://unpkg.com/nostr-tools@2.8.1/lib/nostr.bundle.js"></script>
     <script type="module">
@@ -125,10 +127,16 @@
         const relays = relaysInput.value
           ? relaysInput.value.split(",")
           : await getRelays(pool, pk);
+        pool.trackRelays = true;
         await Promise.allSettled(pool.publish(relays, event));
         pool.close(relays);
 
         json.innerText = JSON.stringify(event, null, 2);
+        const toRelays = pool.seenOn.get(event.id);
+        toRelays &&
+          (publishedTo.innerHTML = Array.from(toRelays)
+            .map((relay) => `<li>${relay.url}</li>`)
+            .join(""));
       };
 
       const handleRChange = (event) => {
