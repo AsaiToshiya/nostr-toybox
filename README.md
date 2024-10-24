@@ -8,7 +8,7 @@ A client for bookmarking events
 
 [https://asaitoshiya.github.io/nostr-toybox/bookmark/](https://asaitoshiya.github.io/nostr-toybox/bookmark/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## broadcastr
 
@@ -24,7 +24,7 @@ A web-based tool to publish events
 
 [https://asaitoshiya.github.io/nostr-toybox/event/](https://asaitoshiya.github.io/nostr-toybox/event/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## fetch
 
@@ -60,7 +60,7 @@ The day you joined Nostr
 
 [https://asaitoshiya.github.io/nostr-toybox/media/](https://asaitoshiya.github.io/nostr-toybox/media/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## menu
 
@@ -68,7 +68,7 @@ Nostr Dynamic Gateway
 
 [https://asaitoshiya.github.io/nostr-toybox/menu/](https://asaitoshiya.github.io/nostr-toybox/menu/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## nevent to naddr
 
@@ -90,7 +90,7 @@ My personal note-taking client that combines micro-apps
 
 [https://asaitoshiya.github.io/nostr-toybox/nosns/](https://asaitoshiya.github.io/nostr-toybox/nosns/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## note-to-text
 
@@ -98,7 +98,7 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 [https://asaitoshiya.github.io/nostr-toybox/note-to-text/](https://asaitoshiya.github.io/nostr-toybox/note-to-text/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## nreq Encoding/Decoding
 
@@ -122,7 +122,7 @@ Publish personal log events (unofficial kind 1081 and kind 31081)
 
 [https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/](https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## poster
 
@@ -130,7 +130,7 @@ A simple web-based tool to post events (kind 1)
 
 [https://asaitoshiya.github.io/nostr-toybox/poster/](https://asaitoshiya.github.io/nostr-toybox/poster/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## posts
 
@@ -150,7 +150,7 @@ A command line tool to save posts as HTML
 
 [https://asaitoshiya.github.io/nostr-toybox/recent-posts/](https://asaitoshiya.github.io/nostr-toybox/recent-posts/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## relay-list
 
@@ -166,7 +166,7 @@ A simple web-based tool to request Nostr events
 
 [https://asaitoshiya.github.io/nostr-toybox/req/](https://asaitoshiya.github.io/nostr-toybox/req/)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## search
 
@@ -180,7 +180,7 @@ An ultra-simple [NIP-50](https://github.com/nostr-protocol/nips/blob/master/50.m
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/seven](https://github.com/AsaiToshiya/nostr-toybox/tree/main/seven)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## sit-up-log
 
@@ -188,7 +188,7 @@ My personal sit up log with Nostr
 
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/sit-up-log](https://github.com/AsaiToshiya/nostr-toybox/tree/main/sit-up-log)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## timeline
 
