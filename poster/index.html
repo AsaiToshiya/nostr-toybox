@@ -22,6 +22,13 @@
     <input id="encryptionNsec" type="text" size="50" /><br />
     content warning:
     <input id="contentWarning" type="checkbox" /><br />
+    relays:
+    <input
+      id="relaysInput"
+      type="text"
+      size="50"
+      placeholder="wss://relay.example.com,..."
+    /><br />
     nsec:
     <input id="nsec" type="text" size="50" /><br />
     <button onclick="handleClick()">投稿</button>
@@ -150,7 +157,12 @@
 
         const pool = new window.NostrTools.SimplePool();
         pool.trackRelays = true;
-        await Promise.allSettled(pool.publish(relays, event));
+        await Promise.allSettled(
+          pool.publish(
+            relaysInput.value ? relaysInput.value.split(",") : relays,
+            event
+          )
+        );
 
         document.querySelector("#event").innerText = JSON.stringify(
           event,
