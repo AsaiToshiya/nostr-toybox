@@ -27,6 +27,8 @@
     <input id="r" type="text" /><br />
     #t:
     <input id="t" type="text" /><br />
+    #P:
+    <input id="P" type="text" size="50" placeholder="npub1..." /><br />
     limit:
     <input id="limit" type="text" />
     <details>
@@ -92,6 +94,9 @@
         );
         const rTagValues = normalizeElementValue(r);
         const tTagValues = normalizeElementValue(t);
+        const uppercasePTagValues = normalizeElementValue(P).map(
+          (value) => window.NostrTools.nip19.decode(value).data
+        );
 
         return {
           ids: ids.length > 0 ? ids : undefined,
@@ -102,6 +107,8 @@
           "#p": pTagValues.length > 0 ? pTagValues : undefined,
           "#r": rTagValues.length > 0 ? rTagValues : undefined,
           "#t": tTagValues.length > 0 ? tTagValues : undefined,
+          "#P":
+            uppercasePTagValues.length > 0 ? uppercasePTagValues : undefined,
           limit: limit.value ? parseInt(limit.value) : undefined,
         };
       };
