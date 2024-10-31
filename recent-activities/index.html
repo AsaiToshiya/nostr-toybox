@@ -143,6 +143,9 @@
           : undefined;
       };
 
+      const ellipsis = (id) =>
+        id.substr(0, 5) + ".." + id.substr(id.length - 5);
+
       const getZapRequestIfZap = (event) =>
         event.kind == 9735
           ? JSON.parse(event.tags.find((tag) => tag[0] == "description")[1])
@@ -168,7 +171,15 @@
         );
         const dateTime = date.toISOString().replace("T", " ").split(".")[0];
         const kind = event.kind;
-        return `${dateTime} ${getKindDescription(kind)} (kind ${kind})`;
+        const nevent = window.NostrTools.nip19.neventEncode({
+          id: event.id,
+        });
+        const url = `https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${nevent}`;
+        return `${dateTime} ${getKindDescription(
+          kind
+        )} (kind ${kind}) <a href="${url}" target="_blank">${ellipsis(
+          event.id
+        )}</a>`;
       };
 
       const npub = new URLSearchParams(location.search).get("npub");
