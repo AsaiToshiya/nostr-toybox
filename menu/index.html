@@ -5,13 +5,15 @@
     <title>menu</title>
   </head>
   <body>
-    <h1>menu</h1>
-    <p>
-      usage:
-      <code
-        >https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=&lt;nip-19-nevent&gt;</code
-      >
-    </p>
+    <div id="headingAndUsage">
+      <h1>menu</h1>
+      <p>
+        usage:
+        <code
+          >https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=&lt;nip-19-nevent&gt;</code
+        >
+      </p>
+    </div>
     <p><a id="njump">njump.me</a></p>
     <p><a id="replies">Replies</a></p>
     <p><a id="reply">reply with nostr-toybox/poster</a></p>
@@ -78,6 +80,7 @@
         );
       })();
 
+      nevent && (headingAndUsage.style.display = "none");
       njump.href = `https://njump.me/${nevent}`;
       replies.href = `https://replies.nostrapps.org/?id=${nevent}`;
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
