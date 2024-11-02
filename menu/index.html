@@ -62,6 +62,7 @@
       const handleCopyNip21Click = () => copy(`nostr:${nevent}`, "copiedNip21");
 
       const nevent = new URLSearchParams(location.search).get("nevent");
+      nevent && (headingAndUsage.style.display = "none");
       const id = window.NostrTools.nip19.decode(nevent).data.id;
 
       (async () => {
@@ -80,7 +81,6 @@
         );
       })();
 
-      nevent && (headingAndUsage.style.display = "none");
       njump.href = `https://njump.me/${nevent}`;
       replies.href = `https://replies.nostrapps.org/?id=${nevent}`;
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
