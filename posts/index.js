@@ -26,11 +26,11 @@ const _renderContent = async (post) =>
     post.content
       .replace(
         /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g,
-        '<a href="$1"><img src="$1" loading="lazy"></a>'
+        '<a href="$1" target="_blank"><img src="$1" loading="lazy"></a>'
       )
       .replace(
         /NIP-(\d{2})/g,
-        '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md">$&</a>'
+        '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md" target="_blank">$&</a>'
       )
       .replace(/^#+ /g, "\\$&")
   );
@@ -77,7 +77,7 @@ const generateHashtagHtml = async (posts) => {
                     const date = new Date(post.created_at * 1000);
                     const dateTime = date.toLocaleString();
                     const content = await _renderContent(post);
-                    return `      <h3><a href="${url}">${dateTime}</a></h3>
+                    return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
       ${content}`;
                   })
                 )
@@ -160,7 +160,7 @@ const generateIndexHtml = async (posts) => {
                   const date = new Date(post.created_at * 1000);
                   const time = date.toLocaleTimeString();
                   const content = await _renderContent(post);
-                  return `      <h3><a href="${url}">${time}</a></h3>
+                  return `      <h3><a href="${url}" target="_blank">${time}</a></h3>
       ${content}`;
                 })
               )
@@ -218,7 +218,7 @@ const posts = await Promise.all(
           )?.content;
         const user = userJson && JSON.parse(userJson);
         const augmentedReference = user
-          ? `<a href="https://njump.me/${nip19.npubEncode(profile.pubkey)}">@${
+          ? `<a href="https://njump.me/${nip19.npubEncode(profile.pubkey)}" target="_blank">@${
               user.name
             }</a>`
           : text;
