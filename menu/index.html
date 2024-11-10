@@ -5,7 +5,7 @@
     <title>menu</title>
   </head>
   <body>
-    <div id="headingAndUsage">
+    <div id="headingAndUsage" style="display: none">
       <h1>menu</h1>
       <p>
         usage:
@@ -64,7 +64,7 @@
       const handleCopyNip21Click = () => copy(`nostr:${nevent}`, "copiedNip21");
 
       const nevent = new URLSearchParams(location.search).get("nevent");
-      nevent && (headingAndUsage.style.display = "none");
+      !nevent && (headingAndUsage.style.display = "block");
       !nevent && (content.style.display = "none");
       const id = window.NostrTools.nip19.decode(nevent).data.id;
 
