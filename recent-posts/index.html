@@ -43,7 +43,7 @@
         breaks: true,
       });
 
-      const toHtml = (post) => {
+      const toHtml = async (post) => {
         const nevent = window.NostrTools.nip19.neventEncode({
           id: post.id,
         });
@@ -64,12 +64,23 @@
               .replace(/^#+ /g, "\\$&")
           )
           .replace(/<a /g, '<a target="_blank" ');
+        const references = window.NostrTools.parseReferences(post);
+        const augmentedContent = await references.reduce(async (acc, obj) => {
+          const { text, _, event } = obj;
+          const augmentedReference = event
+            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
+                { id: event.id }
+              )}" target="_blank">${text}</a>`
+            : text;
+          return (await acc).replaceAll(text, augmentedReference);
+        }, content);
         return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
-      ${content}`;
+      ${augmentedContent}`;
       };
 
       const npub = new URLSearchParams(location.search).get("npub");
-      !npub && (document.body.innerHTML = `<p>
+      !npub &&
+        (document.body.innerHTML = `<p>
       usage:
       <code
         >https://asaitoshiya.github.io/nostr-toybox/recent-posts/?npub=&lt;nip-19-npub&gt;</code
@@ -98,7 +109,9 @@
           limit: 50,
         })
       ).sort((a, b) => b.created_at - a.created_at);
-      document.body.innerHTML = posts.map(toHtml).join("\n");
+      document.body.innerHTML = (await Promise.all(posts.map(toHtml))).join(
+        "\n"
+      );
 
       localStorage.setItem(location.href, document.body.innerHTML);
 
@@ -114,8 +127,9 @@
           },
         ],
         {
-          onevent(event) {
-            document.body.innerHTML = toHtml(event) + document.body.innerHTML;
+          async onevent(event) {
+            document.body.innerHTML =
+              (await toHtml(event)) + document.body.innerHTML;
             localStorage.setItem(location.href, document.body.innerHTML);
           },
         }
