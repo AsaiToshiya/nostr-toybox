@@ -41,7 +41,7 @@
     </div>
 
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
-    <script>
+    <script type="module">
       const relays = [
         "wss://nos.lol",
         "wss://nostr.bitcoiner.social",
@@ -63,10 +63,25 @@
 
       const handleCopyNip21Click = () => copy(`nostr:${nevent}`, "copiedNip21");
 
-      const nevent = new URLSearchParams(location.search).get("nevent");
-      !nevent && (headingAndUsage.style.display = "block");
-      !nevent && (content.style.display = "none");
-      const id = window.NostrTools.nip19.decode(nevent).data.id;
+      const nip19 = new URLSearchParams(location.search).get("nevent");
+      !nip19 && (headingAndUsage.style.display = "block");
+      !nip19 && (content.style.display = "none");
+      const data = window.NostrTools.nip19.decode(nip19).data;
+      const id = window.NostrTools.nip19.NostrTypeGuard.isNEvent(nip19)
+        ? data.id
+        : await (async () => {
+            const pool = new window.NostrTools.SimplePool();
+            const event = await pool.get(relays, {
+              kinds: [data.kind],
+              authors: [data.pubkey],
+              "#d": [data.identifier],
+            });
+            pool.close(relays);
+            return event.id;
+          })();
+      const nevent = window.NostrTools.nip19.NostrTypeGuard.isNEvent(nip19)
+        ? nip19
+        : window.NostrTools.nip19.neventEncode({ id });
 
       (async () => {
         const pool = new window.NostrTools.SimplePool();
@@ -84,14 +99,14 @@
         );
       })();
 
-      njump.href = `https://njump.me/${nevent}`;
-      replies.href = `https://replies.nostrapps.org/?id=${nevent}`;
+      njump.href = `https://njump.me/${nip19}`;
+      replies.href = `https://replies.nostrapps.org/?id=${nip19}`;
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
       quoteReply.href =
         "https://asaitoshiya.github.io/nostr-toybox/poster/?content=" +
         encodeURIComponent(`
 
-nostr:${nevent}`);
+nostr:${nip19}`);
       bookmark.href = `https://asaitoshiya.github.io/nostr-toybox/bookmark/?nevent=${nevent}`;
       share.href = `https://asaitoshiya.github.io/nostr-toybox/note-to-text/?nevent=${nevent}`;
     </script>
