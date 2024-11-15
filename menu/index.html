@@ -63,6 +63,10 @@
 
       const handleCopyNip21Click = () => copy(`nostr:${nevent}`, "copiedNip21");
 
+      window.handleCopyContentClick = handleCopyContentClick;
+      window.handleCopyNip19Click = handleCopyNip19Click;
+      window.handleCopyNip21Click = handleCopyNip21Click;
+
       const nip19 = new URLSearchParams(location.search).get("nevent");
       !nip19 && (headingAndUsage.style.display = "block");
       !nip19 && (content.style.display = "none");
