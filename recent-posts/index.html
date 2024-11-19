@@ -68,8 +68,8 @@
         const augmentedContent = references.reduce((acc, obj) => {
           const { text, _, event } = obj;
           const augmentedReference = event
-            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
-                { id: event.id }
+            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
+                6
               )}" target="_blank">${text}</a>`
             : text;
           return acc.replaceAll(text, augmentedReference);
