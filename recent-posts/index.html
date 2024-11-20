@@ -66,12 +66,13 @@
           .replace(/<a /g, '<a target="_blank" ');
         const references = window.NostrTools.parseReferences(post);
         const augmentedContent = references.reduce((acc, obj) => {
-          const { text, _, event } = obj;
-          const augmentedReference = event
-            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
-                6
-              )}" target="_blank">${text}</a>`
-            : text;
+          const { text, _, event, address } = obj;
+          const augmentedReference =
+            event || address
+              ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
+                  6
+                )}" target="_blank">${text}</a>`
+              : text;
           return acc.replaceAll(text, augmentedReference);
         }, content);
         return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
