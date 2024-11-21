@@ -16,6 +16,7 @@
     </div>
     <div id="content">
       <p><a id="njump">njump.me</a></p>
+      <p><a id="njumpRoot">njump.me (root)</a></p>
       <p><a id="replies">Replies</a></p>
       <p><a id="reply">reply with nostr-toybox/poster</a></p>
       <p><a id="quoteReply">quote reply with nostr-toybox/poster</a></p>
@@ -94,6 +95,13 @@
         });
         pool.close(relays);
 
+        const root = event.tags.find(
+          (tag) => tag[0] == "e" && tag[3] == "root"
+        );
+        root &&
+          (njumpRoot.href = `https://njump.me/${window.NostrTools.nip19.neventEncode(
+            { id: root.id }
+          )}`);
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         copyContent.disabled = false;
         document.querySelector("#event").innerText = JSON.stringify(
