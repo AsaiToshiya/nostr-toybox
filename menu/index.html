@@ -100,7 +100,7 @@
         );
         root &&
           (njumpRoot.href = `https://njump.me/${window.NostrTools.nip19.neventEncode(
-            { id: root.id }
+            { id: root[1] }
           )}`);
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         copyContent.disabled = false;
