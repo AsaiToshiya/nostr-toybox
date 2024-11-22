@@ -197,3 +197,9 @@ A command line tool to save Nostr timelines as HTML
 [https://github.com/AsaiToshiya/nostr-toybox/tree/main/timeline](https://github.com/AsaiToshiya/nostr-toybox/tree/main/timeline)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Wiki Article
+
+[https://asaitoshiya.github.io/nostr-toybox/wiki-article/dist/](https://asaitoshiya.github.io/nostr-toybox/wiki-article/dist/)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
