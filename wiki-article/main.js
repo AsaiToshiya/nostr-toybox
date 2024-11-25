@@ -22,6 +22,10 @@ const createFilter = ({ type, data }) =>
         "#d": [data.identifier],
       };
 
+const getMetaOr = (name, defaultValue) =>
+  document.querySelector(`meta[name='${name}']`)?.getAttribute("content") ||
+  defaultValue;
+
 const normalizeArticleName = (input) =>
   input.trim().toLowerCase().replace(/\W/g, "-");
 
@@ -55,16 +59,9 @@ const turnWikilinksIntoAsciidocLinks = (content) =>
     return `link:${wikilinkPrefix}${nreqString}[${display}]`;
   });
 
-const relays =
-  document.querySelector("meta[name='relays']")?.getAttribute("content") ||
-  defaultRelays;
-const showUsage =
-  document.querySelector("meta[name='usage']")?.getAttribute("content") !==
-    "false" ?? true;
-const wikilinkPrefix =
-  document
-    .querySelector("meta[name='wikilink-prefix']")
-    ?.getAttribute("content") || "#";
+const relays = getMetaOr("relays", defaultRelays);
+const showUsage = getMetaOr("usage") !== "false";
+const wikilinkPrefix = getMetaOr("wikilink-prefix", "#");
 
 window.addEventListener("hashchange", render);
 
