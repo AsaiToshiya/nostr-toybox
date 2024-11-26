@@ -7,6 +7,11 @@
   <body>
     <h1>search</h1>
     <input id="query" type="text" size="50" placeholder="query" /><br />
+    <details>
+      <summary>Options</summary>
+      kind:
+      <input id="kind" type="text" /><br />
+    </details>
     <button onclick="handleClick()">search</button><br />
     result:
     <pre id="result"></pre>
@@ -17,6 +22,7 @@
         const pool = new window.NostrTools.SimplePool();
         const events = await pool.querySync(["wss://relay.nostr.band/"], {
           authors: author ? [author] : undefined,
+          kinds: kind.value ? [parseInt(kind.value, 10)] : undefined,
           search: query.value,
         });
         pool.close(["wss://relay.nostr.band/"]);
