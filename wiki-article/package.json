@@ -15,6 +15,7 @@
   "dependencies": {
     "@scure/base": "^1.1.9",
     "asciidoctor": "^3.0.4",
-    "nostr-tools": "^2.10.3"
+    "nostr-tools": "^2.10.3",
+    "vite-plugin-singlefile": "^2.0.3"
   }
 }
