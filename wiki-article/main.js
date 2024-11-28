@@ -4,11 +4,10 @@ import * as nip19 from "nostr-tools/nip19";
 import * as nreq from "./nreq.js";
 
 const defaultRelays = [
-  "wss://nos.lol",
-  "wss://nostr.bitcoiner.social",
-  "wss://nostr.mom",
-  "wss://relay.damus.io",
-  "wss://relay.nostr.bg",
+  "wss://relay.wikifreedia.xyz",
+  "wss://nostr.wine",
+  "wss://nostr21.com",
+  "wss://relay.nostr.band",
 ];
 
 const createFilter = ({ type, data }) =>
