@@ -53,6 +53,7 @@ NIP-60: Cashu Wallet,60.md
 NIP-61: Nutzaps,61.md
 NIP-64: Chess (Portable Game Notation),64.md
 NIP-65: Relay List Metadata,65.md
+NIP-68: Picture-first feeds,68.md
 NIP-69: Peer-to-peer Order events,69.md
 NIP-70: Protected Events,70.md
 NIP-71: Video Events,71.md
@@ -61,6 +62,7 @@ NIP-73: External Content IDs,73.md
 NIP-75: Zap Goals,75.md
 NIP-78: Application-specific data,78.md
 NIP-84: Highlights,84.md
+NIP-86: Relay Management API,86.md
 NIP-89: Recommended Application Handlers,89.md
 NIP-90: Data Vending Machine,90.md
 NIP-92: Media Attachments,92.md
@@ -68,3 +70,5 @@ NIP-94: File Metadata,94.md
 NIP-96: HTTP File Storage Integration,96.md
 NIP-98: HTTP Auth,98.md
 NIP-99: Classified Listings,99.md
+NIP-7D: Threads,7D.md
+NIP-C7: Chats,C7.md
