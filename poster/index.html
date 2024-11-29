@@ -11,24 +11,27 @@
       content:
       <textarea id="content" rows="4" cols="50"></textarea>
     </div>
-    reply to:
-    <input
-      id="nip19"
-      type="text"
-      size="50"
-      placeholder="nevent1... or nostr:nevent1..."
-    /><br />
-    encryption nsec:
-    <input id="encryptionNsec" type="text" size="50" /><br />
-    content warning:
-    <input id="contentWarning" type="checkbox" /><br />
-    relays:
-    <input
-      id="relaysInput"
-      type="text"
-      size="50"
-      placeholder="wss://relay.example.com,..."
-    /><br />
+    <details>
+      <summary>Options</summary>
+      reply to:
+      <input
+        id="nip19"
+        type="text"
+        size="50"
+        placeholder="nevent1... or nostr:nevent1..."
+      /><br />
+      encryption nsec:
+      <input id="encryptionNsec" type="text" size="50" /><br />
+      content warning:
+      <input id="contentWarning" type="checkbox" /><br />
+      relays:
+      <input
+        id="relaysInput"
+        type="text"
+        size="50"
+        placeholder="wss://relay.example.com,..."
+      /><br />
+    </details>
     nsec:
     <input id="nsec" type="text" size="50" /><br />
     <button onclick="handleClick()">投稿</button>
