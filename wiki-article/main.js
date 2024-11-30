@@ -21,6 +21,9 @@ const createFilter = ({ type, data }) =>
         "#d": [data.identifier],
       };
 
+const findTag = (event, tagName) =>
+  event?.tags.find((tag) => tag[0] == tagName);
+
 const getMetaOr = (name, defaultValue) =>
   document.querySelector(`meta[name='${name}']`)?.getAttribute("content") ||
   defaultValue;
@@ -37,6 +40,8 @@ const render = async () => {
   const event = await pool.get(relays, filter);
   const Asciidoctor = asciidoctor();
   const content = turnWikilinksIntoAsciidocLinks(event.content);
+  const title = findTag(event, "title")?.[1];
+  title && (document.title = `${title} / Wiki Article`);
   document.body.innerHTML = Asciidoctor.convert(content);
 };
 
