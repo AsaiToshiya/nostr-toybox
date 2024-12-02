@@ -200,6 +200,8 @@ A command line tool to save Nostr timelines as HTML
 
 ## Wiki Article
 
+[NIP-54: Wiki](https://github.com/nostr-protocol/nips/blob/master/54.md) article dynamic viewer
+
 [https://asaitoshiya.github.io/nostr-toybox/wiki-article/dist/](https://asaitoshiya.github.io/nostr-toybox/wiki-article/dist/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
