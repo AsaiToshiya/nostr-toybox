@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pin list</title>
+  </head>
+  <body>
+    <h1>Pin list</h1>
+    npub:
+    <input id="npub" type="text" size="50" /><br />
+    <button onclick="handleClick()">load</button><br />
+    <details>
+      <summary>Pin a note</summary>
+      nevent:
+      <input
+        id="nevent"
+        type="text"
+        size="50"
+        placeholder="nevent1... or nostr:nevent1..."
+      /><br />
+      nsec:
+      <input id="nsec" type="text" size="50" />
+      <button onclick="handlePinClick()">pin</button><br />
+      <img
+        id="nostrich"
+        src="nostrich.gif"
+        style="display: none; height: 1.3em; max-height: 1.3em"
+      />
+    </details>
+    pinned notes:<br />
+    <p>
+      Nostrich icon by
+      <a href="https://github.com/SovrynMatt/Nostr-Website-Button-Design"
+        >@SovrynMatt</a
+      >
+    </p>
+    <div id="pinnedNotes"></div>
+
+    <script src="https://unpkg.com/nostr-tools@2.10.3/lib/nostr.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
+
+      marked.setOptions({
+        breaks: true,
+      });
+
+      const e = async (pool, relays, event) => [
+        event,
+        await pool.querySync(relays, {
+          ids: event.tags.filter((tag) => tag[0] == "e").map((tag) => tag[1]),
+        }),
+      ];
+
+      const fetchPinList = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const pk = window.NostrTools.nip19.decode(npub.value).data;
+        const relays = await getRelays(pool, pk);
+        return await pool.get(relays, {
+          authors: [pk],
+          kinds: [10001],
+        });
+      };
+
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const loadPinnedNotes = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const pk = window.NostrTools.nip19.decode(npub.value).data;
+        const relays = await getRelays(pool, pk);
+
+        const pinList = await fetchPinList();
+
+        const pinnedNotes = (await e(pool, relays, pinList))[1];
+        document.querySelector("#pinnedNotes").innerHTML = pinnedNotes
+          .sort((a, b) => b.created_at - a.created_at)
+          .map((note) => {
+            const date = new Date(note.created_at * 1000);
+            const dateTime = date.toLocaleString();
+            const content = marked.parse(note.content);
+            return `<h3><a href="https://njump.me/${window.NostrTools.nip19.neventEncode(
+              {
+                id: note.id,
+              }
+            )}" target="_blank">${dateTime}</a></h3>${content}<button onclick="handleRemoveClick('${
+              note.id
+            }')">remove</button>`;
+          })
+          .join("\n");
+      };
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
+      const handleClick = async () => {
+        showNostrich();
+
+        await loadPinnedNotes();
+
+        hideNostrich();
+      };
+
+      const handlePinClick = async () => {
+        showNostrich();
+
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+
+        const pk = window.NostrTools.getPublicKey(sk);
+        npub.value = window.NostrTools.nip19.npubEncode(pk);
+        const pinList = await fetchPinList();
+
+        const newPinList = window.NostrTools.finalizeEvent(
+          {
+            ...pinList,
+            kind: 10001,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ...pinList.tags,
+              [
+                "e",
+                window.NostrTools.nip19.decode(
+                  nevent.value.replace(/^nostr:/, "")
+                ).data.id,
+              ],
+            ],
+          },
+          sk
+        );
+
+        const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(pool, pk);
+        await Promise.allSettled(pool.publish(relays, newPinList));
+        pool.close(relays);
+
+        await loadPinnedNotes();
+
+        hideNostrich();
+      };
+
+      const handleRemoveClick = async (noteId) => {
+        showNostrich();
+
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const pk = window.NostrTools.getPublicKey(sk);
+
+        const pinList = await fetchPinList();
+
+        const newPinList = window.NostrTools.finalizeEvent(
+          {
+            ...pinList,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: pinList.tags.filter((tag) => tag[1] != noteId),
+          },
+          sk
+        );
+
+        const pool = new window.NostrTools.SimplePool();
+        const relays = await getRelays(pool, pk);
+        await Promise.allSettled(pool.publish(relays, newPinList));
+        pool.close(relays);
+
+        await loadPinnedNotes();
+
+        hideNostrich();
+      };
+
+      window.handleClick = handleClick;
+      window.handlePinClick = handlePinClick;
+      window.handleRemoveClick = handleRemoveClick;
+
+      const params = new URLSearchParams(location.search);
+      npub.value = params.get("npub");
+      npub.value && handleClick();
+      nevent.value = params.get("nevent");
+    </script>
+  </body>
+</html>

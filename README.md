@@ -124,6 +124,12 @@ Publish personal log events (unofficial kind 1081 and kind 31081)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+## Pin list
+
+[https://asaitoshiya.github.io/nostr-toybox/pin-list/](https://asaitoshiya.github.io/nostr-toybox/pin-list/)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## poster
 
 A simple web-based tool to post events (kind 1)
