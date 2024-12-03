@@ -114,7 +114,7 @@
             kind: 10001,
             created_at: Math.floor(Date.now() / 1000),
             tags: [
-              ...pinList?.tags,
+              ...(pinList ? pinList.tags : []),
               [
                 "e",
                 window.NostrTools.nip19.decode(
