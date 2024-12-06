@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simple Broadcast</title>
+  </head>
+  <body>
+    <h1>Simple Broadcast</h1>
+    event id:
+    <input id="eventId" type="text" size="50" placeholder="hex" /><br />
+    relays from:
+    <input
+      id="relaysFrom"
+      type="text"
+      size="50"
+      placeholder="wss://relay.example.com,..."
+    /><br />
+    relays to:
+    <input
+      id="relaysTo"
+      type="text"
+      size="50"
+      placeholder="wss://relay.example.com,..."
+    /><br />
+    <button onclick="handleClick()">broadcast</button><br />
+    event:
+    <pre id="event"></pre>
+    published to:
+    <ul id="publishedTo"></ul>
+
+    <script src="https://unpkg.com/nostr-tools@2.10.4/lib/nostr.bundle.js"></script>
+    <script>
+      const handleClick = async () => {
+        const pool = new window.NostrTools.SimplePool();
+        const event = await pool.get(relaysFrom.value.split(","), {
+          ids: [eventId.value],
+        });
+        document.querySelector("#event").innerText = JSON.stringify(
+          event,
+          null,
+          2
+        );
+        pool.trackRelays = true;
+        await Promise.allSettled(
+          pool.publish(relaysTo.value.split(","), event)
+        );
+        const toRelays = pool.seenOn.get(event.id);
+        toRelays &&
+          (publishedTo.innerHTML = Array.from(toRelays)
+            .map((relay) => `<li>${relay.url}</li>`)
+            .join(""));
+      };
+    </script>
+  </body>
+</html>

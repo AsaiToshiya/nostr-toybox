@@ -188,6 +188,12 @@ An ultra-simple [NIP-50](https://github.com/nostr-protocol/nips/blob/master/50.m
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+## Simple Broadcast
+
+[https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/](https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## sit-up-log
 
 My personal sit up log with Nostr
