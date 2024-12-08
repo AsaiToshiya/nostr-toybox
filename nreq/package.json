@@ -1,0 +1,16 @@
+{
+  "name": "nreq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify -s nreq nreq.js -o dist/nreq.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@scure/base": "^1.2.1",
+    "browserify": "^17.0.1"
+  }
+}

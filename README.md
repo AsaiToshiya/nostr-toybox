@@ -100,6 +100,14 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+## nreq
+
+[`nreq`](https://github.com/nostr-protocol/nips/pull/882) library for browser
+
+[https://github.com/AsaiToshiya/nostr-toybox/tree/main/nreq](https://github.com/AsaiToshiya/nostr-toybox/tree/main/nreq)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## nreq Encoding/Decoding
 
 Limited implementation of [`nreq`](https://github.com/nostr-protocol/nips/pull/882)
