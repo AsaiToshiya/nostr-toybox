@@ -82,9 +82,9 @@
               {
                 id: note.id,
               }
-            )}" target="_blank">${dateTime}</a></h3>${content}<button onclick="handleRemoveClick('${
+            )}" target="_blank">${dateTime}</a></h3>${content}<button onclick="handleUnpinClick('${
               note.id
-            }')">remove</button>`;
+            }')">unpin</button>`;
           })
           .join("\n");
       };
@@ -137,7 +137,7 @@
         hideNostrich();
       };
 
-      const handleRemoveClick = async (noteId) => {
+      const handleUnpinClick = async (noteId) => {
         showNostrich();
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
@@ -166,7 +166,7 @@
 
       window.handleClick = handleClick;
       window.handlePinClick = handlePinClick;
-      window.handleRemoveClick = handleRemoveClick;
+      window.handleUnpinClick = handleUnpinClick;
 
       const params = new URLSearchParams(location.search);
       npub.value = params.get("npub");
