@@ -112,7 +112,7 @@ A web-based tool to turn the `content` of an event (kind 1) into shareable text
 
 Limited implementation of [`nreq`](https://github.com/nostr-protocol/nips/pull/882)
 
-[https://asaitoshiya.github.io/nostr-toybox/nreq-encoding-decoding/dist/](https://asaitoshiya.github.io/nostr-toybox/nreq-encoding-decoding/dist/)
+[https://asaitoshiya.github.io/nostr-toybox/nreq-encoding-decoding/](https://asaitoshiya.github.io/nostr-toybox/nreq-encoding-decoding/)
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 

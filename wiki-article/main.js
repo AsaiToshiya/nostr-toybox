@@ -1,7 +1,6 @@
 import asciidoctor from "asciidoctor";
 import { SimplePool } from "nostr-tools/pool";
 import * as nip19 from "nostr-tools/nip19";
-import * as nreq from "./nreq.js";
 
 const defaultRelays = [
   "wss://relay.wikifreedia.xyz",

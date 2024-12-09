@@ -1,5 +1,3 @@
-import * as nreq from "./nreq.js";
-
 const handleChange = (event) => {
   const input = event.target;
   const tags = document.querySelectorAll("#tag");
