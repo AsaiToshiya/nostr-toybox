@@ -23,6 +23,7 @@
       <p><a id="bookmark">bookmark with nostr-toybox/bookmark</a></p>
       <p><a id="share">share with nostr-toybox/note-to-text</a></p>
       <p><a id="deleteEvent">delete with nostr-toybox/event</a></p>
+      <p><a id="pin">pin with nostr-toybox/pin-list</a></p>
       <p>
         <button id="copyContent" disabled onclick="handleCopyContentClick()">
           copy content
@@ -121,6 +122,7 @@
 nostr:${nip19}`);
       bookmark.href = `https://asaitoshiya.github.io/nostr-toybox/bookmark/?nevent=${nevent}`;
       share.href = `https://asaitoshiya.github.io/nostr-toybox/note-to-text/?nevent=${nevent}`;
+      pin.href = `https://asaitoshiya.github.io/nostr-toybox/pin-list/?nevent=${nevent}`;
     </script>
   </body>
 </html>
