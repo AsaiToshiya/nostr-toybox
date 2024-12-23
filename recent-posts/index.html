@@ -43,7 +43,7 @@
         breaks: true,
       });
 
-      const toHtml = (post) => {
+      const toHtml = async (post) => {
         const nevent = window.NostrTools.nip19.neventEncode({
           id: post.id,
         });
@@ -65,15 +65,27 @@
           )
           .replace(/<a /g, '<a target="_blank" ');
         const references = window.NostrTools.parseReferences(post);
-        const augmentedContent = references.reduce((acc, obj) => {
-          const { text, _, event, address } = obj;
-          const augmentedReference =
-            event || address
-              ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
-                  6
-                )}" target="_blank">${text}</a>`
-              : text;
-          return acc.replaceAll(text, augmentedReference);
+        const augmentedContent = await references.reduce(async (acc, obj) => {
+          const { text, profile, event, address } = obj;
+          const userJson =
+            profile &&
+            (
+              await pool.get(relays, {
+                authors: [profile.pubkey],
+                kinds: [0],
+              })
+            )?.content;
+          const user = userJson && JSON.parse(userJson);
+          const augmentedReference = user
+            ? `<a href="https://njump.me/${window.NostrTools.nip19.npubEncode(
+                profile.pubkey
+              )}" target="_blank">@${user.name}</a>`
+            : event || address
+            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
+                6
+              )}" target="_blank">${text}</a>`
+            : text;
+          return (await acc).replaceAll(text, augmentedReference);
         }, content);
         return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
       ${augmentedContent}`;
@@ -110,7 +122,9 @@
           limit: 50,
         })
       ).sort((a, b) => b.created_at - a.created_at);
-      document.body.innerHTML = posts.map(toHtml).join("\n");
+      document.body.innerHTML = (await Promise.all(posts.map(toHtml))).join(
+        "\n"
+      );
 
       localStorage.setItem(location.href, document.body.innerHTML);
 
@@ -127,7 +141,8 @@
         ],
         {
           async onevent(event) {
-            document.body.innerHTML = toHtml(event) + document.body.innerHTML;
+            document.body.innerHTML =
+              (await toHtml(event)) + document.body.innerHTML;
             localStorage.setItem(location.href, document.body.innerHTML);
           },
         }
