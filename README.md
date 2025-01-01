@@ -134,6 +134,8 @@ Publish personal log events (unofficial kind 1081 and kind 31081)
 
 ## Pin list
 
+Pin list (kind 10001) client
+
 [https://asaitoshiya.github.io/nostr-toybox/pin-list/](https://asaitoshiya.github.io/nostr-toybox/pin-list/)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -197,6 +199,8 @@ An ultra-simple [NIP-50](https://github.com/nostr-protocol/nips/blob/master/50.m
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Simple Broadcast
+
+A simple web-based tool for broadcasting events from relay to relay
 
 [https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/](https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/)
 
