@@ -19,17 +19,31 @@
     <script src="https://unpkg.com/nostr-tools@2.10.4/lib/nostr.bundle.js"></script>
     <script>
       const handleClick = async () => {
-        const pool = new window.NostrTools.SimplePool();
-        const events = await pool.querySync(["wss://relay.nostr.band/"], {
-          authors: author ? [author] : undefined,
-          kinds: kind.value ? [parseInt(kind.value, 10)] : undefined,
-          search: query.value,
-        });
-        pool.close(["wss://relay.nostr.band/"]);
+        const relay = await window.NostrTools.Relay.connect(
+          "wss://relay.nostr.band/"
+        );
+        const events = [];
+        const sub = relay.subscribe(
+          [
+            {
+              authors: author ? [author] : undefined,
+              kinds: kind.value ? [parseInt(kind.value, 10)] : undefined,
+              search: query.value,
+            },
+          ],
+          {
+            onevent(event) {
+              events.push(event);
+            },
+            oneose() {
+              sub.close();
 
-        result.innerText = events
-          .map((event) => JSON.stringify(event, null, 2))
-          .join("\n");
+              result.innerText = events
+                .map((event) => JSON.stringify(event, null, 2))
+                .join("\n");
+            },
+          }
+        );
       };
 
       const author = new URLSearchParams(location.search).get("author");
