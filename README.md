@@ -58,6 +58,8 @@ The day you joined Nostr
 
 ## media
 
+Display a list of images included in the event (kind 1)
+
 [https://asaitoshiya.github.io/nostr-toybox/media/](https://asaitoshiya.github.io/nostr-toybox/media/)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
