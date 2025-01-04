@@ -141,6 +141,8 @@
       };
 
       const handleClick = async () => {
+        bookmark.innerHTML = "";
+
         showNostrich();
 
         await loadBookmark();
