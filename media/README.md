@@ -1,5 +1,7 @@
 # media
 
+media is display a list of images included in the event (kind 1).
+
 https://asaitoshiya.github.io/nostr-toybox/media/
 
 <kbd>![screenshot.png](screenshot.png)</kbd>
