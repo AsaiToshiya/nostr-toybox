@@ -58,7 +58,7 @@ The day you joined Nostr
 
 ## media
 
-Display a list of images included in the event (kind 1)
+Display images included in the event (kind 1) as a list
 
 [https://asaitoshiya.github.io/nostr-toybox/media/](https://asaitoshiya.github.io/nostr-toybox/media/)
 
