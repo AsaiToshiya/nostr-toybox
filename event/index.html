@@ -118,6 +118,9 @@
       ];
 
       const handleClick = async () => {
+        json.innerText = "";
+        publishedTo.innerHTML = "";
+
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
         const pk = window.NostrTools.getPublicKey(sk);
 
@@ -154,6 +157,9 @@
       };
 
       const handleStringifyClick = async () => {
+        json.innerText = "";
+        publishedTo.innerHTML = "";
+
         const event = createEvent();
 
         json.innerText = JSON.stringify(event, null, 2);
