@@ -74,6 +74,8 @@ Nostr Dynamic Gateway
 
 ## nevent to naddr
 
+Convert nevent to naddr
+
 [https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/](https://asaitoshiya.github.io/nostr-toybox/nevent-to-naddr/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
