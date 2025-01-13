@@ -19,6 +19,8 @@
     <script src="https://unpkg.com/nostr-tools@2.10.4/lib/nostr.bundle.js"></script>
     <script>
       const handleClick = async () => {
+        result.innerText = "";
+
         const relay = await window.NostrTools.Relay.connect(
           "wss://relay.nostr.band/"
         );
