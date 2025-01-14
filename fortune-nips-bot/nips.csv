@@ -7,7 +7,7 @@ NIP-06: Basic key derivation from mnemonic seed phrase,06.md
 NIP-07: `window.nostr` capability for web browsers,07.md
 NIP-08: Handling Mentions,08.md
 NIP-09: Event Deletion Request,09.md
-NIP-10: Conventions for clients' use of `e` and `p` tags in text events,10.md
+NIP-10: Text Notes and Threads,10.md
 NIP-11: Relay Information Document,11.md
 NIP-13: Proof of Work,13.md
 NIP-14: Subject tag in text events,14.md
@@ -64,6 +64,7 @@ NIP-75: Zap Goals,75.md
 NIP-78: Application-specific data,78.md
 NIP-84: Highlights,84.md
 NIP-86: Relay Management API,86.md
+NIP-88: Polls,88.md
 NIP-89: Recommended Application Handlers,89.md
 NIP-90: Data Vending Machine,90.md
 NIP-92: Media Attachments,92.md
