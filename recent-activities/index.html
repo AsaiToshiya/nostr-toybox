@@ -9,6 +9,18 @@
     <script type="module">
       import { getRelays } from "../relay-list/relayList.js";
 
+      const eventFilters = [
+        {
+          authors: [pk],
+          limit: 50,
+        },
+        {
+          kinds: [9735],
+          "#P": [pk],
+          limit: 50,
+        },
+      ];
+
       const getKindDescription = (kind) => {
         const description = {
           0: "User Metadata",
@@ -205,19 +217,9 @@
         ).content
       );
       document.title = `${user.display_name || user.name} / recent-activities`;
-      const events = (
-        await querySync(pool, relays, [
-          {
-            authors: [pk],
-            limit: 50,
-          },
-          {
-            kinds: [9735],
-            "#P": [pk],
-            limit: 50,
-          },
-        ])
-      ).sort((a, b) => b.created_at - a.created_at);
+      const events = (await querySync(pool, relays, eventFilters)).sort(
+        (a, b) => b.created_at - a.created_at
+      );
       document.body.innerHTML = events
         .slice(0, 50)
         .map(getZapRequestIfZap)
@@ -229,19 +231,7 @@
         : Math.floor(Date.now() / 1000);
       pool.subscribeMany(
         relays,
-        [
-          {
-            authors: [pk],
-            limit: 50,
-            since,
-          },
-          {
-            kinds: [9735],
-            "#P": [pk],
-            limit: 50,
-            since,
-          },
-        ],
+        eventFilters.map((filter) => ({ ...filter, since })),
         {
           onevent(event) {
             document.body.innerHTML =
