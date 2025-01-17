@@ -9,18 +9,6 @@
     <script type="module">
       import { getRelays } from "../relay-list/relayList.js";
 
-      const eventFilters = [
-        {
-          authors: [pk],
-          limit: 50,
-        },
-        {
-          kinds: [9735],
-          "#P": [pk],
-          limit: 50,
-        },
-      ];
-
       const getKindDescription = (kind) => {
         const description = {
           0: "User Metadata",
@@ -206,6 +194,18 @@
            >
          </p>`);
       const pk = window.NostrTools.nip19.decode(npub).data;
+      const eventFilters = [
+        {
+          authors: [pk],
+          limit: 50,
+        },
+        {
+          kinds: [9735],
+          "#P": [pk],
+          limit: 50,
+        },
+      ];
+
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
       const user = JSON.parse(
