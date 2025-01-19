@@ -162,11 +162,15 @@ A command line tool to save posts as HTML
 
 ## recent-activities
 
+Display user's recent activities
+
 [https://asaitoshiya.github.io/nostr-toybox/recent-activities/](https://asaitoshiya.github.io/nostr-toybox/recent-activities/)
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
 ## recent-posts
+
+Display user's recent posts
 
 [https://asaitoshiya.github.io/nostr-toybox/recent-posts/](https://asaitoshiya.github.io/nostr-toybox/recent-posts/)
 
