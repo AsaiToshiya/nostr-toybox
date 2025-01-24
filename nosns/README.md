@@ -5,7 +5,7 @@ nosns is my personal note-taking client that combines micro-apps.
 
 ## License
 
-    Copyright (C) 2023  Asai Toshiya
+    Copyright (C) 2024  Asai Toshiya
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by

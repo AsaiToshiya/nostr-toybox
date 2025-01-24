@@ -7,7 +7,7 @@ nocomment Playground is a worthless playground for [nocomment](https://github.co
 
     MIT License
 
-    Copyright (c) 2023 Asai Toshiya
+    Copyright (c) 2024 Asai Toshiya
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
