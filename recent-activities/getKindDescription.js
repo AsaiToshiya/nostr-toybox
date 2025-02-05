@@ -70,6 +70,7 @@ export const getKindDescription = (kind) => {
     10063: "User server list",
     10096: "File storage server list",
     13194: "Wallet Info",
+    17375: "Cashu Wallet Event",
     21000: "Lightning Pub RPC",
     22242: "Client Authentication",
     23194: "Wallet Request",
@@ -117,7 +118,6 @@ export const getKindDescription = (kind) => {
     34235: "Video Event",
     34236: "Short-form Portrait Video Event",
     34550: "Community Definition",
-    37375: "Cashu Wallet Event",
     38383: "Peer-to-peer Order events",
   }[kind];
   return description
