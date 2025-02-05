@@ -43,7 +43,10 @@
         breaks: true,
       });
 
-      const toHtml = async (post) => {
+      const toHtml = async (event) => {
+        const post = event.kind == 6
+            ? JSON.parse(event.content)
+            : event;
         const nevent = window.NostrTools.nip19.neventEncode({
           id: post.id,
         });
@@ -118,7 +121,7 @@
       const posts = (
         await pool.querySync(relays, {
           authors: [pk],
-          kinds: [1, 1081],
+          kinds: [1, 6, 1081],
           limit: 50,
         })
       ).sort((a, b) => b.created_at - a.created_at);
@@ -133,7 +136,7 @@
         [
           {
             authors: [pk],
-            kinds: [1, 1081],
+            kinds: [1, 6, 1081],
             since: posts.length
               ? posts[0].created_at + 1
               : Math.floor(Date.now() / 1000),
