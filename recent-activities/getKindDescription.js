@@ -18,6 +18,8 @@ export const getKindDescription = (kind) => {
     16: "Generic Repost",
     17: "Reaction to a website",
     20: "Picture",
+    21: "Video Event",
+    22: "Short-form Portrait Video Event",
     40: "Channel Creation",
     41: "Channel Metadata",
     42: "Channel Message",
@@ -115,8 +117,6 @@ export const getKindDescription = (kind) => {
     31925: "Calendar Event RSVP",
     31989: "Handler recommendation",
     31990: "Handler information",
-    34235: "Video Event",
-    34236: "Short-form Portrait Video Event",
     34550: "Community Definition",
     38383: "Peer-to-peer Order events",
   }[kind];
