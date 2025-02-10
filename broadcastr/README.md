@@ -1,5 +1,7 @@
 # broadcastr
 
+broadcastr is an alternative to [leesalminen/nostr-broadcast](https://github.com/leesalminen/nostr-broadcast).
+
 
 ## License
 
