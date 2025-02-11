@@ -17,3 +17,8 @@ curl -O https://raw.githubusercontent.com/AsaiToshiya/learn-nostr/main/nip-49-pr
 ```bash
 pnpm build
 ```
+
+
+## License
+
+CC0 1.0. See `LICENSE.txt`.
