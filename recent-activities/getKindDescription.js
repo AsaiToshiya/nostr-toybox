@@ -15,6 +15,7 @@ export const getKindDescription = (kind) => {
     12: "Group Thread Reply",
     13: "Seal",
     14: "Direct Message",
+    15: "File Message",
     16: "Generic Repost",
     17: "Reaction to a website",
     20: "Picture",
