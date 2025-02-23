@@ -37,6 +37,12 @@
         <button onclick="handleCopyNip21Click()">copy NIP-21</button>
         <span id="copiedNip21" style="display: none">copied!</span>
       </p>
+      <p>
+        <button id="copyEvent" disabled onclick="handleCopyEventClick()">
+          copy event
+        </button>
+        <span id="copiedEvent" style="display: none">copied!</span>
+      </p>
       <p>event:</p>
       <pre id="event"></pre>
     </div>
@@ -60,11 +66,15 @@
 
       const handleCopyContentClick = () => copy(event.content, "copiedContent");
 
+      const handleCopyEventClick = () =>
+        copy(JSON.stringify(event, null, 2), "copiedEvent");
+
       const handleCopyNip19Click = () => copy(nip19, "copiedNip19");
 
       const handleCopyNip21Click = () => copy(`nostr:${nip19}`, "copiedNip21");
 
       window.handleCopyContentClick = handleCopyContentClick;
+      window.handleCopyEventClick = handleCopyEventClick;
       window.handleCopyNip19Click = handleCopyNip19Click;
       window.handleCopyNip21Click = handleCopyNip21Click;
 
@@ -104,6 +114,7 @@
           )}`);
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         copyContent.disabled = false;
+        copyEvent.disabled = false;
         document.querySelector("#event").innerText = JSON.stringify(
           event,
           null,
