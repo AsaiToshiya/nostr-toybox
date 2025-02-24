@@ -43,8 +43,6 @@
         </button>
         <span id="copiedEvent" style="display: none">copied!</span>
       </p>
-      <p>event:</p>
-      <pre id="event"></pre>
     </div>
 
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
@@ -115,11 +113,6 @@
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         copyContent.disabled = false;
         copyEvent.disabled = false;
-        document.querySelector("#event").innerText = JSON.stringify(
-          event,
-          null,
-          2
-        );
       })();
 
       njump.href = `https://njump.me/${nip19}`;
