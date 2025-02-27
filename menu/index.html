@@ -42,7 +42,6 @@
         <span id="copiedEvent" style="display: none">copied!</span>
       </p>
       <p><a id="njump">njump.me</a></p>
-      <p><a id="njumpRoot">njump.me (root)</a></p>
     </div>
 
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
@@ -103,13 +102,6 @@
         });
         pool.close(relays);
 
-        const root = event.tags.find(
-          (tag) => tag[0] == "e" && tag[3] == "root"
-        );
-        root &&
-          (njumpRoot.href = `https://njump.me/${window.NostrTools.nip19.neventEncode(
-            { id: root[1] }
-          )}`);
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         copyContent.disabled = false;
         copyEvent.disabled = false;
