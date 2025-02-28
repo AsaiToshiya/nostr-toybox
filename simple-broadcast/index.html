@@ -50,6 +50,11 @@
             .map((relay) => `<li>${relay.url}</li>`)
             .join(""));
       };
+
+      const params = new URLSearchParams(location.search);
+      params.forEach(
+        (value, key) => value && (document.getElementById(key).value = value)
+      );
     </script>
   </body>
 </html>
