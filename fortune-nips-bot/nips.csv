@@ -55,6 +55,7 @@ NIP-61: Nutzaps,61.md
 NIP-62: Request to Vanish,62.md
 NIP-64: Chess (Portable Game Notation),64.md
 NIP-65: Relay List Metadata,65.md
+NIP-66: Relay Discovery and Liveness Monitoring,66.md
 NIP-68: Picture-first feeds,68.md
 NIP-69: Peer-to-peer Order events,69.md
 NIP-70: Protected Events,70.md
