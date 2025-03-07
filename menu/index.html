@@ -21,6 +21,7 @@
       <p><a id="share">share</a></p>
       <p><a id="deleteEvent">delete</a></p>
       <p><a id="pin">pin</a></p>
+      <p><a id="broadcast">broadcast</a></p>
       <p>
         <button id="copyContent" disabled onclick="handleCopyContentClick()">
           copy content
@@ -101,12 +102,17 @@
 
       (async () => {
         const pool = new window.NostrTools.SimplePool();
+        pool.trackRelays = true;
         event = await pool.get(relays, {
           ids: [id],
         });
         pool.close(relays);
+        const seenOnRelays = pool.seenOn.get(id);
 
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
+        broadcast.href = `https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/?eventId=${id}&relaysFrom=${Array.from(
+          seenOnRelays
+        ).join(",")}`;
         copyContent.disabled = false;
         copyEvent.disabled = false;
       })();
