@@ -112,7 +112,9 @@
         deleteEvent.href = `https://asaitoshiya.github.io/nostr-toybox/event/?kind=5&e=${id}&k=${event.kind}`;
         broadcast.href = `https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/?eventId=${id}&relaysFrom=${Array.from(
           seenOnRelays
-        ).join(",")}`;
+        )
+          .map((relay) => relay.url)
+          .join(",")}`;
         copyContent.disabled = false;
         copyEvent.disabled = false;
       })();
