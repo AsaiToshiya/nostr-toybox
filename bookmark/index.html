@@ -104,6 +104,8 @@
       const showNostrich = () => (nostrich.style.display = "inline");
 
       const handleAddClick = async () => {
+        bookmark.innerHTML = "";
+
         showNostrich();
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
