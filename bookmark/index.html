@@ -153,6 +153,8 @@
       };
 
       const handleRemoveClick = async (eventId) => {
+        bookmark.innerHTML = "";
+
         showNostrich();
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
