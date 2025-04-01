@@ -6,6 +6,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
     <style>
       .markdown-body {
         box-sizing: border-box;
@@ -90,8 +94,14 @@
             : text;
           return (await acc).replaceAll(text, augmentedReference);
         }, content);
-        return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
-      ${augmentedContent}`;
+        return (
+          "      <h3>" +
+          (event.kind == 6
+            ? '<i class="fa fa-retweet" aria-hidden="true"></i> '
+            : "") +
+          `<a href="${url}" target="_blank">${dateTime}</a></h3>
+        ${augmentedContent}`
+        );
       };
 
       const npub = new URLSearchParams(location.search).get("npub");
