@@ -64,7 +64,7 @@
         media.innerHTML += medias
           .map((event) => {
             const media = event.tags.find(referenceImageTag)[1];
-            return `<p><a href="https://njump.me/${window.NostrTools.nip19.neventEncode(
+            return `<p><a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
               {
                 id: event.id,
               }
