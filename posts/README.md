@@ -67,7 +67,7 @@ available via `npm run-script`:
   build
     node index.js && mv -f index.html hashtag.html ./public && copyfiles -f ./node_modules/github-markdown-css/github-markdown.css ./public
   deploy
-    npm run build && npm run toc && vercel --prod
+    npm run build && npm run toc && cp -f robots.txt ./public && vercel --prod
   toc
     node toc.js && mv -f toc.html ./public
 
