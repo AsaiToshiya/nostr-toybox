@@ -90,7 +90,7 @@
             const date = new Date(event.created_at * 1000);
             const dateTime = date.toLocaleString();
             const content = marked.parse(event.content);
-            return `<h3><a href="https://njump.me/${window.NostrTools.nip19.neventEncode(
+            return `<h3><a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
               {
                 id: event.id,
               }
