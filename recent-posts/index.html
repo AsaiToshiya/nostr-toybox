@@ -98,6 +98,8 @@
           "      <h3>" +
           (event.kind == 6
             ? '<i class="fa fa-retweet" aria-hidden="true" style="color: #999;"></i> '
+            : event.tags.some(([t]) => t == "e")
+            ? '<i class="fa fa-reply" aria-hidden="true" style="color: #999;"></i> '
             : "") +
           `<a href="${url}" target="_blank">${dateTime}</a></h3>
         ${augmentedContent}`
