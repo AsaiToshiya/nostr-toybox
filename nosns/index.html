@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      iframe {
+        flex-grow: 1;
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+    </style>
     <title>nosns</title>
   </head>
   <body style="display: flex; flex-direction: column; height: 100%; margin: 0; padding: 0; width: 100%">
@@ -14,29 +22,13 @@
       <a href="javascript:openUrl('bookmark');">ブックマーク</a>
       <a href="javascript:openUrl('search');">検索</a>
     </div>
-    <iframe
-      id="recent"
-      src="https://asaitoshiya.github.io/nostr-toybox/recent-posts/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"
-      style="flex-grow: 1; margin: 0; padding: 0; border: none"
-    ></iframe>
-    <iframe id="all" src="https://notes.asaitoshiya.com/" style="flex-grow: 1; margin: 0; padding: 0; border: none"></iframe>
-    <iframe id="hashtag" src="https://notes.asaitoshiya.com/toc.html" style="flex-grow: 1; margin: 0; padding: 0; border: none"></iframe>
-    <iframe
-      id="media"
-      src="https://asaitoshiya.github.io/nostr-toybox/media/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38&contentonly"
-      style="flex-grow: 1; margin: 0; padding: 0; border: none"
-    ></iframe>
-    <iframe
-      id="bookmark"
-      src="https://asaitoshiya.github.io/nostr-toybox/bookmark/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"
-      style="flex-grow: 1; margin: 0; padding: 0; border: none"
-    ></iframe>
-    <iframe
-      id="search"
-      src="https://asaitoshiya.github.io/nostr-toybox/search/?author=0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a"
-      style="flex-grow: 1; margin: 0; padding: 0; border: none"
-    ></iframe>
-    <iframe id="post" src="https://asaitoshiya.github.io/nostr-toybox/poster/?relays=wss%3A%2F%2Frelay.damus.io%2Cwss%3A%2F%2Fnostr.bitcoiner.social%2Cwss%3A%2F%2Fnostr.oxtr.dev" style="flex-grow: 1; margin: 0; padding: 0; border: none"></iframe>
+    <iframe id="recent" src="https://asaitoshiya.github.io/nostr-toybox/recent-posts/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"></iframe>
+    <iframe id="all" src="https://notes.asaitoshiya.com/"></iframe>
+    <iframe id="hashtag" src="https://notes.asaitoshiya.com/toc.html"></iframe>
+    <iframe id="media" src="https://asaitoshiya.github.io/nostr-toybox/media/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38&contentonly"></iframe>
+    <iframe id="bookmark" src="https://asaitoshiya.github.io/nostr-toybox/bookmark/?npub=npub1pgh3nhq6rpte9sasxah36luewy54azfjjekrj7f45hwa69z35fdqfdrs38"></iframe>
+    <iframe id="search" src="https://asaitoshiya.github.io/nostr-toybox/search/?author=0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a"></iframe>
+    <iframe id="post" src="https://asaitoshiya.github.io/nostr-toybox/poster/?relays=wss%3A%2F%2Frelay.damus.io%2Cwss%3A%2F%2Fnostr.bitcoiner.social%2Cwss%3A%2F%2Fnostr.oxtr.dev"></iframe>
     <div style="text-align: right; margin: 8px">
       <a href="javascript:openUrl('post');">投稿</a>
     </div>
