@@ -2,6 +2,8 @@
 
 nosns is my personal note-taking client that combines micro-apps.
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
