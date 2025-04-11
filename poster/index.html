@@ -156,6 +156,9 @@
       };
 
       const handleClick = async () => {
+        document.querySelector("#event").innerText = "";
+        publishedTo.innerHTML = "";
+
         const event = await createEvent();
 
         const pool = new window.NostrTools.SimplePool();
@@ -183,6 +186,9 @@
       };
 
       const handleStringifyClick = async () => {
+        document.querySelector("#event").innerText = "";
+        publishedTo.innerHTML = "";
+
         const event = await createEvent();
 
         document.querySelector("#event").innerText = JSON.stringify(
