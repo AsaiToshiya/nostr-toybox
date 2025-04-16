@@ -22,30 +22,33 @@
       <p><a id="deleteEvent">delete</a></p>
       <p><a id="pin">pin</a></p>
       <p><a id="broadcast">broadcast</a></p>
-      <p>
-        <button id="copyContent" disabled onclick="handleCopyContentClick()">
-          copy content
-        </button>
-        <span id="copiedContent" style="display: none">copied!</span>
-      </p>
-      <p>
-        <button id="copyId" onclick="handleCopyIdClick()">copy ID</button>
-        <span id="copiedId" style="display: none">copied!</span>
-      </p>
-      <p>
-        <button onclick="handleCopyNip19Click()">copy NIP-19</button>
-        <span id="copiedNip19" style="display: none">copied!</span>
-      </p>
-      <p>
-        <button onclick="handleCopyNip21Click()">copy NIP-21</button>
-        <span id="copiedNip21" style="display: none">copied!</span>
-      </p>
-      <p>
-        <button id="copyEvent" disabled onclick="handleCopyEventClick()">
-          copy event
-        </button>
-        <span id="copiedEvent" style="display: none">copied!</span>
-      </p>
+      <details>
+        <summary>copy</summary>
+        <p>
+          <button id="copyContent" disabled onclick="handleCopyContentClick()">
+            copy content
+          </button>
+          <span id="copiedContent" style="display: none">copied!</span>
+        </p>
+        <p>
+          <button id="copyId" onclick="handleCopyIdClick()">copy ID</button>
+          <span id="copiedId" style="display: none">copied!</span>
+        </p>
+        <p>
+          <button onclick="handleCopyNip19Click()">copy NIP-19</button>
+          <span id="copiedNip19" style="display: none">copied!</span>
+        </p>
+        <p>
+          <button onclick="handleCopyNip21Click()">copy NIP-21</button>
+          <span id="copiedNip21" style="display: none">copied!</span>
+        </p>
+        <p>
+          <button id="copyEvent" disabled onclick="handleCopyEventClick()">
+            copy event
+          </button>
+          <span id="copiedEvent" style="display: none">copied!</span>
+        </p>
+      </details>
       <p><a id="snort">Snort</a></p>
       <p><a id="iris">iris</a></p>
       <p><a id="primal">Primal</a></p>
