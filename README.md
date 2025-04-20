@@ -122,7 +122,7 @@ Limited implementation of [`nreq`](https://github.com/nostr-protocol/nips/pull/8
 
 ## nsec encryption/decryption
 
-Encrypt/Decrypt the nsec with NIP-49
+Encrypt/Decrypt the nsec with [NIP-49](https://github.com/nostr-protocol/nips/blob/master/49.md)
 
 [https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/](https://asaitoshiya.github.io/nostr-toybox/nsec-encryption-decryption/dist/)
 
