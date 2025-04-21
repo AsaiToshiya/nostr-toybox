@@ -1,5 +1,7 @@
 # nsec encryption/decryption
 
+Encrypt/Decrypt the nsec with [NIP-49](https://github.com/nostr-protocol/nips/blob/master/49.md).
+
 ## セットアップ
 
 ```bash
