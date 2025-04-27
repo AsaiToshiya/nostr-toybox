@@ -4,6 +4,8 @@ poster is a simple web-based tool to post events (kind 1).
 
 https://asaitoshiya.github.io/nostr-toybox/poster/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
