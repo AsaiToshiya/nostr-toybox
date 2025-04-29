@@ -58,7 +58,7 @@ The day you joined Nostr
 
 ## media
 
-Display images included in the event (kind 1) as a list
+Displays images included in the event (kind 1) as a list
 
 [https://asaitoshiya.github.io/nostr-toybox/media/](https://asaitoshiya.github.io/nostr-toybox/media/)
 
@@ -130,7 +130,7 @@ Encrypt/Decrypt the nsec with [NIP-49](https://github.com/nostr-protocol/nips/bl
 
 ## Personal Log Publisher
 
-Publish personal log events (unofficial kind 1081 and kind 31081)
+Publishes personal log events (unofficial kind 1081 and kind 31081)
 
 [https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/](https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/)
 
@@ -162,7 +162,7 @@ A command line tool to save posts as HTML
 
 ## recent-activities
 
-Display user's recent activities
+Displays the user's recent activities
 
 [https://asaitoshiya.github.io/nostr-toybox/recent-activities/](https://asaitoshiya.github.io/nostr-toybox/recent-activities/)
 
@@ -170,7 +170,7 @@ Display user's recent activities
 
 ## recent-posts
 
-Display user's recent posts
+Displays the user's recent posts
 
 [https://asaitoshiya.github.io/nostr-toybox/recent-posts/](https://asaitoshiya.github.io/nostr-toybox/recent-posts/)
 
