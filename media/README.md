@@ -1,6 +1,6 @@
 # media
 
-media is display images included in the event (kind 1) as a list.
+media displays images included in the event (kind 1) as a list.
 
 https://asaitoshiya.github.io/nostr-toybox/media/
 
