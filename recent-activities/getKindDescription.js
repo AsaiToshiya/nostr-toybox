@@ -70,9 +70,11 @@ export const getKindDescription = (kind) => {
     10006: "Blocked relays list",
     10007: "Search relays list",
     10009: "User groups",
+    10012: "Favorite relays list",
     10013: "Private event relay list",
     10015: "Interests list",
     10019: "Nutzap Mint Recommendation",
+    10020: "Media follows",
     10030: "User emoji list",
     10050: "Relay list to receive DMs",
     10063: "User server list",
@@ -127,6 +129,9 @@ export const getKindDescription = (kind) => {
     31990: "Handler information",
     34550: "Community Definition",
     38383: "Peer-to-peer Order events",
+    39089: "Starter packs",
+    39092: "Media starter packs",
+    39701: "Web bookmarks",
   }[kind];
   return description
     ? description
