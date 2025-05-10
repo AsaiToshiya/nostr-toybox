@@ -1,6 +1,6 @@
 ![](featured.jpg)
 
-Nostr Toybox is a collection of micro-apps and POCs for Nostr.
+Nostr Toybox is a collection of my micro-apps and POCs for Nostr.
 
 ## bookmark
 
