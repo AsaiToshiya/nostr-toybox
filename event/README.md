@@ -4,6 +4,8 @@ event is a web-based tool to publish events.
 
 https://asaitoshiya.github.io/nostr-toybox/event/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
