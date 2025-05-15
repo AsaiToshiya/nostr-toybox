@@ -2,6 +2,8 @@
 
 nocomment Playground is a worthless playground for [nocomment](https://github.com/fiatjaf/nocomment).
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
