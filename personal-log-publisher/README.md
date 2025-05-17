@@ -4,6 +4,8 @@ Personal Log Publisher is to publish personal log events (unofficial kind 1081 a
 
 https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
