@@ -4,6 +4,8 @@ Pin list (kind 10001) client.
 
 https://asaitoshiya.github.io/nostr-toybox/pin-list/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
