@@ -4,6 +4,8 @@ recent-activities displays the user's recent activities.
 
 https://asaitoshiya.github.io/nostr-toybox/recent-activities/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
