@@ -4,6 +4,8 @@ broadcastr is an ultra-simple [NIP-50](https://github.com/nostr-protocol/nips/bl
 
 https://asaitoshiya.github.io/nostr-toybox/search/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
