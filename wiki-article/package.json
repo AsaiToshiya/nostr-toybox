@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "asciidoctor": "^3.0.4",
-    "nostr-tools": "^2.10.4",
+    "nostr-tools": "^2.15.0",
     "vite-plugin-singlefile": "^2.0.3"
   }
 }
