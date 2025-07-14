@@ -48,9 +48,7 @@
       });
 
       const toHtml = async (event) => {
-        const post = event.kind == 6
-            ? JSON.parse(event.content)
-            : event;
+        const post = event.kind == 6 ? JSON.parse(event.content) : event;
         const nevent = window.NostrTools.nip19.neventEncode({
           id: post.id,
         });
