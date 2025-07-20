@@ -4,6 +4,8 @@ recent-posts displays the user's recent posts.
 
 https://asaitoshiya.github.io/nostr-toybox/recent-posts/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
