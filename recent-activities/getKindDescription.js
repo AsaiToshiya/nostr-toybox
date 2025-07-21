@@ -122,6 +122,7 @@ export const getKindDescription = (kind) => {
     30818: "Wiki article",
     30819: "Redirects",
     31081: "Personal Log Metadata",
+    31234: "Draft Event",
     31890: "Feed",
     31922: "Date-Based Calendar Event",
     31923: "Time-Based Calendar Event",
