@@ -114,6 +114,7 @@ export const getKindDescription = (kind) => {
     30267: "App curation sets",
     30311: "Live Event",
     30312: "Interactive Room",
+    30313: "Conference Event",
     30315: "User Statuses",
     30402: "Classified Listing",
     30403: "Draft Classified Listing",
