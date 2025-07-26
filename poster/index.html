@@ -24,6 +24,8 @@
       <input id="encryptionNsec" type="text" size="50" /><br />
       content warning:
       <input id="contentWarning" type="checkbox" /><br />
+      detect hashtags:
+      <input id="detectHashtags" type="checkbox" checked /><br />
     </details>
     nsec:
     <input id="nsec" type="text" size="50" /><br />
@@ -121,7 +123,7 @@
           ...createEventTags(content.value),
           ...createPubkeyTags(content.value),
           ...extractReferenceTags(content.value),
-          ...extractHashtagTags(content.value),
+          ...(detectHashtags.checked ? extractHashtagTags(content.value) : []),
           ...(await createReplyTags(nip19.value)),
           ...(encryptionNsec.value ? [["encrypted"]] : []),
           ...(contentWarning.checked ? [["content-warning"]] : []),
