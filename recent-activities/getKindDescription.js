@@ -134,6 +134,8 @@ export const getKindDescription = (kind) => {
     31989: "Handler recommendation",
     31990: "Handler information",
     34550: "Community Definition",
+    38172: "Cashu Mint Announcement",
+    38173: "Fedimint Announcement",
     38383: "Peer-to-peer Order events",
     39089: "Starter packs",
     39092: "Media starter packs",
