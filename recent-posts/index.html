@@ -134,7 +134,7 @@
       const posts = (
         await pool.querySync(relays, {
           authors: [pk],
-          kinds: [1, 6, 1081],
+          kinds: [1, 6],
           limit: 50,
         })
       ).sort((a, b) => b.created_at - a.created_at);
@@ -149,7 +149,7 @@
         [
           {
             authors: [pk],
-            kinds: [1, 6, 1081],
+            kinds: [1, 6],
             since: posts.length
               ? posts[0].created_at + 1
               : Math.floor(Date.now() / 1000),
