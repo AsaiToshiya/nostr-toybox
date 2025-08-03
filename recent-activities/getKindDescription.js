@@ -89,6 +89,8 @@ export const getKindDescription = (kind) => {
     22242: "Client Authentication",
     23194: "Wallet Request",
     23195: "Wallet Response",
+    23196: "Wallet Notification (for backwards compatibility with NIP-04)",
+    23197: "Wallet Notification",
     24133: "Nostr Connect",
     24242: "Blobs stored on mediaservers",
     27235: "HTTP Auth",
