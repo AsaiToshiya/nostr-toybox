@@ -6,6 +6,8 @@ https://asaitoshiya.github.io/nostr-toybox/media/
 
 <kbd>![screenshot.png](screenshot.png)</kbd>
 
+Nostrich icon by [@SovrynMatt](https://github.com/SovrynMatt/Nostr-Website-Button-Design).
+
 
 ## License
 
