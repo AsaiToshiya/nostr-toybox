@@ -2,6 +2,8 @@
 
 Encrypt/Decrypt the nsec with [NIP-49](https://github.com/nostr-protocol/nips/blob/master/49.md).
 
+Nostrich icon by [@SovrynMatt](https://github.com/SovrynMatt/Nostr-Website-Button-Design).
+
 ## セットアップ
 
 ```bash
