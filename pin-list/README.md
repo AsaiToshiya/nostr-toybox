@@ -6,6 +6,8 @@ https://asaitoshiya.github.io/nostr-toybox/pin-list/
 
 <kbd>![screenshot.png](screenshot.png)</kbd>
 
+Nostrich icon by [@SovrynMatt](https://github.com/SovrynMatt/Nostr-Website-Button-Design).
+
 
 ## License
 
@@ -23,3 +25,4 @@ https://asaitoshiya.github.io/nostr-toybox/pin-list/
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
