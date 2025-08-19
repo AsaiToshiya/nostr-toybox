@@ -83,6 +83,8 @@ export const getKindDescription = (kind) => {
     10096: "File storage server list",
     10166: "Relay Monitor Announcement",
     10312: "Room Presence",
+    10377: "Proxy Announcement",
+    11111: "Transport Method Announcement",
     13194: "Wallet Info",
     17375: "Cashu Wallet Event",
     21000: "Lightning Pub RPC",
