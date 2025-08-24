@@ -41,6 +41,11 @@
     /><br />
     <button onclick="handleClick()">投稿</button>
     <button onclick="handleStringifyClick()">stringify (not post)</button><br />
+    <img
+      id="nostrich"
+      src="nostrich.gif"
+      style="display: none; height: 1.3em; max-height: 1.3em"
+    />
     event:
     <pre id="event"></pre>
     published to:
@@ -160,9 +165,15 @@
         ).map((url) => ["r", url]);
       };
 
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
       const handleClick = async () => {
         document.querySelector("#event").innerText = "";
         publishedTo.innerHTML = "";
+
+        showNostrich();
 
         const event = await createEvent();
 
@@ -192,6 +203,8 @@
         encryptionNsec.value = "";
         contentWarning.checked = false;
         detectHashtags.checked = true;
+
+        hideNostrich();
       };
 
       const handleStringifyClick = async () => {
