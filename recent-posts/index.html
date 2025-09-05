@@ -48,7 +48,16 @@
       });
 
       const toHtml = async (event) => {
-        const post = event.kind == 6 ? JSON.parse(event.content) : event;
+        const post =
+          event.kind == 6
+            ? event.content == ""
+              ? await pool.get(relays, {
+                  ids: event.tags
+                    .filter((tag) => tag[0] == "e")
+                    .map((tag) => tag[1]),
+                })
+              : JSON.parse(event.content)
+            : event;
         const nevent = window.NostrTools.nip19.neventEncode({
           id: post.id,
         });
