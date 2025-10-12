@@ -22,6 +22,7 @@
       <p><a id="deleteEvent">delete</a></p>
       <p><a id="pin">pin</a></p>
       <p><a id="broadcast">broadcast</a></p>
+      <p><a id="qr" disabled>qr</a></p>
       <details>
         <summary>copy</summary>
         <p>
@@ -131,6 +132,8 @@
           .join(",")}`;
         copyContent.disabled = false;
         copyEvent.disabled = false;
+        qr.href = `https://asaitoshiya.github.io/text2qr/?text=${JSON.stringify(event)}`;
+        qr.disabled = false;
       })();
 
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
