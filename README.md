@@ -184,6 +184,12 @@ A library to get the relay list well
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## repost
+
+[https://asaitoshiya.github.io/nostr-toybox/repost/](https://asaitoshiya.github.io/nostr-toybox/repost/)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## req
 
 A simple web-based tool to request Nostr events

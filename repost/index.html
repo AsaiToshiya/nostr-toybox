@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>repost</title>
+  </head>
+  <body>
+    <h1>repost</h1>
+    nevent:
+    <input id="nevent" type="text" size="50" /><br />
+    nsec:
+    <input id="nsec" type="text" size="50" /><br />
+    <button onclick="handleClick()">repost</button><br />
+    published to:
+    <ul id="publishedTo"></ul>
+    <img
+      id="nostrich"
+      src="nostrich.gif"
+      style="display: none; height: 1.3em; max-height: 1.3em"
+    />
+
+    <script src="https://unpkg.com/nostr-tools@2.17.0/lib/nostr.bundle.js"></script>
+    <script type="module">
+      import { getRelays } from "../relay-list/relayList.js";
+
+      const relaysFrom = [
+        "wss://nos.lol",
+        "wss://nostr.bitcoiner.social",
+        "wss://nostr.mom",
+        "wss://relay.damus.io",
+        "wss://relay.nostr.bg",
+        "wss://nostr.oxtr.dev",
+      ];
+
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
+      const handleClick = async () => {
+        publishedTo.innerHTML = "";
+
+        showNostrich();
+
+        const pool = new window.NostrTools.SimplePool();
+        pool.trackRelays = true;
+        const sk = window.NostrTools.nip19.decode(nsec.value).data;
+        const pk = window.NostrTools.getPublicKey(sk);
+        const relays = await getRelays(pool, pk);
+
+        const eventId = window.NostrTools.nip19.decode(nevent.value).data.id;
+        const event = await pool.get(relaysFrom, {
+          ids: [eventId],
+        });
+        const repostEvent = window.NostrTools.finalizeEvent(
+          {
+            kind: 6,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ["e", eventId],
+              ["p", event.pubkey],
+            ],
+          },
+          sk
+        );
+
+        await Promise.allSettled(pool.publish(relays, repostEvent));
+        const toRelays = pool.seenOn.get(repostEvent.id);
+        toRelays &&
+          (publishedTo.innerHTML = Array.from(toRelays)
+            .map((relay) => `<li>${relay.url}</li>`)
+            .join(""));
+
+        hideNostrich();
+      };
+
+      window.handleClick = handleClick;
+
+      const params = new URLSearchParams(location.search);
+      nevent.value = params.get("nevent");
+    </script>
+  </body>
+</html>
