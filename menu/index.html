@@ -16,6 +16,7 @@
     </div>
     <div id="content">
       <p><a id="reply">reply</a></p>
+      <p><a id="repost">repost</a></p>
       <p><a id="quoteReply">quote reply</a></p>
       <p><a id="bookmark">bookmark</a></p>
       <p><a id="share">share</a></p>
@@ -137,6 +138,7 @@
       })();
 
       reply.href = `https://asaitoshiya.github.io/nostr-toybox/poster/?nip19=${nevent}`;
+      repost.href = `https://asaitoshiya.github.io/nostr-toybox/repost/?nevent=${nevent}`;
       quoteReply.href =
         "https://asaitoshiya.github.io/nostr-toybox/poster/?content=" +
         encodeURIComponent(`
