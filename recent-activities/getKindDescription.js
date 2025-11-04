@@ -46,6 +46,8 @@ export const getKindDescription = (kind) => {
     1311: "Live Chat Message",
     1337: "Code Snippet",
     1617: "Patches",
+    1618: "Pull Requests",
+    1619: "Pull Request Updates",
     1621: "Issues",
     1622: "Replies",
     1971: "Problem Tracker",
