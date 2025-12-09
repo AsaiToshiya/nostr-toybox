@@ -41,6 +41,9 @@
     <label for="reorder">reorder on client</label><br />
     event:<br />
     <button id="copy" disabled onclick="handleCopyClick()">copy</button>
+    <div id="nostrich" style="display: none">
+      <img src="nostrich.gif" style="height: 1.3em; max-height: 1.3em" /><br />
+    </div>
     <span id="copied" style="display: none">copied!</span>
     <pre id="event"></pre>
 
@@ -73,6 +76,8 @@
         [...document.querySelectorAll(".relay")]
           .filter((element) => element.value)
           .map((element) => element.value);
+
+      const hideNostrich = () => (nostrich.style.display = "none");
 
       const makeFilter = () => {
         const ids = normalizeElementValue($("ids")).map(
@@ -116,6 +121,8 @@
       const normalizeElementValue = (element) =>
         element.value.split(",").filter((value) => value);
 
+      const showNostrich = () => (nostrich.style.display = "inline");
+
       const handleChange = (event) => {
         const input = event.target;
         const relays = document.querySelectorAll(".relay");
@@ -125,10 +132,12 @@
 
       const handleClick = async () => {
         copy.disabled = true;
+        showNostrich();
         const pool = new window.NostrTools.SimplePool();
         const event = await pool.get(getRelays(), makeFilter());
         $("event").innerText = JSON.stringify(event, null, 2);
         copy.disabled = false;
+        hideNostrich();
       };
 
       const handleCopyClick = () =>
@@ -140,6 +149,7 @@
 
       const handleListClick = async () => {
         copy.disabled = true;
+        showNostrich();
         const pool = new window.NostrTools.SimplePool();
         const events = await pool.list(getRelays(), [makeFilter()]);
         $("event").innerText = JSON.stringify(
@@ -150,6 +160,7 @@
           2
         );
         copy.disabled = false;
+        hideNostrich();
       };
 
       defaultRelays.forEach((url) => addRelay(url));
