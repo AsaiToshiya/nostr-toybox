@@ -41,10 +41,11 @@
     <label for="reorder">reorder on client</label><br />
     event:<br />
     <button id="copy" disabled onclick="handleCopyClick()">copy</button>
+    <span id="copied" style="display: none">copied!</span>
     <div id="nostrich" style="display: none">
+      <br />
       <img src="nostrich.gif" style="height: 1.3em; max-height: 1.3em" /><br />
     </div>
-    <span id="copied" style="display: none">copied!</span>
     <pre id="event"></pre>
 
     <script src="https://unpkg.com/nostr-tools@1.17.0/lib/nostr.bundle.js"></script>
