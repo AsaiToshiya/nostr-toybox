@@ -50,7 +50,7 @@
             kind: 1081,
             created_at: Math.floor(Date.now() / 1000),
             tags: [
-              ["i", `#${keyHashTag.toLowerCase()}`],
+              ["i", keyHashTag.toLowerCase()],
               ...(await createTags(note)),
             ],
             content: note,
