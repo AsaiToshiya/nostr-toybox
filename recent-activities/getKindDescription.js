@@ -21,6 +21,7 @@ export const getKindDescription = (kind) => {
     20: "Picture",
     21: "Video Event",
     22: "Short-form Portrait Video Event",
+    24: "Public Message",
     30: "internal reference",
     31: "external web reference",
     32: "hardcopy reference",
