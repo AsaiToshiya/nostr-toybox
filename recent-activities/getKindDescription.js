@@ -115,6 +115,7 @@ export const getKindDescription = (kind) => {
     30003: "Bookmark sets",
     30004: "Curation sets",
     30005: "Video sets",
+    30006: "Picture sets",
     30007: "Kind mute sets",
     30008: "Profile Badges",
     30009: "Badge Definition",
