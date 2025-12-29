@@ -37,6 +37,10 @@
     <button onclick="handleClick()">publish</button>
     <button onclick="handleStringifyClick()">stringify (not publish)</button
     ><br />
+    <div id="nostrich" style="display: none">
+      <br />
+      <img src="nostrich.gif" style="height: 1.3em; max-height: 1.3em" /><br />
+    </div>
     event:
     <pre id="event"></pre>
 
@@ -132,8 +136,13 @@
         ).map((url) => ["r", url]);
       };
 
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
       const handleClick = async () => {
         document.querySelector("#event").innerText = "";
+        showNostrich();
 
         const pool = new window.NostrTools.SimplePool();
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
@@ -161,6 +170,7 @@
         title.value = "";
         description.value = "";
         note.value = "";
+        hideNostrich();
       };
 
       const handleLogClick = () => {
