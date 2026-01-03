@@ -6,6 +6,8 @@ https://asaitoshiya.github.io/nostr-toybox/personal-log-publisher/
 
 <kbd>![screenshot.png](screenshot.png)</kbd>
 
+Nostrich icon by [@SovrynMatt](https://github.com/SovrynMatt/Nostr-Website-Button-Design).
+
 
 ## License
 
