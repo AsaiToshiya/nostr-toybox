@@ -15,11 +15,21 @@
     <button onclick="handleClick()">search</button><br />
     result:
     <pre id="result"></pre>
+    <img
+      id="nostrich"
+      src="nostrich.gif"
+      style="display: none; height: 1.3em; max-height: 1.3em"
+    />
 
     <script src="https://unpkg.com/nostr-tools@2.10.4/lib/nostr.bundle.js"></script>
     <script>
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
       const handleClick = async () => {
         result.innerText = "";
+        showNostrich();
 
         const relay = await window.NostrTools.Relay.connect(
           "wss://relay.nostr.band/"
@@ -43,6 +53,7 @@
               result.innerText = events
                 .map((event) => JSON.stringify(event, null, 2))
                 .join("\n");
+              hideNostrich();
             },
           }
         );
