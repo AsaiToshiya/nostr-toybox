@@ -151,6 +151,8 @@ export const getKindDescription = (kind) => {
     31925: "Calendar Event RSVP",
     31989: "Handler recommendation",
     31990: "Handler information",
+    34235: "Addressable Video Event",
+    34236: "Addressable Short Video Event",
     34550: "Community Definition",
     38172: "Cashu Mint Announcement",
     38173: "Fedimint Announcement",
