@@ -59,6 +59,10 @@
     <button onclick="handleClick()">publish</button>
     <button onclick="handleStringifyClick()">stringify (not publish)</button
     ><br />
+    <div id="nostrich" style="display: none">
+      <br />
+      <img src="nostrich.gif" style="height: 1.3em; max-height: 1.3em" /><br />
+    </div>
     JSON:
     <pre id="json"></pre>
     published to:
@@ -117,9 +121,14 @@
         ...createTag("patches", patches),
       ];
 
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
       const handleClick = async () => {
         json.innerText = "";
         publishedTo.innerHTML = "";
+        showNostrich();
 
         const sk = window.NostrTools.nip19.decode(nsec.value).data;
         const pk = window.NostrTools.getPublicKey(sk);
@@ -140,6 +149,7 @@
           (publishedTo.innerHTML = Array.from(toRelays)
             .map((relay) => `<li>${relay.url}</li>`)
             .join(""));
+        hideNostrich();
       };
 
       const handleRChange = (event) => {
