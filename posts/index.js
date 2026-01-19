@@ -112,6 +112,7 @@ const generateHtml = (content) =>
 
         img {
           max-width: 600px;
+          display: block;
         }
 
         @media screen and (max-width: 600px) {
