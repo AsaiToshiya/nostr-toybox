@@ -68,6 +68,7 @@ NIP-77: Negentropy Syncing,77.md
 NIP-78: Application-specific data,78.md
 NIP-7D: Threads,7D.md
 NIP-84: Highlights,84.md
+NIP-85: Trusted Assertions,85.md
 NIP-86: Relay Management API,86.md
 NIP-87: Ecash Mint Discoverability,87.md
 NIP-88: Polls,88.md
