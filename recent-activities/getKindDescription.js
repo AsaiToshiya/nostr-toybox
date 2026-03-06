@@ -80,6 +80,7 @@ export const getKindDescription = (kind) => {
     10006: "Blocked relays list",
     10007: "Search relays list",
     10009: "User groups",
+    10011: "External Identities",
     10012: "Favorite relays list",
     10013: "Private event relay list",
     10015: "Interests list",
