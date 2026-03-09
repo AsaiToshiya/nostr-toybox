@@ -72,15 +72,16 @@
 
       const pool = new window.NostrTools.SimplePool();
       const relays = await getRelays(pool, pk);
-      const user = JSON.parse(
-        (
-          await pool.get(relays, {
-            authors: [pk],
-            kinds: [0],
-          })
-        ).content
-      );
-      document.title = `${user.display_name || user.name} / recent-activities`;
+      const userMetadata = (
+        await pool.get(relays, {
+          authors: [pk],
+          kinds: [0],
+        })
+      )?.content;
+      const user = userMetadata && JSON.parse(userMetadata);
+      document.title = `${
+        user ? user.display_name || user.name : npub
+      } / recent-activities`;
       const events = (await querySync(pool, relays, eventFilters)).sort(
         (a, b) => b.created_at - a.created_at
       );
