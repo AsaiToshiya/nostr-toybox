@@ -33,10 +33,10 @@ npm install
 
 |オプション|説明|
 |---|---|
-|-date, --d <date&gt;|タイムラインを取得する日付。YYYY-MM-DD 形式。デフォルトはスクリプトの実行日。|
-|-exclude, --e <uses&gt;|タイムラインから除外するユーザー。カンマ区切りの npub または name。|
-|-timeout, --t <milliseconds&gt;|リレーからの応答を待機する時間。ミリ秒。デフォルトは 180000 ミリ秒 (3 分)。|
-|-sort, --s <order&gt;|タイムラインの並べ替え。asc (昇順) または desc (降順)。デフォルトは desc。|
+|--date, -d <date&gt;|タイムラインを取得する日付。YYYY-MM-DD 形式。デフォルトはスクリプトの実行日。|
+|--exclude, -e <uses&gt;|タイムラインから除外するユーザー。カンマ区切りの npub または name。|
+|--timeout, -t <milliseconds&gt;|リレーからの応答を待機する時間。ミリ秒。デフォルトは 180000 ミリ秒 (3 分)。|
+|--sort, -s <order&gt;|タイムラインの並べ替え。asc (昇順) または desc (降順)。デフォルトは desc。|
 
 ## ライセンス
 
