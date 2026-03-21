@@ -23,6 +23,10 @@
       placeholder="wss://relay.example.com,..."
     /><br />
     <button onclick="handleClick()">broadcast</button><br />
+    <div id="nostrich" style="display: none">
+      <br />
+      <img src="nostrich.gif" style="height: 1.3em; max-height: 1.3em" /><br />
+    </div>
     event:
     <pre id="event"></pre>
     published to:
@@ -30,7 +34,13 @@
 
     <script src="https://unpkg.com/nostr-tools@2.10.4/lib/nostr.bundle.js"></script>
     <script>
+      const hideNostrich = () => (nostrich.style.display = "none");
+
+      const showNostrich = () => (nostrich.style.display = "inline");
+
       const handleClick = async () => {
+        showNostrich();
+
         const pool = new window.NostrTools.SimplePool();
         const event = await pool.get(relaysFrom.value.split(","), {
           ids: [eventId.value],
@@ -49,6 +59,7 @@
           (publishedTo.innerHTML = Array.from(toRelays)
             .map((relay) => `<li>${relay.url}</li>`)
             .join(""));
+        hideNostrich();
       };
 
       const params = new URLSearchParams(location.search);
