@@ -4,6 +4,8 @@ Simple Broadcast is a simple web-based tool for broadcasting events from relay t
 
 https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 Nostrich icon by [@SovrynMatt](https://github.com/SovrynMatt/Nostr-Website-Button-Design).
 
 
