@@ -4,6 +4,8 @@ note-to-text is a web-based tool to turn the `content` of an event (kind 1) into
 
 https://asaitoshiya.github.io/nostr-toybox/note-to-text/
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 
 ## License
 
