@@ -90,7 +90,7 @@ export const getKindDescription = (kind) => {
     10040: "Trusted Service Providers",
     10050: "Relay list to receive DMs",
     10051: "KeyPackage Relays List",
-    10063: "User server list",
+    10063: "Blossom servers",
     10096: "File storage server list",
     10166: "Relay Monitor Announcement",
     10312: "Room Presence",
