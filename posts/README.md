@@ -21,12 +21,20 @@ npm install
 #### ログイン
 
 ```bash
-$ node ./node_modules/vercel/dist/index.js login to.asai.60@gmail.com
-Vercel CLI 28.15.4
-We sent an email to to.asai.60@gmail.com. Please follow the steps provided inside it and make sure the security code matches Snowy Vampire Bat.
-> Success! Email authentication complete for to.asai.60@gmail.com
-Congratulations! You are now logged in. In order to deploy something, run `vercel`.
-💡  Connect your Git Repositories to deploy every branch push automatically (https://vercel.link/git).
+$ node ./node_modules/vercel/dist/index.js login
+> NOTE: The Vercel CLI now collects telemetry regarding usage of the CLI.
+> This information is used to shape the CLI roadmap and prioritize features.
+> You can learn more, including how to opt-out if you'd not like to participate in this program, by visiting the following URL:
+> https://vercel.com/docs/cli/about-telemetry
+>
+  Visit https://vercel.com/oauth/device?user_code=FDKC-ZZSJ
+
+  Congratulations! You are now signed in.
+
+  To deploy something, run `vercel`.
+
+  💡 To deploy every commit automatically,
+  connect a Git Repository (vercel.link/git (https://vercel.link/git)).
 ```
 
 #### プロジェクトの作成
@@ -41,12 +49,14 @@ Vercel CLI 28.15.4
 
 ```bash
 $ node ./node_modules/vercel/dist/index.js link
-Vercel CLI 28.20.0
-? Set up “~\nostr-toybox\posts”? [Y/n] y
-? Which scope should contain your project? asaitoshiya
-? Link to existing project? [y/N] y
-? What’s the name of your existing project? vercel-nostr-posts
-✅  Linked to asaitoshiya/vercel-nostr-posts (created .vercel)
+? Set up “~/bin/nostr-toybox/posts”? yes
+? Which scope should contain your project? asaitoshiya's projects
+? Link to existing project? yes
+? Which existing project do you want to link? vercel-nostr-posts
+✅  Linked to asaitoshiyas-projects/vercel-nostr-posts (created .vercel)
+? Would you like to pull environment variables now? yes
+> Downloading `development` Environment Variables for asaitoshiyas-projects/vercel-nostr-posts
+✅  Created .env.local file and added it to .gitignore [197ms]
 ```
 
 ### crontab
