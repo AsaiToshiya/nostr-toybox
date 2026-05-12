@@ -19,7 +19,9 @@
     <div id="headingAndInput">
       <h1>media</h1>
       npub:
-      <input id="npub" type="text" size="50" />
+      <input id="npub" type="text" size="50" /><br />
+      #t:
+      <input id="t" type="text" /><br />
       <button onclick="handleClick()">load</button>
     </div>
     <div id="media"></div>
@@ -46,6 +48,7 @@
           await pool.querySync(relays, {
             authors: [pk],
             kinds: [1],
+            "#t": t.value ? [t.value] : undefined,
             until,
             limit: 200,
           })
@@ -104,6 +107,7 @@
         params.has("contentonly") &&
         (headingAndInput.style.display = "none");
       npub.value = params.get("npub");
+      t.value = params.get("t");
       npub.value && handleClick();
     </script>
   </body>
