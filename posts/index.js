@@ -207,7 +207,7 @@ const posts = await Promise.all(
     return {
       ...post,
       content: await references.reduce(async (acc, obj) => {
-        const { text, profile } = obj;
+        const { text, profile, event, address } = obj;
         const userJson =
           profile &&
           (
@@ -222,7 +222,11 @@ const posts = await Promise.all(
           ? `<a href="https://njump.me/${nip19.npubEncode(profile.pubkey)}" target="_blank">@${
               user.name
             }</a>`
-          : text;
+          : event || address
+            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
+                6,
+              )}" target="_blank">${text}</a>`
+            : text;
         return (await acc).replaceAll(text, augmentedReference);
       }, post.content),
     };
