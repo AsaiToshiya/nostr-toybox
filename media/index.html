@@ -12,6 +12,14 @@
           max-width: 100%;
         }
       }
+
+      #media {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 10px;
+        justify-items: center;
+        align-items: center;
+      }
     </style>
     <title>media</title>
   </head>
@@ -108,6 +116,8 @@
         (headingAndInput.style.display = "none");
       npub.value = params.get("npub");
       t.value = params.get("t");
+      params.has("columns") &&
+        (media.style.gridTemplateColumns = `repeat(${Number(params.get("columns")) || 1}, 1fr)`);
       npub.value && handleClick();
     </script>
   </body>
