@@ -69,11 +69,7 @@
         media.innerHTML += medias
           .map((event) => {
             const media = event.tags.find(referenceImageTag)[1];
-            return `<p><a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
-              {
-                id: event.id,
-              }
-            )}" target="_blank"><img src="${media}" loading="lazy"></a></p>`;
+            return toHtml(event.id, media);
           })
           .join("\n");
 
@@ -95,6 +91,13 @@
       const showLoadMore = () => (loadMore.style.display = "inline-block");
 
       const showNostrich = () => (nostrich.style.display = "inline");
+
+      const toHtml = (id, media) =>
+        `<p><a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
+          {
+            id,
+          },
+        )}" target="_blank"><img src="${media}" loading="lazy"></a></p>`;
 
       const handleClick = async () => {
         media.innerHTML = "";
