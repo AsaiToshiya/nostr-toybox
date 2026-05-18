@@ -67,10 +67,14 @@
         );
 
         media.innerHTML += medias
-          .map((event) => {
-            const media = event.tags.find(referenceImageTag)[1];
-            return toHtml(event.id, media);
-          })
+          .map((event) =>
+            (isAll
+              ? event.tags.filter(referenceImageTag)
+              : [event.tags.find(referenceImageTag)]
+            )
+              .map((tag) => toHtml(event.id, tag[1]))
+              .join("\n"),
+          )
           .join("\n");
 
         loadMore.onclick = async () => {
@@ -121,6 +125,7 @@
       t.value = params.get("t");
       params.has("columns") &&
         (media.style.gridTemplateColumns = `repeat(${Number(params.get("columns")) || 1}, 1fr)`);
+      const isAll = params.has("all");
       npub.value && handleClick();
     </script>
   </body>
