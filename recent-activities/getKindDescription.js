@@ -43,6 +43,7 @@ export const getKindDescription = (kind) => {
     1081: "Personal Log",
     1111: "Comment",
     1222: "Voice Message",
+    1234: "Draft Checkpoint",
     1244: "Voice Message Comment",
     1311: "Live Chat Message",
     1337: "Code Snippet",
