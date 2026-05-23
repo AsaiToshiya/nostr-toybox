@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,7 +63,7 @@
         ).sort((a, b) => b.created_at - a.created_at);
 
         const medias = events.filter((event) =>
-          event.tags.some(referenceImageTag)
+          event.tags.some(referenceImageTag),
         );
 
         media.innerHTML += medias
