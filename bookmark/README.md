@@ -1,6 +1,6 @@
 # bookmark
 
-bookmark is a client for bookmarking events.
+bookmark is a client for a bookmark list (kind 10003).
 
 https://asaitoshiya.github.io/nostr-toybox/bookmark/
 

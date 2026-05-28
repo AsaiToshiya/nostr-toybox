@@ -4,7 +4,7 @@ Nostr Toybox is a collection of my micro-apps and POCs for [Nostr](https://git
 
 ## bookmark
 
-A client for bookmarking events
+A client for a bookmark list (kind 10003)
 
 [https://asaitoshiya.github.io/nostr-toybox/bookmark/](https://asaitoshiya.github.io/nostr-toybox/bookmark/)
 
