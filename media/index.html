@@ -97,11 +97,11 @@
       const showNostrich = () => (nostrich.style.display = "inline");
 
       const toHtml = (id, media) =>
-        `<p><a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
+        `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${window.NostrTools.nip19.neventEncode(
           {
             id,
           },
-        )}" target="_blank"><img src="${media}" loading="lazy"></a></p>`;
+        )}" target="_blank"><img src="${media}" loading="lazy"></a>`;
 
       const handleClick = async () => {
         media.innerHTML = "";
