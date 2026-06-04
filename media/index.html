@@ -24,7 +24,7 @@
     <title>media</title>
   </head>
   <body>
-    <div id="headingAndInput">
+    <div id="headingAndInput" style="display: none">
       <h1>media</h1>
       npub:
       <input id="npub" type="text" size="50" /><br />
@@ -118,9 +118,8 @@
       window.handleClick = handleClick;
 
       const params = new URLSearchParams(location.search);
-      params.has("npub") &&
-        params.has("contentonly") &&
-        (headingAndInput.style.display = "none");
+      (!params.has("npub") || !params.has("contentonly")) &&
+        (headingAndInput.style.display = "block");
       npub.value = params.get("npub");
       t.value = params.get("t");
       params.has("columns") &&
