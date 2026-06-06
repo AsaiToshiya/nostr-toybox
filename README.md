@@ -186,6 +186,8 @@ A library to get the relay list well
 
 ## repost
 
+A client for [NIP-18: Reposts](https://github.com/nostr-protocol/nips/blob/master/18.md) (kind 6)
+
 [https://asaitoshiya.github.io/nostr-toybox/repost/](https://asaitoshiya.github.io/nostr-toybox/repost/)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)

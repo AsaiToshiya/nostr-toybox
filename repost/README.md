@@ -1,5 +1,7 @@
 # repost
 
+repost is a client for [NIP-18: Reposts](https://github.com/nostr-protocol/nips/blob/master/18.md) (kind 6).
+
 https://asaitoshiya.github.io/nostr-toybox/repost/
 
 <kbd>![screenshot.png](screenshot.png)</kbd>
