@@ -62,7 +62,7 @@ $ node ./node_modules/vercel/dist/index.js link
 ### crontab
 
 ```bash
-0 * * * * export PATH=/usr/local/bin/:$PATH; cd /home/pi/bin/nostr-toybox/posts && npm run deploy > /dev/null 2>&1
+0 0 * * * export PATH=/usr/local/bin/:$PATH; cd /home/pi/bin/nostr-toybox/posts && npm run deploy > /dev/null 2>&1
 ```
 
 ## npm スクリプト
