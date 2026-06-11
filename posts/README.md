@@ -2,6 +2,8 @@
 
 posts は、投稿を HTML として保存するためのコマンド ライン ツールです。
 
+<kbd>![screenshot.png](screenshot.png)</kbd>
+
 ## セットアップ
 
 ### リポジトリ
