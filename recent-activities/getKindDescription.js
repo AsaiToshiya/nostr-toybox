@@ -180,14 +180,14 @@ export const getKindDescription = (kind) => {
   return description
     ? description
     : 1630 <= kind && kind <= 1633
-    ? "Status"
-    : 5000 <= kind && kind <= 5999
-    ? "Job Request"
-    : 6000 <= kind && kind <= 6999
-    ? "Job Result"
-    : 9000 <= kind && kind <= 9030
-    ? "Group Control Events"
-    : 39000 <= kind && kind <= 39009
-    ? "Group metadata events"
-    : undefined;
+      ? "Status"
+      : 5000 <= kind && kind <= 5999
+        ? "Job Request"
+        : 6000 <= kind && kind <= 6999
+          ? "Job Result"
+          : 9000 <= kind && kind <= 9030
+            ? "Group Control Events"
+            : 39000 <= kind && kind <= 39009
+              ? "Group metadata events"
+              : undefined;
 };
