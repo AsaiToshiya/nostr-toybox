@@ -167,6 +167,8 @@ export const getKindDescription = (kind) => {
     34235: "Addressable Video Event",
     34236: "Addressable Short Video Event",
     34550: "Community Definition",
+    37516: "Geocache Listing",
+    37517: "Geocache Curation List",
     38172: "Cashu Mint Announcement",
     38173: "Fedimint Announcement",
     38383: "Peer-to-peer Order events",
