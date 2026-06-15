@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -70,13 +70,13 @@
             post.content
               .replace(
                 /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g,
-                '<a href="$1"><img src="$1" loading="lazy"></a>'
+                '<a href="$1"><img src="$1" loading="lazy"></a>',
               )
               .replace(
                 /NIP-(\d{2})/g,
-                '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md">$&</a>'
+                '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md">$&</a>',
               )
-              .replace(/^#+ /g, "\\$&")
+              .replace(/^#+ /g, "\\$&"),
           )
           .replace(/<a /g, '<a target="_blank" ');
         const references = window.NostrTools.parseReferences(post);
@@ -93,13 +93,13 @@
           const user = userJson && JSON.parse(userJson);
           const augmentedReference = user
             ? `<a href="https://njump.me/${window.NostrTools.nip19.npubEncode(
-                profile.pubkey
+                profile.pubkey,
               )}" target="_blank">@${user.name}</a>`
             : event || address
-            ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
-                6
-              )}" target="_blank">${text}</a>`
-            : text;
+              ? `<a href="https://asaitoshiya.github.io/nostr-toybox/menu/?nevent=${text.substring(
+                  6,
+                )}" target="_blank">${text}</a>`
+              : text;
           return (await acc).replaceAll(text, augmentedReference);
         }, content);
         return (
@@ -107,8 +107,8 @@
           (event.kind == 6
             ? '<i class="fa fa-retweet" aria-hidden="true" style="color: #999;"></i> '
             : event.tags.some(([t]) => t == "e")
-            ? '<i class="fa fa-reply" aria-hidden="true" style="color: #999;"></i> '
-            : "") +
+              ? '<i class="fa fa-reply" aria-hidden="true" style="color: #999;"></i> '
+              : "") +
           (event.tags.some(([t]) => t == "encrypted")
             ? '<i class="fa fa-lock" aria-hidden="true" style="color: #999;"></i> '
             : "") +
@@ -152,7 +152,7 @@
         await pool.querySync(relays, { ...filter, limit: 50 })
       ).sort((a, b) => b.created_at - a.created_at);
       document.body.innerHTML = (await Promise.all(posts.map(toHtml))).join(
-        "\n"
+        "\n",
       );
 
       localStorage.setItem(location.href, document.body.innerHTML);
@@ -173,7 +173,7 @@
               (await toHtml(event)) + document.body.innerHTML;
             localStorage.setItem(location.href, document.body.innerHTML);
           },
-        }
+        },
       );
     </script>
   </body>
