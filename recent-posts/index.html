@@ -112,6 +112,9 @@
           (event.tags.some(([t]) => t == "encrypted")
             ? '<i class="fa fa-lock" aria-hidden="true" style="color: #999;"></i> '
             : "") +
+          (event.tags.some(([t]) => t == "content-warning")
+            ? '<i class="fa fa-eye" aria-hidden="true" style="color: #999;"></i> '
+            : "") +
           `<a href="${url}" target="_blank">${dateTime}</a></h3>
         ${augmentedContent}`
         );
