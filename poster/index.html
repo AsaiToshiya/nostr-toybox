@@ -29,6 +29,8 @@
       /><br />
       detect hashtags:
       <input id="detectHashtags" type="checkbox" checked /><br />
+      detect URLs:
+      <input id="detectURLs" type="checkbox" checked /><br />
     </details>
     nsec:
     <input id="nsec" type="text" size="50" /><br />
@@ -129,7 +131,7 @@
         [
           ...createEventTags(content.value),
           ...createPubkeyTags(content.value),
-          ...extractReferenceTags(content.value),
+          ...(detectURLs.checked ? extractReferenceTags(content.value) : []),
           ...(detectHashtags.checked ? extractHashtagTags(content.value) : []),
           ...(await createReplyTags(nip19.value)),
           ...(encryptionNsec.value ? [["encrypted"]] : []),
@@ -202,6 +204,7 @@
         encryptionNsec.value = "";
         contentWarning.checked = false;
         detectHashtags.checked = true;
+        detectURLs.checked = true;
 
         hideNostrich();
       };
