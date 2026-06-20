@@ -26,13 +26,13 @@ const _renderContent = async (post) =>
     post.content
       .replace(
         /(https?:\/\/\S+\.(jpg|jpeg|png|webp|avif|gif))/g,
-        '<a href="$1" target="_blank"><img src="$1" loading="lazy"></a>'
+        '<a href="$1" target="_blank"><img src="$1" loading="lazy"></a>',
       )
       .replace(
         /NIP-(\d{2})/g,
-        '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md" target="_blank">$&</a>'
+        '<a href="https://github.com/nostr-protocol/nips/blob/master/$1.md" target="_blank">$&</a>',
       )
-      .replace(/^#+ /g, "\\$&")
+      .replace(/^#+ /g, "\\$&"),
   );
 
 const generateHashtagHtml = async (posts) => {
@@ -41,14 +41,14 @@ const generateHashtagHtml = async (posts) => {
   const groupedPosts = sortedPosts.reduce((acc1, obj1) => {
     const tags = (
       obj1.content.match(
-        /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi
+        /(^|\s)#[a-z0-9\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]+/gi,
       ) ?? []
     ).filter((tag) => !/#\d+/.test(tag));
     return tags.reduce((acc2, obj2) => {
       const tag = obj2.trim();
       const key =
         Object.keys(acc2).find(
-          (key) => key.toLowerCase() == tag.toLowerCase()
+          (key) => key.toLowerCase() == tag.toLowerCase(),
         ) ?? tag;
       const curGroup = acc2[key] ?? [];
       return { ...acc2, [key]: [...curGroup, obj1] };
@@ -79,12 +79,12 @@ const generateHashtagHtml = async (posts) => {
                     const content = await _renderContent(post);
                     return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
       ${content}`;
-                  })
+                  }),
                 )
-              ).join("\n")
-          )
+              ).join("\n"),
+          ),
       )
-    ).join("\n")
+    ).join("\n"),
   );
 };
 
@@ -163,12 +163,12 @@ const generateIndexHtml = async (posts) => {
                   const content = await _renderContent(post);
                   return `      <h3><a href="${url}" target="_blank">${time}</a></h3>
       ${content}`;
-                })
+                }),
               )
-            ).join("\n")
-        )
+            ).join("\n"),
+        ),
       )
-    ).join("\n")
+    ).join("\n"),
   );
 };
 
@@ -198,8 +198,8 @@ const posts = await Promise.all(
               ...post,
               content: await nip04.decrypt(DECRYPTION_SK, PK, post.content),
             }
-          : post
-      )
+          : post,
+      ),
     )
   ).map(async (post) => {
     // メンション
@@ -230,7 +230,7 @@ const posts = await Promise.all(
         return (await acc).replaceAll(text, augmentedReference);
       }, post.content),
     };
-  })
+  }),
 );
 
 // ファイルに出力する
