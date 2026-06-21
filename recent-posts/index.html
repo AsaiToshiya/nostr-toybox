@@ -102,17 +102,18 @@
               : text;
           return (await acc).replaceAll(text, augmentedReference);
         }, content);
+        const tags = event.tags;
         return (
           "      <h3>" +
           (event.kind == 6
             ? '<i class="fa fa-retweet" aria-hidden="true" style="color: #999;"></i> '
-            : event.tags.some(([t]) => t == "e")
+            : tags.some(([t]) => t == "e")
               ? '<i class="fa fa-reply" aria-hidden="true" style="color: #999;"></i> '
               : "") +
-          (event.tags.some(([t]) => t == "encrypted")
+          (tags.some(([t]) => t == "encrypted")
             ? '<i class="fa fa-lock" aria-hidden="true" style="color: #999;"></i> '
             : "") +
-          (event.tags.some(([t]) => t == "content-warning")
+          (tags.some(([t]) => t == "content-warning")
             ? '<i class="fa fa-eye" aria-hidden="true" style="color: #999;"></i> '
             : "") +
           `<a href="${url}" target="_blank">${dateTime}</a></h3>
