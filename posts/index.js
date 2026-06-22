@@ -77,8 +77,23 @@ const generateHashtagHtml = async (posts) => {
                     const date = new Date(post.created_at * 1000);
                     const dateTime = date.toLocaleString();
                     const content = await _renderContent(post);
-                    return `      <h3><a href="${url}" target="_blank">${dateTime}</a></h3>
-      ${content}`;
+                    const tags = post.tags;
+                    return (
+                      "      <h3>" +
+                      (post.kind == 6
+                        ? '<i class="fa fa-retweet" aria-hidden="true" style="color: #999;"></i> '
+                        : tags.some(([t]) => t == "e")
+                          ? '<i class="fa fa-reply" aria-hidden="true" style="color: #999;"></i> '
+                          : "") +
+                      (tags.some(([t]) => t == "encrypted")
+                        ? '<i class="fa fa-lock" aria-hidden="true" style="color: #999;"></i> '
+                        : "") +
+                      (tags.some(([t]) => t == "content-warning")
+                        ? '<i class="fa fa-eye" aria-hidden="true" style="color: #999;"></i> '
+                        : "") +
+                      `<a href="${url}" target="_blank">${dateTime}</a></h3>
+      ${content}`
+                    );
                   }),
                 )
               ).join("\n"),
@@ -95,6 +110,10 @@ const generateHtml = (content) =>
       <meta charset="utf8" />
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="github-markdown.css">
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      />
       <style>
         .markdown-body {
           box-sizing: border-box;
@@ -161,8 +180,23 @@ const generateIndexHtml = async (posts) => {
                   const date = new Date(post.created_at * 1000);
                   const time = date.toLocaleTimeString();
                   const content = await _renderContent(post);
-                  return `      <h3><a href="${url}" target="_blank">${time}</a></h3>
-      ${content}`;
+                  const tags = post.tags;
+                  return (
+                    "      <h3>" +
+                    (post.kind == 6
+                      ? '<i class="fa fa-retweet" aria-hidden="true" style="color: #999;"></i> '
+                      : tags.some(([t]) => t == "e")
+                        ? '<i class="fa fa-reply" aria-hidden="true" style="color: #999;"></i> '
+                        : "") +
+                    (tags.some(([t]) => t == "encrypted")
+                      ? '<i class="fa fa-lock" aria-hidden="true" style="color: #999;"></i> '
+                      : "") +
+                    (tags.some(([t]) => t == "content-warning")
+                      ? '<i class="fa fa-eye" aria-hidden="true" style="color: #999;"></i> '
+                      : "") +
+                    `<a href="${url}" target="_blank">${time}</a></h3>
+      ${content}`
+                  );
                 }),
               )
             ).join("\n"),
