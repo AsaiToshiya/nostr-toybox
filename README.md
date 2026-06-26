@@ -216,7 +216,7 @@ An ultra-simple [NIP-50](https://github.com/nostr-protocol/nips/blob/master/50.m
 
 ## Simple Broadcast
 
-A simple web-based tool for broadcasting events from relay to relay
+A simple web-based tool for broadcasting event from relay to relay
 
 [https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/](https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/)
 

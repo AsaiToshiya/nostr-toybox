@@ -1,6 +1,6 @@
 # Simple Broadcast
 
-Simple Broadcast is a simple web-based tool for broadcasting events from relay to relay.
+Simple Broadcast is a simple web-based tool for broadcasting event from relay to relay.
 
 https://asaitoshiya.github.io/nostr-toybox/simple-broadcast/
 
