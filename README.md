@@ -56,6 +56,14 @@ The day you joined Nostr
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## JSON Broadcast
+
+A simple web-based tool for broadcasting JSON (raw event) to relay
+
+[https://asaitoshiya.github.io/nostr-toybox/json-broadcast/](https://asaitoshiya.github.io/nostr-toybox/json-broadcast/)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## media
 
 Displays images included in the event (kind 1) as a list or a grid
