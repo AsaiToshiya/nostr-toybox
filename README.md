@@ -58,7 +58,7 @@ The day you joined Nostr
 
 ## JSON Broadcast
 
-A simple web-based tool for broadcasting JSON (raw event) to relay
+A simple web-based tool for broadcasting JSON (raw event) to relays
 
 [https://asaitoshiya.github.io/nostr-toybox/json-broadcast/](https://asaitoshiya.github.io/nostr-toybox/json-broadcast/)
 

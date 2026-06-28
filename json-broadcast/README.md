@@ -1,6 +1,6 @@
 # JSON Broadcast
 
-JSON Broadcast is a simple web-based tool for broadcasting JSON (raw event) to relay.
+JSON Broadcast is a simple web-based tool for broadcasting JSON (raw event) to relays.
 
 https://asaitoshiya.github.io/nostr-toybox/json-broadcast/
 
