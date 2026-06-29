@@ -32,6 +32,8 @@
       const showNostrich = () => (nostrich.style.display = "inline");
 
       const handleClick = async () => {
+        json.value = "";
+
         showNostrich();
 
         const pool = new window.NostrTools.SimplePool();
