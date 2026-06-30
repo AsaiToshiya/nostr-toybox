@@ -32,8 +32,6 @@
       const showNostrich = () => (nostrich.style.display = "inline");
 
       const handleClick = async () => {
-        json.value = "";
-
         showNostrich();
 
         const pool = new window.NostrTools.SimplePool();
@@ -48,6 +46,8 @@
             .map((relay) => `<li>${relay.url}</li>`)
             .join(""));
         hideNostrich();
+
+        json.value = "";
       };
     </script>
   </body>
