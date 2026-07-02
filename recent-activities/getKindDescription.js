@@ -85,7 +85,7 @@ export const getKindDescription = (kind) => {
     10009: "User groups",
     10011: "External Identities",
     10012: "Favorite relays list",
-    10013: "Private event relay list",
+    10013: "Private relays",
     10015: "Interests list",
     10019: "Nutzap Mint Recommendation",
     10020: "Media follows",
